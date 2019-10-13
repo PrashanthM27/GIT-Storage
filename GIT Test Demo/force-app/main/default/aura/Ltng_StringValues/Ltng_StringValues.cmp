@@ -1,0 +1,16 @@
+<aura:component >
+    <aura:attribute name="colors" type="List" default="[{'Label':'RED','Value':'RED'},
+                                                       {'Label':'GREEN','Value':'GREEN'},
+                                                       {'Label':'Yellow','Value':'Yellow'}]"/>
+    <aura:attribute name="fruits" type="List" default="[{'Label':'Apple','Value':'Apple'},
+                                                       {'Label':'Mango','Value':'Mango'},
+                                                       {'Label':'Papaya','Value':'Papaya'}]"/>
+    <aura:attribute name="colorValue" type="String"/>
+    <aura:attribute name="fruitsValue" type="String"/>
+    <lightning:layout multipleRows="true">
+        <lightning:layoutItem flexibility="auto" padding="around-large" size="12">
+            <lightning:radioGroup name="myColors" label="Colors[Default View]" options="{!v.colors}" value="{!v.colorValue}" type="radio"/> <br/>
+            <lightning:radioGroup name="myFruits" label="Fruits[Horizontal View]" options="{!v.fruits}" value="{!v.fruitsValue}" type="radio" class="frts"/> 
+        </lightning:layoutItem>
+    </lightning:layout>
+</aura:component>

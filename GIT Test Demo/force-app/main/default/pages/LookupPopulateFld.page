@@ -1,0 +1,21 @@
+<apex:page standardController="Case" extensions="LookupContactAutoPopulate">
+    <apex:form >
+    <apex:pageBlock title="Account Details" mode="Main Details">
+        <apex:pageBlockSection title="Case Details">
+        <apex:inputField value="{!Case.Priority}"/>
+        <apex:inputField value="{!Case.Origin}"/>
+            <apex:inputField value="{!Case.Status}"/>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="Account Details" >
+        <apex:inputField value="{!case.AccountId}">
+            <apex:actionSupport action="{!AccountSelected}" reRender="act,msgs" event="onchange" status="st"/>
+            </apex:inputField>
+             </apex:pageBlockSection>        
+            <apex:pageBlockSection id="act">
+            <apex:outputField value="{!Case.Account.Website}"/>
+            <apex:outputField value="{!Case.Account.Phone}"/>
+              <apex:actionStatus startText="Getting Data wait...." id="st" />    
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:form>
+</apex:page>

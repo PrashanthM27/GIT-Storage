@@ -1,0 +1,25 @@
+<apex:page controller="mutiselectListDemo">
+  <apex:form >
+  <apex:pageBlock >
+      <apex:commandButton value="Check Selection" action="{!showSelected}"/>
+      <apex:pageBlockSection >
+          
+          <apex:selectList value="{!selectedOptionsList}" size="4" multiselect="true">
+                <apex:selectOptions value="{!multiSelectOptions}" />
+          </apex:selectList>
+      
+      </apex:pageBlockSection>
+  
+      <apex:pageBlockSection >
+      <apex:pageBlockSectionItem >
+      <apex:outputLabel value="Selected Values"> </apex:outputLabel>
+      <apex:inputText id="txtBox"/>
+      </apex:pageBlockSectionItem>
+      </apex:pageBlockSection>
+      
+  </apex:pageBlock>
+  </apex:form>
+  <script>
+      document.getElementById('j_id0:j_id1:j_id2:j_id7:j_id8:txtBox').value = '{!selectedOptions}';
+  </script>
+</apex:page>

@@ -1,0 +1,16 @@
+<apex:page standardController="Contact" extensions="LookupContAccount">
+    <apex:form >
+    <apex:pageBlock >
+      <apex:pageBlockSection >
+          <apex:inputField value="{!Contact.AccountId}">
+          <apex:actionSupport action="{!Save}" event="onchange" reRender="ret" status="st"/>
+          </apex:inputField>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="Account Details" id="ret">
+        <apex:outputField value="{!Contact.Account.AccountNumber}" />
+        <apex:outputField value="{!Contact.Account.NumberofContacts__c}" />
+        <apex:actionStatus startText="Please wait..." id="st"/>
+        </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

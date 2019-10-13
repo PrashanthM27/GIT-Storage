@@ -1,0 +1,13 @@
+<apex:page standardController="Contact" extensions="DynamicCaseLoader">
+<apex:form >
+<apex:pageBlock >
+<apex:pageBlockSection >
+<apex:repeat value="{!caseFieldList }" var="s">
+{!s}
+<apex:inputText value="{!caseDetails[s]}" rendered="{!IF(contains(s,"Contact"),true,false)}"/>
+<apex:outputText value="{!caseDetails[s]}" rendered="{!IF(contains(s,"Contact"),true,false)}"/>
+</apex:repeat>
+</apex:pageBlockSection>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

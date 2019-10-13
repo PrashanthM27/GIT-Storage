@@ -1,0 +1,25 @@
+<aura:component controller="Ltng_ContentDocumentController">
+    <aura:attribute name="selectedDocId" type="String" />
+    <aura:attribute name="LstContent" type="List"/>
+    <aura:attribute name="hasModelOpen" type="Boolean"/>
+    
+    <lightning:layout>
+        <lightning:layoutItem padding="around-small">
+            <div class="header-column">
+                <p class="field-title" title="Field 4">Title</p>
+                <p>
+                <span title="Title">Title</span>
+                </p>
+            </div>
+        </lightning:layoutItem>
+        <lightning:layoutItem padding="around-small">
+            <div class="header-column">
+                <p class="field-column">Document Type</p>
+                <p>
+                <span title="Document Type">Doc Type</span>
+                </p>
+            </div>
+        </lightning:layoutItem>
+    </lightning:layout>
+    
+</aura:component>

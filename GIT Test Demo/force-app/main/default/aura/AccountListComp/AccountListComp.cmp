@@ -1,0 +1,17 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" controller="AccountContController">
+    <aura:attribute name="ContactList" type="List"/>
+    <aura:handler name="init" action="{!c.callContactList}" value="{!this}"/>
+    <lightning:card title="Header Details">
+        <aura:iteration items="{!v.ContactList}" var="List">
+            <lightning:recordViewForm recordId="{!List.Id}" objectApiName="Contact"></lightning:recordViewForm>
+            <p class="slds-box slds-theme_default">
+            <lightning:outputField fieldName="Name"/>
+            <lightning:outputField fieldName="Phone"/>
+            <lightning:outputField fieldName="Email"/>
+                </p>
+        </aura:iteration>
+        <aura:set attribute="actions">
+            <lightning:button label="New Contact" onclick="{!c.createContact}"/>
+        </aura:set>
+    </lightning:card>
+</aura:component>

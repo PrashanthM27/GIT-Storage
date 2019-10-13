@@ -1,0 +1,6 @@
+<aura:component >
+    <aura:attribute name="message" type="String"/>
+    <aura:attribute name="income" type="Object"/>
+    <aura:attribute name="myIncome" type="List"/>
+    <aura:registerEvent name="TotalIncomeCompEvent" type="c:TotalIncomeEvent"/> 
+</aura:component>

@@ -1,0 +1,6 @@
+<apex:page controller="PassingParametersFromURL">
+  <apex:pageBlock >
+  Name:{!name}
+  City:{!city}
+  </apex:pageBlock>
+</apex:page>

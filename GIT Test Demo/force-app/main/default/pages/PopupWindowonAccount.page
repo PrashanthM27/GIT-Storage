@@ -1,0 +1,17 @@
+<apex:page controller="OpenClosePopUpWindow">
+    <apex:form >
+        <apex:commandButton value="Show Pop up" action="{!displayPopupWindow}" rerender="tstpopup"/>
+        <apex:pageBlock >
+            This is just filler text from the Salesforce General. 
+        </apex:pageBlock>
+ 
+        <apex:outputPanel id="tstpopup">
+        <apex:outputPanel styleClass="popupBackground" layout="block" rendered="{!displayPopUp}"/>
+            <apex:outputPanel styleClass="custPopup" layout="block" rendered="{!displayPopUp}">
+                This is where I would put whatever information I needed to show to my end user.<br/><br/><br/>
+                <apex:commandButton value="Hide Pop up" action="{!closePopUpWindow}" rerender="tstpopup"/>
+            </apex:outputPanel>
+        </apex:outputPanel>
+ 
+    </apex:form>
+</apex:page>

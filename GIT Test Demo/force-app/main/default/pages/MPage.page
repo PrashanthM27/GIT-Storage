@@ -1,0 +1,7 @@
+<apex:page controller="PageRef">
+ <apex:form >
+ <apex:pageBlock >
+ <apex:commandButton value="Submit" action="{!Save}"/>
+ </apex:pageBlock>
+ </apeX:form>
+</apex:page>

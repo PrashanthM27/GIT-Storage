@@ -1,0 +1,10 @@
+<apex:page >
+  <script src="/soap/ajax/30.0/connection.js" type="text/javascript"></script>
+  <script>
+  var obj=new sforce.SObject("Account");
+  obj.Name="Raj";
+  obj.Industry="Banking";
+ var rec=sforce.connection.create([obj]);
+ alert(rec);
+  </script>  
+</apex:page>

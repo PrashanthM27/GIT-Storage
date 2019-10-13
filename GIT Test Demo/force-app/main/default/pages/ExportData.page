@@ -1,0 +1,10 @@
+<apex:page controller="ExportData"  contentType="application/vnd.ms-excel#ImportCSVFile.csv">
+  <apex:pageBlock >
+  <apex:pageBlockSection >
+  <apex:repeat value="{!ac}" var="a"> 
+  {!a.Name}
+  {!a.Industry}
+  </apex:repeat>
+  </apex:pageBlockSection>
+  </apex:pageBlock>
+</apex:page>

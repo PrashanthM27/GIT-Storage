@@ -1,0 +1,24 @@
+<apex:page controller="AccountRecordSearch">
+<apex:form >
+    <apex:pageBlock title="Hello! {!$User.FirstName}">
+    <apex:pageBlockSection >
+        <apex:outputLabel value="Enter Account Name"/>
+        <apex:inputText value="{!accName}"/>
+        <apex:commandButton action="{!Save}" value="Search" id="ent"/>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection rendered="{!options.size>0}" title="Account Selection">
+        <apex:selectList value="{!selectedAcc}" size="1">            
+            <apex:selectOptions value="{!options}"/>
+            <apex:actionSupport action="{!getTheRecords}" event="onchange" reRender="ent"/>
+        </apex:selectList>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection rendered="{!conList.size > 0}" title="Contacts">
+            <apex:pageBlockTable value="{!conList}" var="con">
+                <apex:column >
+                    <apex:outputLink target="_blank" value="/{!con.Id}">{!con.Name}</apex:outputLink>
+                </apex:column>
+            </apex:pageBlockTable>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+    </apex:form>
+</apex:page>

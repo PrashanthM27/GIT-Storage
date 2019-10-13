@@ -1,0 +1,44 @@
+<apex:page controller="WeatherCont" sidebar="false">  
+  <apex:form > 
+  <apex:pageBlock >
+  <apex:pageBlockSection >
+  <apex:pageBlockSectionItem >
+     <apex:outputLabel value="Enter city" for="inputzip"/>
+          <apex:inputText value="{!city }" id="inputzip"/>
+          </apex:pageBlockSectionItem><br/><br/>  
+          <apex:pageBlockSectionItem >
+                    <apex:outputPanel >
+                        <div style="text-align: center">
+                            <apex:commandButton value="Search" action="{!getWeatherData}" />
+                        </div>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>                                         
+     </apex:pageBlockSection>
+     
+<apex:pageBlockSection >
+    <apex:pageBlockTable id="addressList" var="z" value="{!listValues}" >
+        <apex:column >
+        <apex:facet name="header">Temp</apex:facet>
+            {!z.temp}
+        </apex:column>
+        <apex:column >
+            <apex:facet name="header">Pressure</apex:facet>
+            {!z.pressure}
+        </apex:column>
+        <apex:column >
+            <apex:facet name="header">Humidity</apex:facet>            
+            {!z.humidity}            
+        </apex:column>
+        <apex:column >
+            <apex:facet name="header">Temp_min</apex:facet>            
+            {!z.temp_min }            
+        </apex:column>
+        <apex:column >
+            <apex:facet name="header">Temp_max</apex:facet>            
+            {!z.temp_max}            
+        </apex:column>
+    </apex:pageBlockTable>    
+    </apex:pageBlockSection>
+    </apex:pageBlock>
+    </apex:form>
+</apex:page>

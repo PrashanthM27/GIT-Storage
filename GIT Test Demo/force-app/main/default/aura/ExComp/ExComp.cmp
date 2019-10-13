@@ -1,0 +1,10 @@
+<aura:component >
+    <aura:attribute access="private" name="messageToSend" type="String"/>
+    <aura:attribute access="private" name="messageToReceive" type="String" default=" "/>
+    <aura:attribute access="private" name="error" type="String"/>
+    <div>
+        <lightning:button label="Send"/>
+    </div>
+    
+	
+</aura:component>

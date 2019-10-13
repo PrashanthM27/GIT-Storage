@@ -1,0 +1,6 @@
+<aura:component controller="Ltng_AccountSortController">
+    <aura:attribute name="AccountList" type="Account[]"/>
+    <aura:handler name="init" value="{!this}" action="{!c.accountTable}"/>
+    <aura:iteration items="{!v.AccountList}" var = "acc"/>
+    
+</aura:component>

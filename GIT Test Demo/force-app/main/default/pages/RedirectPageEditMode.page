@@ -1,0 +1,11 @@
+<apex:page standardController="Opportunity" extensions="myControllerExtension">
+    <apex:sectionHeader title="{!$ObjectType.Opportunity.label} Edit" subtitle="{!op.name}"/>
+    <apex:form >
+    <apex:pageBlock title="{!$ObjectType.Opportunity.label} Edit" mode="edit">
+        <apex:pageBlockButtons >
+            <apex:commandButton action="{!Save}" value="Save"/>
+            <apex:commandButton action="{!cancel}" value="Cancel"/>
+        </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

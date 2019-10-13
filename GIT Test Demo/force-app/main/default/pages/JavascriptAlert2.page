@@ -1,0 +1,20 @@
+<apex:page controller="JavascriptSearchAccounts">
+ <apex:form >
+ <apex:pageBlock >
+ <apex:pageBlockSection >
+ <apex:pageBlockSectionItem >
+ <apex:outputLabel value="Search for"/>
+ <apex:inputText />
+ </apex:pageBlockSectionItem>
+ <apex:pageBlockTable value="{!ac}" var="a">
+ <apex:column value="{!a.Name}"/>
+ <apex:column value="{!a.Type}"/>
+ <apex:column value="{!a.Industry}"/>
+ </apex:pageBlockTable>
+ </apex:pageBlockSection>
+ <apex:pageBlockButtons >
+   <apex:commandButton action="{!SeachAccounts}" value="Press"/>
+   </apex:pageBlockButtons>
+ </apex:pageBlock>
+ </apex:form>
+</apex:page>

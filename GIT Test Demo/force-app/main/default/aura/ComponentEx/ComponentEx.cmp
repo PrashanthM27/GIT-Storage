@@ -1,0 +1,5 @@
+<aura:component >
+    <aura:attribute name="parentAttribute" type="String" default="I Love India"/>
+    
+    <p><lightning:button label="Fuck Me" onclick="{!v.lebelrefer}"/></p>
+</aura:component>

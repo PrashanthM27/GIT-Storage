@@ -1,0 +1,12 @@
+<apex:page controller="PassParamameters">
+<apex:form >
+<apex:pageBlock title="Account Details">
+<apex:pageBlockSection title="Details">
+<apex:inputField value="{!c.Name}"/>
+<apex:inputField value="{!c.Industry}"/>
+<apex:inputField value="{!c.Type}"/>
+</apex:pageBlockSection>
+<apex:commandButton action="{!Submit}" value="Submit"/>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

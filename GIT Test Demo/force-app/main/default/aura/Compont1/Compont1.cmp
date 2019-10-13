@@ -1,0 +1,18 @@
+<aura:component >
+<form>
+ <fieldset>
+    <legend>Select your favourite colour:</legend>
+ <lightning:input type="checkbox" label="Red" name="color1" value="1" aura:id="colors"/>
+  <lightning:input type="checkbox" label="Yellow" name="color2" value="2" aura:id="colors"/>
+     <lightning:input type="file" label="Blue" name="color3" value="3" aura:id="colors"/>
+    </fieldset><br/>
+    <lightning:button label="Submit" onclick="{!c.submitForm}"/>
+        </form>
+     <lightning:dynamicIcon type="trend" alternativeText="Your data is running"/>
+  <lightning:icon iconName="standard:call" size="large" alternativeText="This is Icon"/>
+<lightning:formattedNumber value="12.34" style="currency"
+ currencyCode="INR" currencyDisplayAs="symbol"/>
+    <lightning:input type="number" name="percentVal" label="Enter Percentage Value" formatter="percent" step="0.01"/> 
+    <lightning:input type="currency" name="Currency" label="Enter Currency dude" formatter="currency" step="0.01"/>
+
+    </aura:component>

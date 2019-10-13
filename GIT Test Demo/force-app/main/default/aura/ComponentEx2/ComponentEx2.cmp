@@ -1,0 +1,6 @@
+<aura:component >
+    <aura:attribute name="childAttribute" type="String" default="Prathyusha"/>
+    <aura:handler name="change" value="{!v.childAttribute}" action="{!c.onChildChange}"/>
+    <p>ComponentEx2 ComponentEx2:{#v.childAttribute}</p>
+    <p><lightning:button label="Kiss Me" onclick="{!c.childUpdate}"/></p>
+</aura:component>

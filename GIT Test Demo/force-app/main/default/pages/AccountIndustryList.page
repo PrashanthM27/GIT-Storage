@@ -1,0 +1,13 @@
+<apex:page controller="AccountIndustryList">
+    <apex:form >
+    <apex:pageBlock >
+        <apex:pageBlockSection columns="1">
+            <apex:outputLabel value="Account Industry"/>
+             <apex:selectList value="{!selectedValue}" size="1">
+                 <apex:selectOptions value="{!options}"/>
+                 <apex:actionSupport event="onchange" action="{!checkValue}"/>
+            </apex:selectList>
+        </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

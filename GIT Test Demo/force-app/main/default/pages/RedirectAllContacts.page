@@ -1,0 +1,5 @@
+<apex:page standardController="Contact" showHeader="false">
+<apex:form >
+ <apex:commandButton action="{!Save}" value="Click here" oncomplete="parent.window.opener.location.href='/{!$CurrentPage}';window.close();"/>
+</apex:form>
+</apex:page>

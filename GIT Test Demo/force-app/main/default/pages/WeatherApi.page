@@ -1,0 +1,32 @@
+<apex:page showHeader="false" sidebar="false" controller="WeatherReportData">
+   <apex:form >
+    <div class="container" id="main">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>                       
+                        <th><apex:outputLabel value="Enter City:"/></th>
+                        <th><apex:inputText value="{!City}"/></th>
+                        <th><apex:outputText value="City" /></th>
+                        <th><apex:outputText value="Weather Details" /></th>
+                        <th><apex:outputText value="Current Temperature" /></th>
+                        <th><apex:outputText value="Maximum Temperature" /></th>
+                        <th><apex:outputText value="Minimum Temperature" /></th>
+                        </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><apex:outputText value="{!city}" /></td>
+                        <td><apex:outputText value="{!weather}" /></td>
+                        <td><apex:outputText value="{!description}" /></td>
+                        <td><apex:outputText value="{!currentTemperature} Degrees" /></td>                        
+                        <td><apex:outputText value="{!maxTemperature} Degrees" /></td>
+                        <td><apex:outputText value="{!minTemperature} Degrees" /></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+        <apex:commandButton value="Click"/>
+</apex:form>
+</apex:page>

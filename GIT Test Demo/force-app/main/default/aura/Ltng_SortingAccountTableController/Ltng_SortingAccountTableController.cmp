@@ -1,0 +1,9 @@
+<aura:component controller="Ltng_CustomSortingController" description="Account Records in Sort Order" implements="flexipage:availableForAllPageTypes">
+    <aura:attribute name="accList" type="List"/>
+    <aura:attribute name="accColumns" type="Sobject"/>
+    <aura:attribute name="EnableInfiniteLoading" type="Boolean" default="true"/>
+    <aura:attribute name="InitialRows" type="Integer" default="10"/>
+    <aura:attribute name="currentCount" type="Integer" default="10"/>
+    <aura:attribute name="totalRows" type="Integer" default="0"/>
+    
+</aura:component>

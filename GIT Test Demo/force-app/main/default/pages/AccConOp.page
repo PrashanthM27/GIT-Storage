@@ -1,0 +1,11 @@
+<apex:page standardcontroller="Account">
+  <apex:form >
+  <apex:pageBlock >
+  <apex:pageBlockSection >
+  <apex:inputField value="{!Account.Name}"/>
+  <apex:inputField value="{!Account.Industry}" style="color:#FFA500"/>
+  <h1>Welcome!!</h1>
+  </apex:pageBlockSection>
+  </apex:pageBlock>
+  </apex:form>
+</apex:page>

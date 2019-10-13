@@ -1,0 +1,16 @@
+<apex:page standardController="Answer__c" extensions="QuestionAnswerController">
+    <apex:sectionHeader title="Details"/>
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockSection >
+                <apex:pageBlockTable value="{!answer}" var="an">
+
+                <apex:column headerValue="Member Name">
+                    <apex:inputField value="{!an.Name}"/>
+                </apex:column>
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+    
+</apex:page>

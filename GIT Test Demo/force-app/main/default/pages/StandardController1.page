@@ -1,0 +1,15 @@
+<apex:page standardcontroller="Account" recordSetVar="records" >
+    <apex:pageBlock rendered="{!$ObjectType.Account.accessible}">
+        <apex:form >
+        <apex:pageBlockSection >
+        <apex:dataList value="{!records}" var="r">
+       {!r.Name}
+        </apex:dataList>
+            </apex:pageBlockSection>
+            <apex:panelGrid columns="2">
+                <apex:commandLink action="{!Previous}">Previous</apex:commandLink>
+                <apex:commandLink action="{!Next}">Next</apex:commandLink>
+            </apex:panelGrid>
+            </apex:form>
+    </apex:pageBlock>
+</apex:page>

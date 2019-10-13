@@ -1,0 +1,5 @@
+<aura:component >
+    <aura:attribute name="Expense" type="Expense__c"/>
+    
+	
+</aura:component>

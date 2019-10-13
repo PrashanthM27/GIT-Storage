@@ -1,0 +1,23 @@
+<aura:component controller="Ltng_AccountForm">
+    <aura:attribute name="AccName" type="String"/>
+    <aura:attribute name="Industry" type="String"/>
+    <aura:attribute name="AccountNUmber" type="Integer"/>
+    <aura:attribute name="Phone" type="Integer"/>
+    
+    <!--aura:handler name="init" value="{!this}" action="{!c.doInIt}"/-->
+    
+    <lightning:layoutItem size="2" padding="around-small">
+        <b> Account Name</b>
+    <lightning:input />
+        <b> Account Number</b>
+    <ui:inputNUmber class="slds-input slds-text-body_regular fnn-text" required="true"  maxlength="10" format="########"/>
+        <lightning:avatar initials="" fallbackIconName="standard:account" alternativeText="Salesforce" class="slds-m-right_small"/>
+    <lightning:select label="Industry"/>
+        <b>Phone</b>
+        <ui:inputNUmber class="slds-input slds-text-body_regular fnn-text" required="true"  maxlength="10" format="########"/>
+
+        
+       </lightning:layoutItem> 
+    <lightning:button label="Submit"/>    
+   
+</aura:component>

@@ -1,0 +1,17 @@
+<apex:page controller="clickableAccount">
+<apex:form >
+  <apex:pageBlock TabStyle="Account" title="Account Record List">
+  <apex:pageMessages />
+  <apex:pageBlockSection title="Account Details Section">
+  <apex:pageBlockTable value="{!ac}" Var="a">
+  <apex:column headerValue="Account Name">
+  <apex:commandLink value="{!a.Name}" action="{!click}"/>
+  </apeX:column>
+  <apex:column headerValue="Industry" value="{!a.Industry}"></apex:column>
+  <apex:column headerValue="Phone" value="{!a.Phone}"></apex:column>
+  </apex:pageBlockTable>
+  </apex:pageBlockSection>
+  <apex:commandButton action="{!click}" value="Click"/>
+  </apex:pageBlock>
+  </apex:form>
+</apex:page>

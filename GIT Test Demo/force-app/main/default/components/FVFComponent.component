@@ -1,0 +1,6 @@
+<apex:component >
+    <apex:attribute name="attEx" type="String" Description="VF Page component"/>
+    <h1>
+         Welcome! New World
+    </h1>
+</apex:component>

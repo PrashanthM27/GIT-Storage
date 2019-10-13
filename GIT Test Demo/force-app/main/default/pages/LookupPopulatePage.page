@@ -1,0 +1,14 @@
+<apex:page controller="LookupPopulateCls">
+    <apex:form >
+    <apex:pageBlock >
+        <apex:pageBlockSection >
+        <apex:inputField value="{!acc.ParentId}">
+            <apex:actionSupport event="onchange" action="{!Save}" reRender="accno"/>
+            </apex:inputField>
+            <apex:outputPanel id="accno">
+            <apex:inputText value="{!accNum}"/>
+                </apex:outputPanel>
+        </apex:pageBlockSection>       
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

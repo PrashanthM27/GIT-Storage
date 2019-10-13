@@ -1,0 +1,42 @@
+<apex:page controller="ContactApex">
+    <apeX:form >
+    <style type="Text/CSS">
+    .Outborder
+        {
+        border:10px outset black;
+        }
+        .inBorder
+        {
+        border-top:20px;
+        border-left:10px;
+        }
+            </style>
+        <apex:tabPanel >
+        <apex:tab label="Tab A" labelWidth="100px">
+        <apex:pageBlock >
+        <apex:pageBlockSection >
+            <apex:pageBlockTable value="{!con}" var="c" styleClass="Outborder">
+            <apex:column value="{!c.FirstName}"/>
+             <apex:column value="{!c.LastName}"/>
+            </apex:pageBlockTable>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+            </apex:tab>
+            </apex:tabPanel>
+        
+        <apex:tabPanel >
+        <apex:tab label="Tab2" labelWidth="100px">
+            <apex:dataTable value="{!con}" var="c" styleClass="Outborder" width="500px">
+                <apex:column styleClass="inBorder">
+                <apex:facet name="header">LastName</apex:facet>
+                <apex:outputText >{!c.LastName}</apex:outputText>
+                </apex:column><br/>
+                <apex:column styleClass="inBorder">
+                    <apex:facet name="header">FirstName</apex:facet>
+                    <apex:outputText >{!c.FirstName}</apex:outputText>
+                </apex:column>
+                </apex:dataTable>
+            </apex:tab>
+        </apex:tabPanel>
+  </apeX:form>         
+</apex:page>

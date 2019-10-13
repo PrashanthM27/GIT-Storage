@@ -1,0 +1,22 @@
+<apex:page >
+  <script type="text/javascript">
+  window.onload=focus1;
+   function focus1(){
+   document.getElementById('{!$Component.fm.pb.pbs.t1}').focus;  
+   }
+   function focus2(){
+   document.getElementBbyId('{!$Component.fm.pb.pbs.t3}').focus;
+   }
+  </script>
+  <apex:form id="fm">
+  <apex:pageBlock id="pb">
+  <apex:pageBlockSection id="pbs">
+  <apex:inputText id="t1" label="Test1"/>
+  <apex:inputText id="t2" label="Test2"/>
+  <apex:inputText id="t3" label="Test3"/>
+  <apex:inputText id="t4" label="Test4"/>
+  </apex:pageBlockSection>
+  <div align="right"> <a href="#" id="#backToTop" onclick="focus2()">back to top</a></div>
+  </apex:pageBlock>
+  </apex:form>
+</apex:page>

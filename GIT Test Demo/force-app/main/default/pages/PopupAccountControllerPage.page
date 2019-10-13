@@ -1,0 +1,23 @@
+<apex:page controller="AccountDropdown" sidebar="false"> 
+    <script>
+    function PopUpWindow(id){
+        var win=window.open('{!$Page.PopupOpptProductController}?id=' +id,'Popup',
+                            'height=322,width=573,left=300,top=100,resizable=no,scrollbars=yes,toolbar=yes,status=yes');
+        if(window.focus){
+            win.focus();
+        }
+        return false;
+    }
+    </script>
+    <apex:form id="form">
+        <apex:pageBlock id="one">
+            <apex:selectList id="dropdown_change" value="{!accid}" size="1" required="true" multiselect="false" onchange="PopUpWindow()">
+                <apex:selectOptions value="{!records}" />
+            </apex:selectList>
+            <!--apex:commandButton value="Submit" reRender="testPanel" onclick="PopUpWindow()" /-->
+            <apex:param value="{!accid}" assignTo="{!accid}"/>
+        </apex:pageBlock>
+        <apex:outputPanel id="testPanel">
+        </apex:outputPanel>
+    </apex:form>
+</apex:page>

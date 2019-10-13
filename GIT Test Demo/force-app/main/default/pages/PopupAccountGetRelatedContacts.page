@@ -1,0 +1,12 @@
+<apex:page standardController="Contact" extensions="LookupDataSelect">
+    <apex:form >
+<apex:pageBlock >
+    <apex:pageBlockSection >
+    <apex:inputField value="{!Contact.AccountId}">
+        <apex:actionSupport action="{!Save}" event="onchange" id="tc"/>
+        </apex:inputField>
+        <apex:outputField value="{!Contact.Account.AccountNumber}" id="tc"/>        
+    </apex:pageBlockSection>
+    </apex:pageBlock>
+        </apex:form>
+</apex:page>

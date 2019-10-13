@@ -1,0 +1,5 @@
+<apex:page >
+<div style="text-align:center;font-size: 25px;">
+               <apex:outputText value="Congratulations!!Record deleted" /> 
+           </div>
+</apex:page>

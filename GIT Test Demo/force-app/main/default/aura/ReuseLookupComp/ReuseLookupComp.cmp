@@ -1,0 +1,5 @@
+<aura:component >
+    <aura:attribute name="numbers" type="List"/>
+    <lightning:button onClick="{!NumberList}" label="Display Numbers"/>
+     
+</aura:component>

@@ -1,0 +1,5 @@
+<aura:component >
+    <aura:registerEvent name="sampleComponentEvent" type="c:compEvent"/>
+    <aura:handler name="sampleComponentEvent" event="c:compEvent" action="{!c.handleClick}"/>
+    <!--lightning:button label="Click" onclick="{!c.handleClick}"/-->
+</aura:component>

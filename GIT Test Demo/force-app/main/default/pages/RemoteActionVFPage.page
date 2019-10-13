@@ -1,0 +1,23 @@
+<apex:page controller="RemoteActionCls">
+    <script type="text/javasctipt">
+    function Save(){
+    Visualforce.remoting.manager.invokeAction('{!$RemoteAction.RemoteActionCls.getRecordsAll}',nm,function(result,event)
+                                              {
+        if(event.status){
+            var res=result.length;
+            if(res==0){
+                var dc=document.getElementById("details").innerHTML='<p>NO RESULTS</p>';
+                
+                }else {
+                    var data='<table id="records">';
+                    data+='<tr><th>sl.No</th><th>Name</th></tr>';
+                    for(integer i=0;i<1;i++){
+                        var det='<tr>'+"<td>"+result[i].Name+"</td>";
+                                       
+                        }
+                    }
+            }
+    });
+    }
+    </script>
+    </apex:page>

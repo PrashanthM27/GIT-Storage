@@ -1,0 +1,19 @@
+<apex:page controller="RevRecRules">
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockSection >
+                <apex:outputLabel value="Product Family"/><br/>
+                <apex:selectList size="1">
+                    <apex:selectOptions value="{!options}"/>
+                </apex:selectList>
+                <apex:outputLabel value="Products"/><br/>
+                <apex:selectList size="1">
+                </apex:selectList>
+                <apex:selectList >
+                    <apex:selectOption >
+                    </apex:selectOption>
+                </apex:selectList>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

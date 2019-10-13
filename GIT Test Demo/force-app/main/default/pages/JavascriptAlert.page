@@ -1,0 +1,42 @@
+<apex:page controller="JavascriptAlert">
+
+<script type="text/javascript">
+function validate(){
+if(document.getElementById('{!$Component.frm.pb.pbs.pbsi1.nam}').value=='')
+{
+alert("Account Name is mandatory");
+}
+if(document.getElementById('{!$Component.frm.pb.pbs.pbsi2.phone}').value==''){
+alert("Please enter your phone");
+}
+else
+{
+call();
+alert('Account has been created');
+}
+}
+</script>
+
+<apex:form id="frm">
+<apex:actionfunction action="{!submit}" name="call" rerender="pb"/>
+<apex:pageBlock id="pb">
+<apex:pageBlockSection id="pbs">
+<apex:pageblockSectionItem >
+  <apex:outputLabel value="Account Name"/>
+  </apex:pageblockSectionItem>
+  <apex:pageBlockSectionItem id="pbsi1">
+  <apex:inputText value="{!nam}" id="nam"/>
+    </apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem >
+    <apex:outputLabel value="Phone"/>
+    </apex:pageBlockSectionItem>
+    <apex:pageBlockSectionItem id="pbsi2">
+    <apex:inputText value="{!ph}" id="phone"/>
+    </apex:pageBlockSectionItem>
+  </apex:pageBlockSection>
+  <apex:pageBlockButtons >
+  <apex:commandButton value="Insert" onclick="validate();"/>
+  </apex:pageBlockButtons>
+  </apex:pageBlock>
+  </apex:form>
+</apex:page>

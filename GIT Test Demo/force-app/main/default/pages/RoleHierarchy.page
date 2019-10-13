@@ -1,0 +1,25 @@
+<apex:page StandardController="UserRole" extensions="RoleController">
+<apex:form >
+<apex:pageBlock title="Parent Role">
+<apex:pageBlockSection >
+<apex:pageBlockTable value="{!parentRoleSt}" var="p">
+<apex:column value="{!p.Name}"/>
+</apex:pageBlockTable>
+</apeX:pageBlockSection>
+</apex:pageBlock>
+<apex:pageBlock title="Child Roles">
+<apex:pageBlockSection >
+<apex:pageBlockTable value="{!childs}" var="ch">
+<apex:column value="{!ch.Name}"/>
+</apex:pageBlockTable>
+</apex:pageBlockSection>
+</apex:pageBlock>
+<apex:pageBlock title="Current Role">
+<apex:pageBlockSection >
+<apex:pageBlockTable value="{!cRole}" var="cr">
+<apex:column value="{!cr.Name}"/>
+</apex:pageBlockTable>
+</apex:pageBlockSection>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

@@ -1,0 +1,9 @@
+<aura:component controller="LightningIterationcls">
+    <aura:attribute name="AccountData" type="Account[]" default="Hello"/>
+    <aura:iteration items="{!v.AccountData}" var="a">
+        {!a.Name}<br/>
+        {!a.Industry}<br/>
+        {!a.Phone}
+    </aura:iteration>
+    <lightning:button label="Submit" onclick="{!c.myAction}"/>
+</aura:component>

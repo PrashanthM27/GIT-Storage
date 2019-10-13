@@ -1,0 +1,27 @@
+<apex:page standardController="Account">
+<apex:pageBlock title="Hello {!$User.FirstName}!">
+You are Displaying <b>{!account.name}</b> Account
+</apex:pageBlock>
+<apex:pageBlock title="Contacts">
+<apex:form >
+<apex:dataTable value="{!account.Contacts}" var="contact" cellPadding="4" border="1">
+    <apex:column >
+        <apex:commandLink rerender="detail">
+            {!contact.Name}
+                <apex:param name="cid" value="{!contact.id}"/>
+        </apex:commandLink>
+    </apex:column>
+</apex:dataTable>
+</apex:form>
+</apex:pageBlock>
+<apex:outputPanel id="detail">
+<!--<apex:actionStatus startText="Requsting..">
+<apex:facet name="Stop"> -->
+<apex:detail subject="{!$CurrentPage.parameters.cid}" relatedList="false" title="false"/>
+<!--</apex:facet>
+</apex:actionStatus>-->
+</apex:outputPanel>
+<!--<apex:detail subject="{!$CurrentPage.parameters.relatedId}" relatedList="false" title="false"/>-->
+<!--<apex:detail subject="{!account}" relatedList="false"/>
+<apex:relatedList list="OpenActivities" subject="{!$CurrentPage.parameters.relatedId}"/>-->
+  </apex:page>

@@ -1,0 +1,8 @@
+<aura:component >
+    <aura:attribute name="contact" type="Contact"/>
+    <lightning:card variant="narrow" title="{!v.contact.Name}" iconName="Standard:Contact">
+    <aura:set attribute="actions">
+        <lightning:button name="details" label="details"/>
+       </aura:set>
+        </lightning:card>
+</aura:component>

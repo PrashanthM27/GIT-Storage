@@ -1,0 +1,4 @@
+<aura:component >
+    <aura:attribute name = "Test" type ="Account" default="Account Object"/>
+    
+</aura:component>

@@ -1,0 +1,6 @@
+<aura:component >
+    <aura:attribute name="Message" type="String"/>
+    <h1>My Message for Today is:{!v.Message}</h1>
+    <ui:button label="Hi Prathyusha you when will we meet?" press="{!c.handleClick}"/>
+    <ui:button label="When we meet we will start loving eachother" press="{!c.handleClick}"/>
+</aura:component>

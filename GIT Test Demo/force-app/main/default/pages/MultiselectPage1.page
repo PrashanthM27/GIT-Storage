@@ -1,0 +1,33 @@
+<apex:page standardController="Account" recordSetVar="ignored"
+           extensions="DynamicCustomizableListHandler">
+    <br/>
+    <apex:form >
+
+    <apex:pageBlock title="Select Fields to Display" id="selectionBlock">
+        <apex:pageMessages />
+        <apex:panelGrid columns="3">
+            <apex:selectList id="unselected_list" required="false" 
+                value="{!selected}" multiselect="true" size="20" style="width:250px">
+                <apex:selectOptions value="{!unSelectedOptions}"/>
+            </apex:selectList>
+            <apex:panelGroup >
+                <apex:commandButton value=">>" 
+                    action="{!doAdd}" rerender="selectionBlock"/>
+                <br/>
+                <apex:commandButton value="<<" 
+                    action="{!doRemove}" rerender="selectionBlock"/>
+            </apex:panelGroup>
+            <apex:selectList id="selected_list" required="false" 
+                value="{!unselected}" multiselect="true" size="20" style="width:250px">
+                <apex:selectOptions value="{!selectedOptions}"/>
+            </apex:selectList>
+        </apex:panelGrid>
+        <em>Note: Fields marked <strong>*</strong> are inaccessible to your account</em>
+    </apex:pageBlock>
+    
+    <br/>
+    <apex:commandButton value="Show These Fields" action="{!show}"/>
+
+    </apex:form>
+
+</apex:page>

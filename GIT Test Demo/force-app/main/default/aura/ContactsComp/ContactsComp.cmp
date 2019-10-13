@@ -1,0 +1,22 @@
+<aura:component >
+    <ltng:require styles="{!$Resource.SLDSv2 + '/assets/styles/lightning-design-system-ltng.css'}"
+                  scripts="{!$Resource.jsLibraries + '/jsLibOne.js'}"/>
+    <lightning:input type="number" name="some number" label="Select Number:" value="54"/>
+    <lightning:input type="text" name="some text" label="{!$Label.c.Hello_Prathyusha}"/>
+    <div>
+    Hello Prashanth
+    </div>
+    {!$Browser.isTablet}<br/>
+    {!$Browser.isPhone}<br/><br/>
+    {!$Browser.isAndroid}<br/><br/>
+    
+    {!$Locale.country}<br/><br/>
+    {!$Locale.timezone}<br/><br/>
+    {!$Locale.currencyFormat}<br/><br/>
+    {!$Locale.language}<br/><br/>
+   
+    
+    <lightning:button label="Kiss here" onclick="{!c.checkBrowser}"/><br/><br/>
+    <lightning:button label="Touch here" onclick="{!c.checkLocale}"/>
+    <lightning:button label="Fuck here" onclick="{!c.labels}"/>
+</aura:component>

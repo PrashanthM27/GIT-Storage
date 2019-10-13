@@ -1,0 +1,56 @@
+<apex:page controller="Registration" sidebar="false">
+<!-- Need to add slds file into Static Resources-->
+<apex:form >
+<div class="slds">
+<div class="slds-page-header" role="banner">
+<div class="slds-grid">
+<!--<div class="slds-col">
+<div class="slds-media">
+<div class="slds-media__figure">-->
+<div class="slds-media__body">
+<p class="slds-text-heading--label">Registration</p>
+<h1 class="slds-text-heading--medium">Home</h1>
+</div>
+<div class="slds-col slds-no-flex slds-align-middle">
+<div class="slds-button-group" role="group">
+<apex:commandButton styleClass="slds-button slds-button--neutral" value="save" action="{!save}"/>
+<apex:commandButton styleClass="slds-button slds-button--neutral" value="cancel" action="{!cancel}"/>
+</div>
+</div>
+</div>
+</div>
+<div class="myapp">
+<div class="slds-grid slds-m-top--large">
+<div class="slds-col slds-col-rule--right slds-p-right--large">
+<div class="widthtofields">
+<div class="slds-form--horizontal">
+<div class="slds-grid slds-wrap slds-grid--pull-padded">
+<div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--3-of-12 "></div>
+<div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--3-of-12 ">FirstName<span style="color:red;margin:5px">*</span></div>
+<div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--3-of-12 "><apex:inputText value="{!firstName}" Styleclass="slds-input" style="margin:5px"/></div>
+<div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--3-of-12"></div>
+
+
+<div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--3-of-12 "></div>
+<div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--3-of-12 ">LastName<span style="color:red;margin:5px">*</span></div>
+<div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--3-of-12 "><apex:inputText value="{!lastName}" Styleclass="slds-input" style="margin:5px"/></div>
+<div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--3-of-12"></div>
+
+<div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--3-of-12 "></div>
+<div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--3-of-12 ">UserName<span style="color:red;margin:5px">*</span></div>
+<div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--3-of-12 "><apex:inputText value="{!userName}" Styleclass="slds-input" style="margin:5px"/></div>
+<div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--3-of-12"></div>
+
+<div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--3-of-12 "></div>
+<div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--3-of-12 ">Password<span style="color:red;margin:5px">*</span></div>
+<div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--3-of-12 "><apex:inputText value="{!passWord}" Styleclass="slds-input" style="margin:5px"/></div>
+<div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--3-of-12"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</apex:form>
+</apex:page>

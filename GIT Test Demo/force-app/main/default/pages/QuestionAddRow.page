@@ -1,0 +1,32 @@
+<apex:page sidebar="false" standardController="Answer__c" extensions="QuestionAddRow" >
+<apex:form >
+    <apex:pageBlock id="membAdd" >                 
+        <apex:pageblockSection >
+            <apex:pageBlockTable value="{!memberAddList}" var="memb">
+                <apex:column headerValue="Question">
+                    <apex:inputField value="{!memb.Name}"/>
+                </apex:column>           
+                <apex:column headerValue="Type">
+                    <apex:inputField value="{!memb.Type__c}" />
+                    <apex:actionSupport event="onchange" reRender="acs"/>
+                </apex:column>
+                <apex:column headerValue="Picklist Value" id="acs">                             
+                    <apex:selectOption title="Text Value" rendered="{!memb.Type__c=='Text'}"> 
+                       <apex:inputText /> 
+                      </apex:selectOption> 
+                      <apex:selectRadio title="Text Value" rendered="{!memb.Type__c=='Radio'}"> 
+                       <apex:selectOption /> 
+                      </apex:selectRadio>                                                   
+                </apex:column>
+            </apex:pageBlockTable>
+            <apex:commandLink value="Add Question" action="{!addRow}" reRender="membAdd"/>       
+        </apex:pageblockSection>  
+        <apex:pageblockSection columns="1">
+            <apex:pageblockSectionItem >
+                <apex:commandButton value="Save"/>
+                <apex:commandButton value="Cancel"/>
+            </apex:pageblockSectionItem>        
+        </apex:pageblockSection>
+    </apex:pageBlock>
+</apex:form>
+</apex:page>

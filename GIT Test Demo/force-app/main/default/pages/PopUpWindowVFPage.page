@@ -1,0 +1,24 @@
+<apex:page standardcontroller="Account" recordSetVar="acc">
+  <script>
+    function PopUpWindow(id){
+        var win=window.open('{$Page.popup}?id=' +Id,'popup','height=340,width=505,left=100,top=100,resizable=no,scrollbars=yes,toolbar=no,status=no');
+        if(window.focus)
+        {
+        win.focus();
+        }
+        return false;
+        }
+    </script>
+    <apex:pageBlock >
+    <apex:pageBlockSection >
+      <apex:pageBlockTable value="{!acc}" var="a">
+          <apex:column headerValue="Action">
+          <apex:outputLink title="Click" onclick="return PopUpWindow('{!a.Id}')">Click</apex:outputLink>
+          </apex:column>
+        <apex:column value="{!a.Name}"/>
+          <apex:column value="{!a.Industry}"/>
+          <apex:column value="{!a.Phone}"/>
+          </apex:pageBlockTable>
+      </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:page>

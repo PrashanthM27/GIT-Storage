@@ -1,0 +1,29 @@
+<apex:page StandardController="Contact" extensions="DisplayLookupField" sidebar="false" showHeader="false">
+<apex:form >
+ <apex:pageBlock title="Order Entry">
+         <apex:actionRegion >
+            <apex:pageBlockSection title="Order Header" columns="2">
+               <apex:pageBlockSectionItem >
+                  <apex:outputLabel value="Customer"/>
+                  <apex:outputPanel >
+                     <apex:inputField value="{!contact.AccountId}">
+                        <apex:actionSupport event="onchange" 
+                           action="{!Submit}"
+                           rerender="thePageBlock"
+                           status="status"/>
+                     </apex:inputField>
+                     <apex:actionStatus startText="applying address..." 
+                        id="status"/>
+                  </apex:outputPanel>
+               </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Address" columns="2" id="thePageBlock" rendered="true">
+            <apex:pageBlockSectionItem >
+               <apex:outputLabel value="MailingStreet"/>
+               <apex:outPutField value="{!cts.Name}"/>
+            </apex:pageBlockSectionItem>
+         </apex:pageBlockSection>
+         </apex:actionRegion>
+         </apex:pageBlock>
+</apex:form>
+</apex:page>
