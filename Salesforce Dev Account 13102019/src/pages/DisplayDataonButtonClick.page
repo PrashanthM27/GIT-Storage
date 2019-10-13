@@ -1,0 +1,12 @@
+<apex:page controller="DisplayDataonButtonClick">
+    <apex:form >
+    <apex:commandButton value="Save" action="{!Save}" reRender="pn"/>
+    <apex:pageBlock >
+        <apex:outputPanel id="pn">
+        <apex:pageBlockTable value="{!acc}" var="s" >
+        <apex:column value="{!s.Name}"/>
+        </apex:pageBlockTable>
+            </apex:outputPanel>
+    </apex:pageBlock>
+        </apex:form>
+</apex:page>

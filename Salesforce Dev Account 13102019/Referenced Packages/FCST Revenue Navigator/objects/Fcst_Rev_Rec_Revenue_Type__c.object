@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>List</customSettingsType>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Fcst_12_Month_Duration__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Fcst 12 Month Duration</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Fcst Rev Rec Revenue Type</label>
+    <listViews>
+        <fullName>FCST_View</fullName>
+        <columns>NAME</columns>
+        <columns>Fcst_12_Month_Duration__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>FCST View</label>
+    </listViews>
+    <visibility>Public</visibility>
+</CustomObject>

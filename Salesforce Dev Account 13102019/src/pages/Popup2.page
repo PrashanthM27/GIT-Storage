@@ -1,0 +1,4 @@
+<apex:page standardController="Account" >
+<apex:sectionHeader title="Block" subtitle="{!Account.Name}"/>
+<apex:detail relatedList="true"/>
+</apex:page>

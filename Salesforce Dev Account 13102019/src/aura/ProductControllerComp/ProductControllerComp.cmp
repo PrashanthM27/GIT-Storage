@@ -1,0 +1,19 @@
+<aura:component controller="ProductController">
+  <!--aura:handler name="init" value="{!this}" action="{!c.getProductlist}"/>
+   <aura:attribute name="objInfo" type="Product2" default="{sobjectType : 'Product2'}" /-->
+    <!--lightning:layoutItem size="2" padding="around-small">
+   <div class="slds-form-element">
+      <label class="slds-form-element__label" for="select-01">Product Code</label>
+      <div class="slds-select_container">
+         <ui:inputSelect  aura:id="prdProductCode" class="slds-select"  change="{!c.onPicklistChange}"/>
+      </div>
+   </div>
+       </lightning:layoutItem--> 
+    <lightning:layoutItem size="2" padding="around-small">
+    <lightning:select name="ProductCode" label="Product">
+      <option>
+          --None--<br/>
+        </option>
+    </lightning:select>
+        </lightning:layoutItem>
+</aura:component>

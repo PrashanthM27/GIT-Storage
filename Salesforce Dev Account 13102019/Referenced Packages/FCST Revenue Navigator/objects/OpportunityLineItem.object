@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>Account_Owner_Id__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>Opportunity.Account.OwnerId</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Account Owner Id</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FCST_Account_Id__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>Opportunity.AccountId</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>FCST Account Id</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FCST_Revenue_Type__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>TEXT(PricebookEntry.Product2.Revenue_Type__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>FCST Revenue Type</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FCST_Revenue_Types__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>FCST Revenue Types</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Fcst_Auto_Script__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Fcst Auto Script</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Risk_Factor__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Risk Factor</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Percent</type>
+    </fields>
+</CustomObject>

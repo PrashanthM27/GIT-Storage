@@ -1,0 +1,4 @@
+<apex:page controller="PageRef">
+
+ <h1 style="color:#FFA500;"> Namaste! Welcome to this page</h1>
+</apex:page>

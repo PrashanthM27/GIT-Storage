@@ -1,0 +1,5 @@
+<aura:component >
+    <aura:attribute name="Message" type="String"/>
+    <p>Message of the day</p>
+    <lightning:button label="Click" onClick="{!c.onClickButton}"/>
+</aura:component>

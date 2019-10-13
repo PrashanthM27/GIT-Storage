@@ -1,0 +1,241 @@
+<apex:page sidebar="false" controller="FcstCCRev.FCST_CompucomSummaryWorkBench" showHeader="false" docType="html-5.0">
+     <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> 
+        <head> 
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <apex:stylesheet value="{!URLFOR($Resource.FcstCCRev__SLDS090, 'assets/styles/salesforce-lightning-design-system-vf.css')}"/>
+            <style>
+             table {
+                     border-collapse: collapse;
+                } 
+                th, td {
+                    
+                     font-family: Montserrat; 
+                 }
+                 th {
+                      background-color: #F7F9FB;
+                      border:1px solid #EEF0F3;
+                  }
+                 
+            </style>
+       </head>
+        <apex:form > 
+                <div class="slds" id="pageBody">
+                 
+                        <div class="slds-grid">
+                                <div class="slds-col">
+                                        <apex:actionStatus id="getDataStatus">
+                                                <apex:facet name="start">
+                                                    <div style="background:f8f8f8;width: 150px;z-index:1000;position:fixed;border:2px solid ccc;left:50%;top:50%;padding:25px">
+                                                        <img src="/img/loading24.gif" style="vertical-align:middle;"/>
+                                                        Searching....
+                                                    </div>
+                                                </apex:facet> 
+                                        </apex:actionStatus>
+                                <div class="slds-box slds-box--small slds-theme--shade " style="height: 80px;">
+                                    <div class="slds-text-heading--medium" style=" position: relative;top: 18%;right: -18%;"><b>Client Forecast Summary</b></div>
+                                         <apex:image url="{!URLFOR($Resource.FcstCCRev__FcstEraSldsIcons, 'CompuComlogo.png')}" alt="Report" style="height: 65%;width: 15%;margin-top: -3%;" />                                                                                      <!--<a  href="{!$Label.salesbooking_help}" target="_blank" style="float: right;margin-top: -31px; margin-left:9Px" title="help">
+                                                    <apex:image url="{!URLFOR($Resource.salesbookinghelp)}" width="40" height="40" alt="help" style="width: 25px;height: 32px;"/> 
+                                                </a>--->
+                                                       <apex:commandButton title="Back" styleClass="slds-button slds-button--icon-border slds-not-selected" style="color: white;background-color: #2F2B9C;margin-top: -4%;position: relative;left: 910px;width: 130px;height: 36px;" value="Back" action="{!BackPage}" />
+                                        <button id="FilterIconDiv" style="background-color: #2F2B9C;position: relative;top: -27px;right: -72.6%;" class="slds-button slds-button--icon-border slds-not-selected" name="data" title="Show filter" type="button" onClick="show()">
+                                                <apex:image url="{!URLFOR($Resource.FcstCCRev__FcstSldsIcons, 'filter_60.png')}" width="40" height="40" alt="Report" style="width: 16px;"/>
+                                                <span class="slds-assistive-text">Filter List</span>
+                                        </button>  
+                                        <button id="QuarterButton" class="slds-button slds-float--right slds-button--icon-border slds-not-selected" Style="background-color: #2F2B9C; margin-top: -2%;position: relative;right: 3%;" title="Go to home" name="data" type="button" onclick="gotohome()">
+                                                <apex:image url="{!URLFOR($Resource.FcstCCRev__FcstSldsIcons, 'home_60.png')}" width="40" height="40" alt="Report"  />
+                                        </button>
+                                        
+                                        <apex:actionFunction action="{!gotohomepage}" name="gotohome"/> 
+                                
+                            </div>
+                       </div>
+                 </div>  
+              
+  <div id="expand1" style="margin-left: 16px;"><!-- ----- -->
+  <div class="slds-grid slds-wrap slds-grid--pull-padded slds-page-header__detail-row">
+                            <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-4">
+                                <div class="slds-text-body--regular" title="Planning Year"><b>Planning Year</b></div>
+                                    <apex:selectList style="width:90%" id="SelectListPlaningYear"  Styleclass="slds-select" value="{!strPlanYear}" multiselect="false" size="1" >
+                                        <apex:selectOptions value="{!PlanningYearOptionList}" />
+                                    </apex:selectList>
+                            </div> 
+                            
+                            
+                            <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-4">
+                                <div class="slds-text-body--regular" title="Planning Version"><b>Planning Version</b></div>
+                                    <apex:selectList style="width:90%" id="SelectListPlaningVersion"  Styleclass="slds-select" value="{!strPlanningVersion}" multiselect="false" size="1" >
+                                        <apex:selectOptions value="{!FromPlanningVersion}" />
+                                    </apex:selectList>
+                            </div>
+                            
+                            
+                  <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-4">
+                      <label class="slds-text-body--regular" title="User Role"><b>User Role(Search Field)</b></label>
+                        <div class="slds-form-element__control">
+                           <apex:inputText Styleclass="slds-input" style="width: 90%;" value="{!strUserRole}"  html-inputText="Enter your preferred browser" html-autocomplete="on" list="{!userRoleSet}" >
+                                <apex:actionSupport event="onchange" action="{!getUsersRoleChange}"  reRender="selectedUser,selectedAccount,selectedResion" Status="getDataStatus"/>
+                           </apex:inputText>
+                        </div>
+                        </div>
+                        
+                        
+                            <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-4">
+                                <label class="slds-text-body--regular" title="User Name"><b>User Name (Search Field)</b></label>
+                                        <apex:outputPanel id="selectedUser">
+                                            <div class="slds-form-element__control">
+                                                <apex:inputText Styleclass="slds-input" style="width: 90%;" value="{!strUserName}"  html-inputText="Enter your preferred browser" html-autocomplete="on" list="{!userNameSet}">
+                                                     <apex:actionSupport event="onchange" action="{!UserChange}"  reRender="selectedAccount,selectedResion" Status="getDataStatus"/> 
+                                                </apex:inputText>
+                                            </div>
+                                        </apex:outputPanel>
+                                    </div> 
+  </div> 
+                    
+   <div class="slds-grid slds-wrap slds-grid--pull-padded slds-page-header__detail-row">
+   
+                            <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-4">
+                                <label class="slds-text-body--regular" title="Account Name"><b>Account Name(Search Field)</b></label>
+                                   <apex:outputPanel id="selectedAccount">
+                                      <div class="slds-form-element__control">
+                                           <apex:inputText Styleclass="slds-input" style="width: 90%;" value="{!strAccount}"  html-inputText="Enter your preferred browser" html-autocomplete="on" list="{!accountSet}">
+                                               <apex:actionSupport event="onchange" action="{!getCPMResionVal}"  reRender="selectedResion" Status="getDataStatus"/>
+                                            </apex:inputText>
+                                          </div>
+                                        </apex:outputPanel>
+                                     </div>  
+                                     
+ <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-4">
+                       <apex:outputPanel id="selectedResion" rendered="{!IF(CPMRegionLabelname <> null && CPMRegionLabelname !='--None--' && CPMRegionLabelname !='',TRUE,FALSE)}">
+                       <label class="slds-text-body--regular" title="CPM Region"><b>{!CPMRegionLabelname}</b></label>
+                       <apex:selectList style="width: 90%;" id="CPMRegionId" Styleclass="slds-select" value="{!StrCPMRegion}" size="1" multiselect="false" >
+                       <apex:selectOptions value="{!CPMRegionList}"/>
+                      </apex:selectList>
+                      </apex:outputPanel>
+                      </div>                                      
+   
+                    
+<div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-4">
+</div>
+<div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-4">
+</div>
+                    
+                    
+  </div>                                    
+  </div>
+              
+
+              <!------------------------------------ Filter  End---------------------------------------------------------->
+        <!-------------------------------------Date Button start ---------------------------------------------------->
+               <!--Date Button start -->
+                <div  style="display:block;border-top:1px solid #D8DDE6">
+                  <div class="slds-grid slds-wrap slds-grid--pull-padded slds-page-header__detail-row"> 
+                     <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-4" >
+                         <apex:outputPanel id="periodPannelId">
+                            <div class="slds-text-heading--large" title="planning Period" style="font-size: 157%;"><b>{!planningPeriod}</b></div>
+                         </apex:outputPanel>
+                     </div>
+                    
+                     <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-4" >
+                        <div class="slds-form-element">
+                           <div class="slds-button-group" role="group">
+                             <button class="slds-button slds-button--icon-border" title="Previous Year" type="button" onclick="decreaseYearfucn()">
+                               <apex:image url="{!URLFOR($Resource.FcstCCRev__FcstSldsIcons, 'left_60.png')}" width="60" height="60" alt="Report"  />
+                               <span class="slds-assistive-text">left</span>
+                             </button>
+                             <button style="cursor: default;background-color:white" onclick="return false;" class="slds-button slds-button--icon-border" title="event">
+                                  <apex:image url="{!URLFOR($Resource.FcstCCRev__FcstSldsIcons, 'event_60.png')}" width="40" height="40" alt="Report"  />
+                               <span class="slds-assistive-text">event</span>
+                             </button>
+                             <button class="slds-button slds-button--icon-border" title="Next Year" type="button" onclick="increaseYearfucn()">
+                                 <apex:image url="{!URLFOR($Resource.FcstCCRev__FcstSldsIcons, 'right_60.png')}" width="60" height="60" alt="Report"  />
+                               <span class="slds-assistive-text">right</span>
+                             </button>
+                           </div>
+                         </div>
+                     </div>
+                     <apex:actionFunction name="increase" status="counterStatus" action="{!mainfetchOppRecord}"  rerender="tabelPannelId,periodPannelId,myPanel,myButtons" >
+                         <apex:param name="getincreaseValue" value="" />
+                     </apex:actionFunction>
+            
+                    <div class="slds-col--padded slds-size--1-of-1  slds-medium-size--1-of-1 slds-large-size--1-of-4"  Style="margin-left: -15%;">
+                        <apex:commandButton styleClass="slds-button slds-button--neutral slds-button--brand" title="Load Workbench"   value="Load Workbench"  id="WorkbenchbuttonId"  onClick="callLoadButton();return false" >
+                        </apex:commandButton>
+                        <apex:actionFunction name="callLoadButtonfun" action="{!mainfetchOppRecord}" status="counterStatus"   rerender="myPanel,myButtons,periodPannelId,counterStatus,tabelPannelId" ></apex:actionFunction>
+                      
+                     </div>
+                    <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-4" style="margin-left: -10%;"></div>
+                     
+                  </div>
+                   
+                  <apex:actionstatus id="counterStatus">
+                    <apex:facet name="start">
+                        <div class="waitingSearchDiv" id="el_loading" style="background-color: #fbfbfb; height:100%;opacity:0.65;width:100%;">
+                            <div class="waitingHolder" style="top: 275px; width: 91px;">
+                            <img class="waitingImage" src="/img/loading.gif" title="Please Wait..." />
+                            <span class="waitingDescription">Loading...</span>
+                            </div>
+                        </div>
+                    </apex:facet>
+                  </apex:actionstatus>
+               
+                </div>
+             <!--Date Button end -->
+             <!------------------------------------------Date Button end ------------------------------------------------------>
+             <!----------------------------------------- Table Start  --------------------------------------------------------->
+             <div id="tablerHeaderId" style="display:block;border-top:1px solid #D8DDE6">
+                  <apex:outputPanel id="tabelPannelId">
+                        <apex:outputText value="{!tableBlock}" escape="false"/>
+                        <apex:outputPanel rendered="{!!IsTableDataPresent}"> 
+                            <div style="text-align:center;font-size:20px;color:red;">Data Not Present based on selected filters</div>
+                        </apex:outputPanel> 
+                 </apex:outputPanel>    
+             </div>
+                       
+             <!------------------------------------------ Table End  ---------------------------------------------------------->
+                 
+                 
+               </div>
+                
+             <script>
+                 
+                 var increaseVal =0; 
+                 function increaseYearfucn(){
+                 var lasty='{!lastYear}';
+                  var cYear='{!cYear}';
+                 var newValue=+increaseVal + +1 + +cYear;
+                 if(newValue<=lasty)
+                    increaseVal++;
+                    
+                  increase(increaseVal);
+                 }
+                 function decreaseYearfucn(){
+                  var lastI='{!initialYear}';
+                  var cYear='{!cYear}';
+                  var newValue=+increaseVal - +1 + +cYear; 
+                 if(newValue>=lastI)
+                    increaseVal--;
+                    
+                  increase(increaseVal);
+                 }
+
+            function callLoadButton(){
+                    increaseVal=0;
+                    callLoadButtonfun();
+                 }
+            
+                 function show()
+                {              
+                               
+                    var x = document.getElementById("expand1");
+                    if (x.style.display === "none") {
+                        x.style.display = "block";
+                        document.getElementById('FilterIconDiv').title = 'Hide Filter';
+                    } else {
+                        x.style.display = "none";
+                        document.getElementById('FilterIconDiv').title ='Show Filter' ;
+                    }
+                }                               
+            </script>
+          </apex:form>
+      </html>
+</apex:page>

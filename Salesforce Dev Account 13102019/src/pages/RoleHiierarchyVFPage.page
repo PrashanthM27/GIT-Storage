@@ -1,0 +1,14 @@
+<apex:page StandardController="UserRole" extensions="RoleControllerCls">
+    <apex:form >
+<apex:pageBlock >
+    <apex:outputLabel value="Enter Role Name"/>
+    <apex:inputText value="{!Selectedrole}"/>
+    <apex:pageBlockSection >
+    <apex:pageBlockTable value="{!usr}" var="a">
+        <apex:column value="{!a.Name}"/>
+        </apex:pageBlockTable>
+        <apex:commandButton action="{!getRoleDetails}" value="Click"/>
+    </apex:pageBlockSection>
+    </apex:pageBlock>
+        </apex:form>
+</apex:page>

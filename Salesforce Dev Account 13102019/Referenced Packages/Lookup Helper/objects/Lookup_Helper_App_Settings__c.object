@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Record_Scope__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Record Scope</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>emailToSendExceptions__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <inlineHelpText>Lookup Helper will send an email to the specified email address daily with a summary of exceptions that have occurred (no emails will be sent if this field is not populated).</inlineHelpText>
+        <label>Email To Send Exceptions</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Lookup Helper App Settings</label>
+    <visibility>Public</visibility>
+</CustomObject>

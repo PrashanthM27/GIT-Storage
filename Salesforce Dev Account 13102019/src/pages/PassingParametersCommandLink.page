@@ -1,0 +1,6 @@
+<apex:page standardController="Contact" extensions="PassingParameterswithCommandLink">
+     <apex:form >
+    <apex:commandLink value="Process NickName" action="{!pageLinkClick}"/>
+    <apex:param name="NickName" value="{!contact.FirstName}" assignTo="{!nickName}"/>
+    </apex:form>
+    </apex:page>

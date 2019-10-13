@@ -1,0 +1,13 @@
+<apex:page controller="Account_QueryController">
+    <apex:form >
+      <apex:pageBlock >
+          <apex:pageBlockSection >
+             <apex:pageBlockTable value="{!acc}" var="rec">
+                <apex:column value="{!rec.Name}"/>
+                 <apex:column value="{!rec.Industry}"/>
+              </apex:pageBlockTable>
+          </apex:pageBlockSection>
+          <apex:commandButton action="{!getAccountRecords}" value="Save"/>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

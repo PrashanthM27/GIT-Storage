@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>FCST Trigger</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>FCST Trigger</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account Trigger --></label>
+        <name>Account_Trigger__c</name>
+    </fields>
+    <fields>
+        <label><!-- FCST LineItem Trigger --></label>
+        <name>FCST_LineItem_Trigger__c</name>
+    </fields>
+    <fields>
+        <label><!-- FCST Opportunity Trigger --></label>
+        <name>FCST_Opportunity_Trigger__c</name>
+    </fields>
+    <fields>
+        <label><!-- Product Trigger --></label>
+        <name>Product_Trigger__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

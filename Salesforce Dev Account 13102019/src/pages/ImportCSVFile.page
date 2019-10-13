@@ -1,0 +1,19 @@
+<apex:page controller="ImportCSVFile">
+<apex:form >
+  <apex:pageBlock title="Account Details">
+  <apex:pageBlockSection title="Account CSV File">
+  <apex:inputFile value="{!csvData}" onclick="{!csvToString}"/>
+  <apex:commandButton action="{!getCSVFile}" value="Import Data"/>
+  </apex:pageBlockSection>
+  </apex:pageBlock>
+  <apex:pageBlock TItle="Account Details">
+  <apex:pageBlockSection title="Account Section">
+  <apex:pageBlockTable value="{!cont}" var="c">
+  <apex:column value="{!c.FirstName}"/>
+  <apex:column value="{!c.LastName}"/>
+  <apex:column value="{!c.Phone}"/>
+  </apex:pageBlockTable>
+  </apex:pageBlockSection>
+  </apex:pageBlock>
+  </apex:form>
+</apex:page>

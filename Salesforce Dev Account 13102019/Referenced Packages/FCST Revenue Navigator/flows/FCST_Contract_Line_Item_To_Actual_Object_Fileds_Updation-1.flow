@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>when ever Revenue type,cost center,cost center description,line description and BSLA changed then related objects (FCST Initial forecast and FCST Actual Model object ) records same fields will be updated.</description>
+    <label>FCST Contract Line Item To Actual Object Fileds Updation</label>
+    <processType>Workflow</processType>
+</Flow>

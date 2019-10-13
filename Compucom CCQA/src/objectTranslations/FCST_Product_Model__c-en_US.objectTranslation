@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>FCST Product Model</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>FCST Product Models</value>
+    </caseValues>
+    <fields>
+        <label><!-- AccountId Unused Field --></label>
+        <name>AccountId__c</name>
+    </fields>
+    <fields>
+        <label><!-- AccountOwnerId Unused Field --></label>
+        <name>AccountOwnerId__c</name>
+    </fields>
+    <fields>
+        <label><!-- Account Business Unit --></label>
+        <name>Account_Business_Unit__c</name>
+    </fields>
+    <fields>
+        <label><!-- Account CPM Region --></label>
+        <name>Account_CPM_Region__c</name>
+    </fields>
+    <fields>
+        <label><!-- Account OwRole Unused Field --></label>
+        <name>Account_Owner_Role__c</name>
+    </fields>
+    <fields>
+        <label><!-- Account Owner --></label>
+        <name>Account_Owner__c</name>
+        <relationshipLabel><!-- FCST Product Models --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Account Sales Region --></label>
+        <name>Account_Sales_Region__c</name>
+    </fields>
+    <fields>
+        <label><!-- Account Sub region --></label>
+        <name>Account_Sub_region__c</name>
+    </fields>
+    <fields>
+        <label><!-- Account --></label>
+        <name>Account__c</name>
+        <relationshipLabel><!-- FCST Product Models --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Amount --></label>
+        <name>Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Comments --></label>
+        <name>Comments__c</name>
+    </fields>
+    <fields>
+        <label><!-- EndNumber --></label>
+        <name>EndNumber__c</name>
+    </fields>
+    <fields>
+        <label><!-- FCST Product Line ID --></label>
+        <name>FCST_Product_Line_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- FCST Revenue Types --></label>
+        <name>FCST_Revenue_Types__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fiscal Period --></label>
+        <name>Fiscal_Period__c</name>
+        <relationshipLabel><!-- FCST Product Models --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Hyperion Revenue Type --></label>
+        <name>Hyperion_Revenue_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Model Name --></label>
+        <name>Model_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Opportunity StageName --></label>
+        <name>Opportunity_StageName__c</name>
+    </fields>
+    <fields>
+        <label><!-- Opportunity Stage Type --></label>
+        <name>Opportunity_Stage_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Opportunity Type --></label>
+        <name>Opportunity_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Opportunity --></label>
+        <name>Opportunity__c</name>
+        <relationshipLabel><!-- FCST Product Models --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Planning Measure --></label>
+        <name>Planning_Measure__c</name>
+        <relationshipLabel><!-- FCST Product Models --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Planning Version --></label>
+        <name>Planning_Version__c</name>
+        <relationshipLabel><!-- FCST Product Models --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Product --></label>
+        <name>Product__c</name>
+        <relationshipLabel><!-- FCST Product Models --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- User Adjusted Revenue --></label>
+        <name>User_Adjusted_Revenue__c</name>
+    </fields>
+    <fields>
+        <label><!-- Weighted Revenue --></label>
+        <name>Weighted_Revenue__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

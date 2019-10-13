@@ -1,0 +1,14 @@
+<apex:page controller="Lookup_populate" >
+   <apex:form >
+ <apex:pageBlock >
+   <apex:pageBlockSection title="Account Information">
+     <apex:inputField value="{!cont.ParentId}">
+        <apex:actionSupport event="onchange" action="{!AccountPopulated}" rerender="accinfo"/> 
+       </apex:inputField>
+       <apex:outputPanel >
+       <apex:inputText value="{!AccNo}" id="accinfo"/>
+       </apex:outputPanel>
+    </apex:pageBlockSection>
+     </apex:pageBlock>  
+    </apex:form>
+ </apex:page>

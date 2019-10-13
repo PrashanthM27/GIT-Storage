@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Mapping Setting</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Mapping Setting</value>
+    </caseValues>
+    <fields>
+        <label><!-- Cost Center --></label>
+        <name>Cost_Center__c</name>
+    </fields>
+    <fields>
+        <label><!-- FCST BSLA --></label>
+        <name>FCST_BSLA__c</name>
+    </fields>
+    <fields>
+        <label><!-- FCST GeoCodes --></label>
+        <name>FCST_GeoCodes__c</name>
+    </fields>
+    <fields>
+        <label><!-- FCST_ProgramManager --></label>
+        <name>FCST_ProgramManager__c</name>
+    </fields>
+    <fields>
+        <label><!-- FCST_Program Executive --></label>
+        <name>FCST_Program_Executive__c</name>
+    </fields>
+    <fields>
+        <label><!-- FCST_TR_YR1_Amount --></label>
+        <name>FCST_TR_YR1_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fcst_BusinessUnit --></label>
+        <name>Fcst_BusinessUnit__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fcst_CPM --></label>
+        <name>Fcst_CPM__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fcst_EndDate --></label>
+        <name>Fcst_EndDate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fcst Product Amount --></label>
+        <name>Fcst_Product_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fcst Q# --></label>
+        <name>Fcst_Q__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fcst Revenue Type --></label>
+        <name>Fcst_Revenue_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fcst_SalesRegion --></label>
+        <name>Fcst_SalesRegion__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fcst_StartDate --></label>
+        <name>Fcst_StartDate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fcst_SubRegion --></label>
+        <name>Fcst_SubRegion__c</name>
+    </fields>
+    <fields>
+        <label><!-- Geo Name --></label>
+        <name>Geo_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Geo# --></label>
+        <name>Geo__c</name>
+    </fields>
+    <fields>
+        <label><!-- Opportunity RecordType Api --></label>
+        <name>Opportunity_RecordType_Api__c</name>
+    </fields>
+    <fields>
+        <label><!-- Opportunity SVC YR1 --></label>
+        <name>Opportunity_SVC_YR1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Opportunity TCV --></label>
+        <name>Opportunity_TCV__c</name>
+    </fields>
+    <fields>
+        <label><!-- Term In Months --></label>
+        <name>Term_In_Months__c</name>
+    </fields>
+    <fields>
+        <label><!-- Transition Date --></label>
+        <name>Transition_Date__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

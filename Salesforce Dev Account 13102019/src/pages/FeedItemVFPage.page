@@ -1,0 +1,18 @@
+<apex:page controller="chatterpost">
+<apex:form >
+<table>
+<tr>
+<td><apex:outputLabel >Enter User ID</apex:outputLabel></td>
+<td><apex:inputText value="{!userID}" label="Enter User ID"/></td>
+</tr>
+<tr>
+<td><apex:outputLabel >Enter Post Content</apex:outputLabel></td>
+<td><apex:inputTextarea value="{!body}" label="Enter Post Content"/></td>
+</tr>
+<tr>
+<td></td>
+<td><apex:commandButton value="Post" action="{!postFeed}"/></td>
+</tr>
+</table>
+</apex:form>
+</apex:page>

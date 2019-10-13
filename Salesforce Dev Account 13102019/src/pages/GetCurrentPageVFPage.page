@@ -1,0 +1,11 @@
+<apex:page standardController="Account" extensions="GetCurrentPageId">
+  <apex:pageBlock >
+  <apex:pageBlockSection title="Current Record Id:{!currentId}">
+  <apex:outputField value="{!ac.Name}"/>
+  <apex:outputField value="{!ac.Industry}"/>
+  </apex:pageBlockSection>
+  <apex:pageBlockSection title="Details"> 
+  Name is <b>{!paramterValue}</b>
+  </apex:pageBlockSection>
+  </apex:pageBlock>
+</apex:page>

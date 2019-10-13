@@ -1,0 +1,15 @@
+<aura:component >
+ <ui:message title="Confirmation" severity="confirm" closable="true">
+   This is a confirmation message.
+ </ui:message>
+ <ui:message title="Information" severity="info" closable="true">
+   This is a message.
+ </ui:message>
+ <ui:message title="Warning" severity="warning" closable="true">
+   This is a warning.
+ </ui:message>
+ <ui:message title="Error" severity="error" closable="true">
+   This is an error message.
+ </ui:message>
+ 
+</aura:component>

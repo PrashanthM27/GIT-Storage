@@ -1,0 +1,10 @@
+<apex:page standardController="Account">
+    <apex:pageBlock >
+         u r looking for {!Account.Name}      
+        </apex:pageBlock>
+
+        <apex:relatedList list="Opportunities"/>
+    <apex:relatedList list="contacts">
+        <apex:facet name="Header"></apex:facet>
+    </apex:relatedList>
+</apex:page>

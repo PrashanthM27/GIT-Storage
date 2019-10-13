@@ -1,0 +1,8 @@
+<apex:page showHeader="false" standardStylesheets="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0">
+<html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+<div class="slds-grid">
+<div class="slds-column">Column 1</div>
+<div class="slds-column">Column 2</div>
+</div>
+</html>
+</apex:page>

@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>true</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Contract_Description__c</fullName>
+        <externalId>false</externalId>
+        <label>Contract Description</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Contract_Owner__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Contract Owner(UNUSED)</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>FCST_Contracts</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Contract__c</fullName>
+        <externalId>false</externalId>
+        <label>Contract#</label>
+        <length>50</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FCST_Baseline_Created_Year_Integer__c</fullName>
+        <externalId>false</externalId>
+        <formula>value(FCST_Contract_Created_Year__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>FCST Baseline Created Year Integer</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FCST_Contract_Created_Year__c</fullName>
+        <externalId>false</externalId>
+        <label>FCST Baseline Created Year</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FCST_Q__c</fullName>
+        <externalId>false</externalId>
+        <label>FCST Q#</label>
+        <length>25</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Fcst_Account__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Account</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>FCST Contracts</relationshipLabel>
+        <relationshipName>FCST_Contracts</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Fcst_Geo_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Fcst Geo Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Fcst_Geo_Number__c</fullName>
+        <externalId>false</externalId>
+        <label>Fcst Geo Number(UNUSED)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Fcst_Geo_Numbers__c</fullName>
+        <externalId>false</externalId>
+        <label>Fcst Geo Number</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Fcst_Service_End_date__c</fullName>
+        <externalId>false</externalId>
+        <label>Fcst Service End date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Fcst_Service_start_date__c</fullName>
+        <externalId>false</externalId>
+        <label>Fcst Service start date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Opportunity__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Opportunity</label>
+        <referenceTo>Opportunity</referenceTo>
+        <relationshipLabel>FCST Contracts</relationshipLabel>
+        <relationshipName>FCST_Contracts</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Revenue_Source__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(VALUE(FCST_Contract_Created_Year__c) &gt;=YEAR(TODAY()), &apos;New Sales&apos;, &apos;Backlog&apos;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Revenue Source</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>FCST Contract</label>
+    <listViews>
+        <fullName>All_Contract</fullName>
+        <columns>NAME</columns>
+        <columns>Contract__c</columns>
+        <columns>Fcst_Account__c</columns>
+        <columns>Contract_Description__c</columns>
+        <columns>Contract_Owner__c</columns>
+        <columns>FCST_Contract_Created_Year__c</columns>
+        <columns>Fcst_Geo_Name__c</columns>
+        <columns>Fcst_Geo_Number__c</columns>
+        <columns>FCST_Q__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All Contract</label>
+    </listViews>
+    <nameField>
+        <displayFormat>{0000}</displayFormat>
+        <label>FCST Contract Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>FCST Contracts</pluralLabel>
+    <searchLayouts>
+        <lookupDialogsAdditionalFields>Contract__c</lookupDialogsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <webLinks>
+        <fullName>Add_Update_Baseline_LineItem</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Add/Update Baseline LineItem</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/33.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/33.0/apex.js&quot;)} 
+
+var baselineYr = &apos;{!FCST_Contract__c.FCST_Contract_Created_Year__c}&apos;; 
+console.log(&apos;baselineYr&apos;+baselineYr);
+var currentYr = {!YEAR(TODAY())}
+if(baselineYr &lt; currentYr){ 
+window.open(&apos;/apex/FCST_BaseLineYear_Contract?id={!FCST_Contract__c.Id}&apos;); 
+} 
+else{  
+alert(&apos;Baseline Created Year should be less than Current Year&apos;); 
+}</url>
+    </webLinks>
+</CustomObject>

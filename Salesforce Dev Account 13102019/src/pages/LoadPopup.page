@@ -1,0 +1,43 @@
+<apex:page id="pg" controller="PopupScreen">
+ <apex:form >
+ <apex:pageblock title="PopupExample" id="pb">
+ <apex:pagemessages id="msg">
+ </apex:pagemessages>
+ <apex:commandButton value="Show" onclick=""/>
+ <script type="text/javascript">
+ var PopupBox;
+ var strreason;
+ var strcomment;
+ PopupBox=new SimpleDialog("test",false);
+ PopupBox.createDialog();
+ function openPopup(){
+  PopupBox.setTitle("PopupExample");
+  PopupBox.importContentNode(document.getElementById("{!$Component.PopupBox}");
+  PopupBox.show();
+ }
+ function callreason(res){strreason=res;}
+ function callcomment(cmnt){strcomment=cmt;}
+ function checkreason(){
+ if(strreason.length>0&&strcomment.length>0){
+ submitStandardPopup('Rejected'.strcomment,strreason);
+ PopupBox.hide()
+ }
+ else
+ {
+ alert('Please select reason or enter comment');
+ }
+ }
+ </script>
+ 
+ <apex:outputPanel style="display:none">
+ <apex:outputPanel id="PopupBox" layout="block">
+ <apex:inputText id="reason" value="{!textreason}" onchange="callreason(this.value);" style="width:100%"/><br/><br/>
+ <b>comments </b>
+ <apex:inputText id="comment" value="{!textcomment}" onchange="callcomment(this.value);" style="height:100px; width:100%"/><br/><br/>
+ <center> <apex:commandButton value="OK" onClick="checkreason();"/>
+ </center>
+ </apex:outputPanel>
+ </apex:outputPanel>
+ </apex:pageblock>
+</apex:form>
+</apex:page>

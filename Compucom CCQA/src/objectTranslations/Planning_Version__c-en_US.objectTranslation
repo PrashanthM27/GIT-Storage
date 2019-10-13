@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>FCST Planning Version</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>FCST Planning Versions</value>
+    </caseValues>
+    <fields>
+        <label><!-- Additional Planning Version --></label>
+        <name>Additional_Planning_Version__c</name>
+        <relationshipLabel><!-- FCST Planning Versions --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Backlog CWon Date Unused Field --></label>
+        <name>Backlog_ClosedWon_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- CopyNumber --></label>
+        <name>CopyNumber__c</name>
+    </fields>
+    <fields>
+        <label><!-- Data Entry Closed Date --></label>
+        <name>Data_Entry_Closed_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Data Entry Start Date --></label>
+        <name>Data_Entry_Start_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fiscal Period --></label>
+        <name>Fiscal_Period__c</name>
+        <relationshipLabel><!-- FCST Planning Versions --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Fiscal Year Planning --></label>
+        <name>Fiscal_Year_Planning__c</name>
+        <relationshipLabel><!-- FCST Planning Versions --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Gap Planning Version --></label>
+        <name>Gap_Planning_Version__c</name>
+        <relationshipLabel><!-- FCST Planning Versions --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- IsAutoConvert --></label>
+        <name>IsAutoConvert__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is this a Budget Planning Version? --></label>
+        <name>Is_this_a_Budget_Planning_Version__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is this a Gap Planning Version? --></label>
+        <name>Is_this_a_Gap_Planning_Version__c</name>
+    </fields>
+    <fields>
+        <label><!-- Long_Label --></label>
+        <name>Long_Label__c</name>
+    </fields>
+    <fields>
+        <label><!-- MonthName --></label>
+        <name>MonthName__c</name>
+    </fields>
+    <fields>
+        <label><!-- # Month --></label>
+        <name>Month_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- OpenByInProgressVersion --></label>
+        <name>OpenByInProgressVersion__c</name>
+    </fields>
+    <fields>
+        <label><!-- Period Number --></label>
+        <name>Period_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Planning Version Current Period --></label>
+        <name>Planning_Version_Current_Period__c</name>
+    </fields>
+    <fields>
+        <label><!-- Planning Version Description --></label>
+        <name>Planning_Version_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Planning Version Fiscal Year --></label>
+        <name>Planning_Version_Fiscal_Year__c</name>
+    </fields>
+    <fields>
+        <label><!-- Previous Version --></label>
+        <name>Previous_Version__c</name>
+        <relationshipLabel><!-- FCST Planning Versions --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Quarter Unused Field --></label>
+        <name>Quarter__c</name>
+    </fields>
+    <fields>
+        <label><!-- Record Source --></label>
+        <name>Record_Source__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sequence Number --></label>
+        <name>SequenceNo__c</name>
+    </fields>
+    <fields>
+        <label><!-- Short Label Unused Field --></label>
+        <name>Short_Label__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status Closed Date --></label>
+        <name>Status_Closed_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Version Status --></label>
+        <name>Version_Status__c</name>
+        <picklistValues>
+            <masterLabel>Closed</masterLabel>
+            <translation><!-- Closed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Progress</masterLabel>
+            <translation><!-- In Progress --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Open</masterLabel>
+            <translation><!-- Not Open --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Open (Admin)</masterLabel>
+            <translation><!-- Open (Admin) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Open (User)</masterLabel>
+            <translation><!-- Open (User) --></translation>
+        </picklistValues>
+    </fields>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- you can not change version date with closed version status --></errorMessage>
+        <name>Prevent_update_after_closed</name>
+    </validationRules>
+</CustomObjectTranslation>

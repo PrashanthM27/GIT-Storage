@@ -1,0 +1,21 @@
+<apex:page >
+<script src="/soap/ajax/42.0/connection.js" type="text/javascript"/>
+<script src="/soap/ajax/42.0/apex.js" type="text/javascript"/>
+<script type="text/javascript">
+function clickhere()
+{
+var acc=sforce.sobject("Account");
+var id=sforce.apex.execute("BatchButtonClickable","Click",{});
+location.reload(true); 
+window.alert('Now Please check Debug logs');
+}
+}
+</script>
+<apex:form >
+<apex:pageBlock title="No Title">
+<apex:pageBlockSection title="No Section">
+<button type="button" onclick="clickhere()">Press</button>
+</apex:pageBlockSection>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

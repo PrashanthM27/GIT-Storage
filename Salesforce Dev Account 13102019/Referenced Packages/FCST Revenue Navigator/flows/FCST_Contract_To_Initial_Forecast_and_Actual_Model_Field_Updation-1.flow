@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>when ever Account,Fcst Geo Name and Fcst Geo Number changed then related child object&apos;s (Fcst Intitail forecast and Fcst Actual object) records  same fields will be updated.</description>
+    <label>FCST Contract To Initial Forecast and Actual Model Field Updation</label>
+    <processType>Workflow</processType>
+</Flow>

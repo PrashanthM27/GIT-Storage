@@ -1,0 +1,635 @@
+<apex:page standardController="FCST_Contract__c" extensions="FCST_BaseLineYear_Contract" docType="html-5.0" sidebar="false">
+    <html xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">    
+        <head> 
+    <apex:slds />
+            <apex:includeScript value="{!URLFOR($Resource.jquery_3_1_1_min)}"/>
+            <apex:includeScript value="{!URLFOR($Resource.ILOC_Resources, 'ILOC_Resources/Js/jquery-1.11.1.min.js')}"/>                
+            <apex:includeScript value="{!URLFOR($Resource.ILOC_Resources, 'ILOC_Resources/Js/jquery.dataTables.min.js')}"/>
+            <apex:stylesheet value="{!URLFOR($Resource.ILOC_Resources, 'ILOC_Resources/Css/jquery.dataTables.css')}" />
+            <apex:includeScript value="{!URLFOR($Resource.ILOC_Resources, 'ILOC_Resources/Js/jquery-ui.js')}"/>
+    <style> 
+       div.b {
+              word-wrap: normal;
+            }
+        .clean_creation_header {
+               margin-left: 20px;
+            font-size: 25px;            
+            background-color: white;
+            color: black;
+            font-weight: bold;
+            height: 45px;
+            }
+        .slds-scope img {
+            max-width:1000px !important
+        }
+        .limlength{
+            max-width:20% !important;
+        }
+        .selectclc{
+            width:50% !important;
+        }
+        .monthclc{
+            padding:0px !important;
+            border-color:#F3F2F2 !important;
+            text-align:right !important;
+        }
+        .monthclc2{
+            padding:5px !important;
+            border-color:#F3F2F2 !important;
+            text-align:right !important;
+        }
+        .monthclcoutput{
+            //width:50px !important;
+            padding:5px !important;
+            border:1px solid #C9C7C5;
+            border-radius:5px;
+            background-color:#ECEBEA !important;
+            text-align:right !important;
+        }
+        .errorAmount{
+            border:1px solid red !important; 
+            color:red !important;
+        }
+        .hover{
+            pointer-events: none;
+        }
+    </style>
+    <script>
+       
+        function ConfirmDelete(lineid){
+            if(confirm('Are you sure to remove this item? Click on Save button to truly delete this Opportunity Product')){
+                RemoveProduct(lineid);
+            }
+        }
+        
+        var table;
+        var listofIds = [];
+        function tableload(){
+            listofIds = [];
+            table = $('#pageTable').DataTable({
+                 responsive: true,
+                 searching: true,
+                 order:false,
+            'columnDefs': [
+                { "targets": 0,"orderable": false},
+                { "targets": 1,"orderable": false},
+                { "targets": 2,"orderable": false},
+                { "targets": 3,"orderable": false},
+                { "targets": 4,"orderable": false},
+                { "targets": 5,"orderable": false},
+                { "targets": 6,"orderable": false},
+                { "targets": 7,"orderable": false},
+                { "targets": 8,"orderable": false},
+                { "targets": 9,"orderable": false},
+                { "targets": 10,"orderable": false},
+                { "targets": 11,"orderable": false},
+                { "targets": 12,"orderable": false},
+                { "targets": 13,"orderable": false},
+                { "targets": 14,"orderable": false},
+                { "targets": 15,"orderable": false},
+                { "targets": 16,"orderable": false},
+                { "targets": 17,"orderable": false},
+                { "targets": 18,"orderable": false},
+                { "targets": 19,"orderable": false}
+            ]
+            });
+            
+           
+            
+        }
+        
+        function initialWeightRev(ele){
+            var x = document.getElementsByClassName("initialweightrev");
+            var i;
+            var sid = (ele.id).split('_')[0];
+            
+            for (i = 0; i < x.length; i++) {
+                var pid = (x[i].id).split('_')[0];
+                var eleOutput =  document.getElementById(pid+'_output');
+                var eleInput =  document.getElementById(pid+'_input');
+                
+                console.log(pid+'##'+sid+'##'+eleOutput+'##'+eleInput);
+                if(pid != sid){
+                    if(eleOutput != null && eleOutput != 'undefined'){
+                        eleOutput.style.display = 'block';
+                    }
+                    if(eleInput != null && eleInput != 'undefined'){
+                        eleInput.style.display = 'none';
+                    }
+                }
+                if(pid == sid){
+                    if(eleOutput != null && eleOutput != 'undefined'){
+                        eleOutput.style.display = 'none';
+                    }
+                    if(eleInput != null && eleInput != 'undefined'){
+                        eleInput.style.display = 'block';
+                    }
+                }
+            }
+        }
+    </script>
+    </head>
+     <div class="slds" id="pageBody"  >
+    <body onload="tableload()" >
+    <apex:form id="formid">
+        <apex:actionfunction name="RemoveProduct" action="{!removeContractLineItem}" rerender="prodlistid,oppAmount,oppProductsCount" status="deleteStatus">
+            <apex:param name="lineId" value=""/>
+        </apex:actionfunction>
+        <apex:actionfunction name="goBack" action="{!goBack}" rerender="prodlistid" immediate="true"/>
+        
+        <apex:actionfunction name="searchContract" action="{!searchContract}" rerender="prodlistid,filtersec" status="searchstatus"/>
+
+        <apex:actionfunction name="RevertProduct" immediate="true" action="{!RevertProduct}" rerender="prodlistid">
+            <apex:param name="lineId" value=""/>
+        </apex:actionfunction>
+        <apex:actionfunction name="AddProduct" action="{!addContractLineItem}" rerender="prodlistid" status="addstatus"/>
+        <apex:actionfunction name="onSave" action="{!saveContract}" rerender="tableid,prodlistid,MessagePanel,lineduplicateepanel" status="savestatus"/>
+
+        <apex:actionfunction name="EditProduct" action="{!EditProduct}" rerender="prodlistid">
+            <apex:param name="lineId" value=""/>
+        </apex:actionfunction>
+      
+        
+        <apex:actionfunction name="goback" action="{!goBack}"/>
+        <apex:pageMessages id="messagebx" />
+        <div class="slds" id="pageBody"  style="overflow-x:hidden;"> 
+            
+            <article class="slds-card " style="margin-top: 15px;">
+                <div class="clean_creation_header">
+                    Add/Update Baseline LineItem
+                </div>
+            </article>
+
+           
+            <apex:outputPanel id="MessagePanel">
+                
+                <apex:outputPanel rendered="{!IF(status == 'success',true,false)}">
+                    <article class="slds-card" style="margin-top: 10px;background:rgb(30, 183, 113)">
+                        <div class="slds-card__header slds-grid">
+                            All Changes Saved Successfully
+                        </div>
+                    </article>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!IF(status == 'failure',true,false)}">
+                    <article class="slds-card" style="margin-top: 10px;background:rgb(239, 75, 34)">
+                        <div class="slds-card__header slds-grid">
+                            Unable to save Contract, please contact system administrator.
+                        </div>
+                    </article>
+                </apex:outputPanel>
+                
+            </apex:outputPanel>
+
+            <article class="slds-card">
+                <div class="slds-card__header slds-grid">
+                    <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                    <div class="slds-media__figure">
+                        <span class="slds-icon_container slds-icon-standard-account" title="Contract">
+                         <span class="slds-assistive-text">Contract</span>
+                        </span>
+                    </div>
+                    <div class="slds-media__body">
+                        <h2 class="slds-card__header-title">
+                            <a href="javascript:void(0);" class="slds-card__header-link slds-truncate hover" title="Contract Detail">
+                                <span >Contract Detail</span>
+                            </a>
+                        </h2>
+                    </div>
+                    </header>
+                </div>
+                <div class="slds-card__body"></div>
+                <footer class="slds-card__footer" style="">
+                    <div class="slds-grid slds-wrap slds-grid--pull-padded slds-page-header__detail-row" style="padding:0px !important;margin: 0px;"> 
+                        <!--div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-5 slds-large-size--1-of-5">
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" for="SelectListFromYear"><b>Contract Name</b></label>
+                                <div class="slds-form-element__control">
+                                    <apex:outputtext title="{!FCST_Contract__c.Name}" rendered="{!(len(FCST_Contract__c.Name) > 20)}" value="{!Left(FCST_Contract__c.Name,20)}..."/>
+                                    <apex:outputtext title="{!FCST_Contract__c.Name}" rendered="{!(len(FCST_Contract__c.Name) <= 20)}" value="{!Left(FCST_Contract__c.Name,20)}"/>
+                                </div>
+                            </div>
+                        </div-->
+                        <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-5 slds-large-size--1-of-5">
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" for="SelectListFromYear"><b>Account Name</b></label>
+                                <div class="slds-form-element__control">
+                                    <apex:outputtext title="{!FCST_Contract__c.Fcst_Account__r.Name}" rendered="{!(len(FCST_Contract__c.Fcst_Account__r.Name) > 20)}" value="{!Left(FCST_Contract__c.Fcst_Account__r.Name,20)}..."/>
+                                    <apex:outputtext title="{!FCST_Contract__c.Fcst_Account__r.Name}" rendered="{!(len(FCST_Contract__c.Fcst_Account__r.Name) <= 20)}" value="{!Left(FCST_Contract__c.Fcst_Account__r.Name,20)}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-5 slds-large-size--1-of-5">
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" for="SelectListFromYear"><b>Geo #</b></label>
+
+                                <div class="slds-form-element__control">
+                                    <apex:outputtext value="{!geonumber}" id="oppAmount"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-5 slds-large-size--1-of-5">
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" for="SelectListFromYear"><b>Geo Name</b></label>
+                                <div class="slds-form-element__control">
+                                    <apex:outputtext value="{!geoname}"/>
+                                </div>
+                            </div>
+                        </div> 
+                        <!--div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-5 slds-large-size--1-of-5">
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" for="SelectListFromYear"><b>Stage</b></label>
+                                <div class="slds-form-element__control">
+                                    <apex:outputfield value="{!FCST_Contract__c.FCST_Contract_Created_Year__c}"/>
+                                </div>
+                            </div>
+                        </div-->
+                    </div>
+                    
+                </footer>
+            </article>
+            
+            
+                
+            <br/>
+            
+            <article class="slds-card">
+                <div class="slds-card__header slds-grid">
+                    <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                        <div class="slds-media__figure">
+                            <span class="slds-icon_container slds-icon-standard-contact" title="contact">
+                                <!--<svg class="slds-icon slds-icon_small" aria-hidden="true">
+                                    <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#contact"></use>
+                                </svg>-->
+                                <span class="slds-assistive-text">Contracts</span>
+                            </span>
+                        </div>
+                        <div class="slds-media__body">
+                            <h2 class="slds-card__header-title">
+                            <apex:outputpanel id="oppProductsCount">
+                                <a href="javascript:void(0);" class="slds-card__header-link slds-truncate hover" title="Contract Edit">
+                                    <span>Contract Edit</span>
+                                </a>
+                             </apex:outputpanel>   
+                            </h2>
+                        </div>
+                        <div class="slds-no-flex">
+                        </div>
+                    </header>
+                </div>
+                <div class="slds-card__body">
+                
+                    <apex:outputPanel id="filtersec">
+                    <div class="slds-grid slds-wrap slds-grid--pull-padded slds-page-header__detail-row" style="padding:0px !important;margin: 0px;"> 
+                        <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" for="horizontal-output-id-01"><b>Enter Contract #</b></label>
+                                <span class="slds-form-element__control">
+                                   &nbsp;&nbsp;&nbsp; <apex:Outputtext html-autocomplete="off" value="{!conRecord.Contract__c}" styleclass="slds-output selectclc" />
+                                </span>
+                            </div>
+                        </div>
+                        <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-3">
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" for="SelectListFromYear"><b>Enter Contract Description</b></label>
+                                <span class="slds-form-element__control">
+                                    <apex:Outputtext html-autocomplete="off" value="{!conRecord.Contract_Description__c}" styleclass="slds-output selectclc" />
+                                </span>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <br/>
+                    <div class="slds-grid slds-wrap slds-grid--pull-padded slds-page-header__detail-row" style="padding:0px !important;margin: 0px;width:67%"> 
+                        <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" for="horizontal-input-id-01"><b>Choose Fiscal Year</b></label>
+                                <span class="slds-form-element__control">
+                                    <apex:selectList value="{!cfiscalyear}" multiselect="false" size="1" styleClass="slds-select selectclc" onChange="searchContract()">
+                                        <apex:selectOptions value="{!FiscalYears}"/>
+                                    </apex:selectList>
+                                </span>
+                            </div>
+                        </div>
+                        <!--div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                            <div class="slds-form-element">
+                                <label class="slds-form-element__label" for="SelectListFromYear"><b>Q#</b></label>
+                                <span class="slds-form-element__control">
+                                    <apex:outputfield value="{!contract1.FCST_Q__c}"/>
+                                </span>
+                            </div>
+                        </div-->
+                    </div>
+                    </apex:outputPanel>
+                    <div style="padding:10px">
+                        <apex:actionStatus id="searchstatus" starttext="searching please wait......."/>
+                    </div>
+                    <br/>
+                     
+                    
+                <apex:outputpanel id="prodlistid">  
+                    <apex:outputpanel id="lineduplicateepanel">
+                        <apex:outputPanel rendered="{!IF(duplicatestatus == 'duplicate',true,false)}">
+                            <article class="slds-card" style="padding: 0px !important;margin:0px !important;background:rgb(239, 75, 34)">
+                                <div class="slds-card__header slds-grid" style="color: white;padding: 5px !important;margin:0px !important">
+                                    Duplicate Lineitem Exists.
+                                </div>
+                            </article>
+                        </apex:outputPanel>
+                        </apex:outputpanel>
+                    
+                    <apex:outputpanel id="linefailurepanel">
+                        <apex:outputPanel rendered="{!IF(status == 'linefailure',true,false)}">
+                            <article class="slds-card" style="padding: 0px !important;margin:0px !important;background:rgb(239, 75, 34)">
+                                <div class="slds-card__header slds-grid" style="color: white;padding: 5px !important;margin:0px !important">
+                                    Total Line Item Amount Exceeds Initial Forecast
+                                </div>
+                            </article>
+                        </apex:outputPanel>
+                        </apex:outputpanel>
+                   
+                <apex:outputpanel id="tableid">
+                    <div style="padding:15px;overflow-x:scroll;">
+                    <table id="pageTable" class="slds-table slds-table_cell-buffer slds-no-row-hover slds-table_bordered" role="grid">
+                        <thead>
+                            <tr class="slds-line-height_reset">
+                                <th class="slds-text-title_caps" colspan="7" style="text-align:center">
+                                    <div class="slds-truncate" >&nbsp;</div>
+                                </th>
+                                <apex:repeat value="{!ContractObj.months}" var="m">
+                                    <th class="slds-text-body_regular" scope="col">
+                                      <div class="slds-truncate" title="Months" style="text-align:right !important;">{!m.name}</div>
+                                    </th>
+                                </apex:repeat>
+                                <th class="slds-text-body_regular" scope="col" >
+                                    <div class="slds-truncate" title="Total" style="text-align:right !important;">Total</div>
+                                </th>
+                            </tr> 
+                            <!--tr class="slds-line-height_reset">
+                                <th class="slds-text-title_caps" colspan="7" style="text-align:center">
+                                    <div class="slds-truncate" title="PM Forecast">PM Forecast</div>
+                                </th>   
+                                 <apex:variable var="sr" value="{!0}"/>
+                                <apex:repeat value="{!oppInitialList}" var="m">
+                                     <apex:variable var="sr" value="{!sr+1}"/>
+                                <th class="slds-text-title_caps" scope="col">
+                                  <div class="slds-truncate" style="text-align:right !important;">   
+                                    <apex:outputPanel id="parentlineamountfield">
+                                      <apex:outputPanel rendered="{!IF(m.User_Adjusted_Revenue__c!=null,true,false)}">
+                                         <div id="{!sr}_output" onclick="initialWeightRev(this)" class="initialweightrev monthclc2 {!IF(contains(ContractObj.MoreThanAmounts,m.Fcst_Fiscal_Period__c),'errorAmount','')}">                                         
+                                             <apex:outputText value="${0, number, ###,###,###}" rendered="{!m.User_Adjusted_Revenue__c >= 0}">
+                                                <apex:param value="{!m.User_Adjusted_Revenue__c}"/>
+                                            </apex:outputText>
+                                             <apex:outputText value="(${0, number, ###,###,###})" rendered="{!m.User_Adjusted_Revenue__c < 0}">
+                                                <apex:param value="{!m.User_Adjusted_Revenue__c * -1}"/>
+                                            </apex:outputText>
+                                         </div>
+                                         <div id="{!sr}_input" class="initialweightrev" style="display:none"> 
+                                            <apex:inputtext style="width:60px;" value="{!m.User_Adjusted_Revenue__c}" required="false" styleclass="slds-input {!IF(contains(ContractObj.MoreThanAmounts,m.Fcst_Fiscal_Period__c),'errorAmount','')}">
+                                                <apex:actionSupport event="onchange" rerender="oppinttotal,messagebx,parentlineamountfield,linefailurepanel" action="{!lineItemInitialTotal}" status="updateAmountStatus"/>
+                                            </apex:inputtext>
+                                         </div>
+                                        </apex:outputPanel>
+                                        
+                                        
+                                    </apex:outputPanel>
+                                  </div>
+                                </th>
+                                </apex:repeat>
+                                <th class="slds-text-title_caps" scope="col" >
+                                    <apex:outputPanel id="oppinttotal" rendered="{!OpportunityInitialTotal < 0}"><div class="slds-truncate" title="space" style="text-align:right !important;">
+                                        <apex:actionStatus id="updateAmountStatus">
+                                            <apex:facet name="stop">                                                
+                                                <apex:outputText value="(${0, number, ###,###,###})" >
+                                                    <apex:param value="{!OpportunityInitialTotal * -1}"/>
+                                                </apex:outputText>
+                                            </apex:facet>
+                                            <apex:facet name="start">
+                                                .....
+                                            </apex:facet>
+                                        </apex:actionStatus>
+                                    </div></apex:outputPanel>
+                                    
+                                    <apex:outputPanel id="oppinttotal2" rendered="{!OpportunityInitialTotal >= 0}"><div class="slds-truncate" title="space" style="text-align:right !important;">
+                                        <apex:actionStatus id="updateAmountStatus2">
+                                            <apex:facet name="stop">                                                
+                                                <apex:outputText value="${0, number, ###,###,###}" >
+                                                    <apex:param value="{!OpportunityInitialTotal}"/>
+                                                </apex:outputText>
+                                            </apex:facet>
+                                            <apex:facet name="start">
+                                                .....
+                                            </apex:facet>
+                                        </apex:actionStatus>
+                                    </div></apex:outputPanel>
+                                </th>
+                            </tr-->
+                            <tr class="slds-line-height_reset">
+                                <th class="slds-text-title_caps" scope="col" style="width:25px">
+                                    <div class="slds-truncate"  title="Action">Action</div>
+                                </th>
+                                <th class="slds-text-title_caps" scope="col" style="width:20px">
+                                    <div class="slds-truncate"  title="Line Number">Line#</div>
+                                </th>
+                                <th class="slds-text-title_caps" scope="col" style="width:50px">
+                                    <div class="slds-truncate"  title="Line Description">Description</div>
+                                </th>
+                                <th class="slds-text-title_caps" scope="col" style="width:50px">
+                                    <div class="slds-truncate"  title="Revenue Type">Revenue Type</div>
+                                </th>                                
+                                <th class="slds-text-title_caps" scope="col" style="width:25px">
+                                    <div class="slds-truncate"  title="Cost Center">Cost Center</div>
+                                </th>
+                                <th class="slds-text-title_caps" scope="col" style="width: 25px;">
+                                    <div class="slds-truncate"  title="BU Level 1">BU Level 1</div>
+                                </th>
+                                 <th class="slds-text-title_caps" scope="col" style="width: 25px;">
+                                    <div class="slds-truncate" style="width: 87px;" title="BSLA #">BSLA #</div>
+                                </th>
+                                <th class="slds-text-title_caps" scope="col" colspan="13">
+                                  <div class="slds-truncate" >&nbsp;</div>
+                                </th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody id="mainBody"> 
+                            <apex:variable var="linenumber" value="{!0}" />
+                            <apex:repeat value="{!ContractObj.lineItems}" var="a">
+                                 <apex:variable var="linenumber" value="{!linenumber+1}" />
+                                <tr class="slds-hint-parent">
+                                    <td scope="row">
+                                        <apex:outputpanel rendered="{!!a.isEditable}">
+                                            <a href="javascript:void(0)" onclick="EditProduct('{!a.LineId}')"><apex:image url="{!URLFOR($Resource.ContractIcon, '/edit.png')}" width="12" height="12" alt="Edit"/></a>&nbsp;
+                                            <a href="javascript:void(0)" onclick="ConfirmDelete('{!a.LineId}')"><apex:image url="{!URLFOR($Resource.ContractIcon, '/delete.png')}" width="16" height="16" alt="Remove"/></a>                                    
+                                        </apex:outputpanel>
+                                        <apex:outputpanel rendered="{!a.isEditable}">
+                                            <a href="javascript:void(0)" onclick="RevertProduct('{!a.LineId}')"><apex:image url="{!URLFOR($Resource.ContractIcon, '/revert.png')}" width="13" height="13" alt="Refresh"/></a>      
+                                        </apex:outputpanel>
+                                    </td>
+                                    <td scope="row">{!a.line.Name}</td>                                  
+                                    <td scope="row" >
+                                        <apex:outputpanel rendered="{!!a.isEditable}"> 
+                                            
+                                           <apex:outputText title="{!a.line.Line_Description__c}" rendered="{!(len(a.line.Line_Description__c) > 20)}" value="{!Left(a.line.Line_Description__c,20)}..." />
+                                           <apex:outputText title="{!a.line.Line_Description__c}" rendered="{!(len(a.line.Line_Description__c) <= 20)}" value="{!Left(a.line.Line_Description__c,20)}" /> 
+                                        </apex:outputpanel>
+                                        <apex:outputpanel rendered="{!a.isEditable}">
+                                            <apex:inputField value="{!a.line.Line_Description__c}" required="true" styleclass="slds-input" >
+                                                <apex:actionSupport event="onchange" action="{!lineItemDuplicateValue}" rerender="messagebx,prodlistid,lineduplicateepanel"/>
+                                            </apex:inputField>
+                                        </apex:outputpanel>                                 
+                                    </td>
+                                    <td scope="row">
+                                        <apex:outputpanel rendered="{!!a.isEditable}">
+                                            <apex:outputField value="{!a.line.Fcst_Revenue_Type__c}" />
+                                        </apex:outputpanel>
+                                        <apex:outputpanel rendered="{!a.isEditable}">
+                                            <apex:selectList value="{!a.line.Fcst_Revenue_Type__c}" multiselect="false" size="1" styleClass="slds-select ">
+                                                <apex:selectOptions value="{!Product}"/>
+                                                <apex:actionSupport event="onchange" action="{!lineItemDuplicateValue}" rerender="messagebx,prodlistid,lineduplicateepanel"/>
+                                                
+                                    </apex:selectList>
+                                        </apex:outputpanel>                                 
+                                    </td>
+                                    <td scope="row">
+                                        <apex:outputpanel rendered="{!!a.isEditable}">
+                                            <apex:outputField value="{!a.line.Cost_Center__c}" />
+                                        </apex:outputpanel>
+                                        <apex:outputpanel rendered="{!a.isEditable}">                                            
+                                     <apex:selectList value="{!a.line.Cost_Center__c}" multiselect="false" size="1" styleClass="slds-select " >
+                                        <apex:selectOptions value="{!CostCentre}"/>
+                                        <apex:actionSupport event="onchange" action="{!lineItemDuplicateValue}" rerender="business1,messagebx,prodlistid,lineduplicateepanel" status="updateLineAmountStatus,updateLineAmountStatus2"/>
+                                    </apex:selectList>
+                                        </apex:outputpanel> 
+                                    </td>
+                                     <td scope="row">
+                                        <apex:outputpanel rendered="{!!a.isEditable}">
+                                            <apex:outputField value="{!a.line.BU_Level1__c}" />
+                                        </apex:outputpanel>
+                                        <apex:outputpanel id="business1" rendered="{!a.isEditable}">
+                                            <apex:outputText value="{!a.line.BU_Level1__c}"  />
+                                        </apex:outputpanel> 
+                                    </td>
+                                     <td scope="row">
+                                        <apex:outputpanel rendered="{!!a.isEditable}">
+                                            <apex:outputField value="{!a.line.BSLA_Number__c}" />
+                                        </apex:outputpanel>
+                                        <apex:outputpanel rendered="{!a.isEditable}">                                       
+                                    <apex:selectList value="{!a.line.BSLA_Number__c}" multiselect="false" size="1" styleClass="slds-select " >
+                                        <apex:selectOptions value="{!BSLA}"/>
+                                        <apex:actionSupport event="onchange" action="{!lineItemDuplicateValue}" rerender="messagebx,prodlistid,lineduplicateepanel"/>
+                                        
+                                    </apex:selectList>
+                                        </apex:outputpanel> 
+                                    </td>
+                                <!--     <td scope="row">
+                                        <apex:outputpanel rendered="{!!a.isEditable}">
+                                            <apex:outputField value="{!a.line.Cost_Center_Description__c}" />
+                                        </apex:outputpanel>
+                                        <apex:outputpanel rendered="{!a.isEditable}">
+                                           <!-- <apex:outputText value="{!a.line.Cost_Center_Description__c}"  />
+                                        </apex:outputpanel> 
+                                    </td> -->
+                                    <apex:repeat value="{!a.InitialItems}" var="p">
+                                        <td role="gridcell" style="padding:0px 3px 0px 3px !important">
+                                            <apex:outputpanel rendered="{!!a.isEditable}">
+                                                <div class="monthclcoutput">
+                                                <apex:outputField value="{!p.Fcst_Amount__c}" styleclass="slds-input"/>
+                                                </div>
+                                            </apex:outputpanel>
+                                            <apex:outputpanel id="lineamountfield" rendered="{!a.isEditable}">
+                                                <apex:inputtext value="{!p.Fcst_Amount__c}" required="false" styleclass="slds-input monthclc ">
+                                                    <apex:actionSupport event="onchange" action="{!lineItemInitialTotal}" rerender="messagebx,opplineinttotal,opplineinttotal2,parentlineamountfield,linefailurepanel" status="updateLineAmountStatus,updateLineAmountStatus2"/>
+                                                </apex:inputtext>
+                                            </apex:outputpanel>
+                                        </td>
+                                    </apex:repeat>
+                                   <td role="gridcell">
+                                        <apex:outputPanel id="opplineinttotal" rendered="{!a.Total < 0}">                                        
+                                        <div class="slds-truncate" title="space" style="text-align:right !important;">
+                                        <apex:actionStatus id="updateLineAmountStatus">
+                                            <apex:facet name="stop">                                                
+                                                <apex:outputText value="(${0, number, ###,###,###})" >
+                                                    <apex:param value="{!a.Total * -1}"/>
+                                                </apex:outputText>
+                                            </apex:facet>
+                                            <apex:facet name="start">
+                                                .....
+                                            </apex:facet>
+                                        </apex:actionStatus>
+                                    </div></apex:outputPanel>
+                                       
+                                       <apex:outputPanel id="opplineinttotal2" rendered="{!a.Total >= 0}">                                        
+                                        <div class="slds-truncate" title="space" style="text-align:right !important;">
+                                        <apex:actionStatus id="updateLineAmountStatus2">
+                                            <apex:facet name="stop">                                                
+                                                 <apex:outputText value="${0, number, ###,###,###}" >
+                                                    <apex:param value="{!a.Total}"/>
+                                                </apex:outputText>  
+                                            </apex:facet>
+                                            <apex:facet name="start">
+                                                .....
+                                            </apex:facet>
+                                        </apex:actionStatus>
+                                    </div></apex:outputPanel>
+                                    </td>
+                                </tr>
+                            </apex:repeat>
+                            
+                            
+                          
+                        </tbody>                        
+                        <tr>
+                            <td style="text-align:left">
+                            <a href="javascript:void(0)" onclick="AddProduct()">
+                            <apex:image url="{!URLFOR($Resource.ContractIcon, '/savenew.png')}" width="15" height="15" alt="Save Product"/>
+                            </a>
+                            </td>
+                            <td colspan="19" style="text-align:center">
+                            <apex:actionStatus id="addstatus" starttext="Loading new contract line item......."/>
+                            </td>
+                        </tr>
+                        <tr class="slds-line-height_reset">                                                           
+                            <th class="slds-text-title_caps" colspan="1" style="text-align:right;background-color:#FAFAF9;border-top:1px solid #111111;border-bottom:1px solid #111111">
+                            &nbsp;
+                            </th>
+                            <th class="slds-text-title_caps" colspan="18" style="text-align:left;background-color:#FAFAF9;border-top:1px solid #111111;border-bottom:1px solid #111111">
+                            <div class="slds-truncate" title="Total" style="text-align:left !important;"><b>Total</b></div>
+                            </th>                           
+                                
+                            <th class="slds-text-title_caps" scope="col" style="background-color:#FAFAF9;border-top:1px solid #111111;border-bottom:1px solid #111111" >
+                            <div class="slds-truncate" title="space" style="text-align:right !important;"><b>
+                                <apex:outputText value="${0, number, ###,###,###}" rendered="{!linetotal >= 0}">
+                                    <apex:param value="{!linetotal}"/>
+                                </apex:outputText>
+                                 <apex:outputText value="(${0, number, ###,###,###})" rendered="{!linetotal < 0}">
+                                    <apex:param value="{!linetotal * -1}"/>
+                                </apex:outputText>
+                                
+                                </b>
+                            </div>
+                            </th>
+                        </tr>
+                    </table>
+                    </div>
+                            <script>
+                                tableload();
+                                 $(document).ready(function() {                  
+                                   $("th").removeAttr("tabindex");                                       
+                                });
+                           </script> 
+                    </apex:outputpanel>
+                    <div class="slds-no-flex" align="center" border="none" style="padding-top: 12px">                        
+                        <button class="slds-button slds-button_brand" type="button" name="data" onClick="onSave()">Save</button>                        
+                        <button class="slds-button slds-button_brand" type="button" name="data" onClick="goback()">Back</button>                        
+                    </div>
+                
+                </apex:outputpanel>
+                </div>
+            </article>
+            
+        </div>
+    </apex:form>
+    </body>
+    </div>
+    </html>
+</apex:page>

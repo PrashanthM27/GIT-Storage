@@ -1,0 +1,17 @@
+<apex:page controller="PassParamametersControl">
+<apex:form >
+ <apex:pageBlock >
+ <apex:pageBlockButtons location="bottom">
+ <apex:commandButton value="Save" action="{!save}"/>
+ </apex:pageBlockButtons>
+ <apex:pageBlockSection rendered="{!input}">
+ <apex:inputField value="{!c.Name}"/><br/>
+ <apex:inputField value="{!c.Industry}"/>
+ </apex:pageBlockSection>
+ <apex:pageBlockSection rendered="{!output}">
+ <apex:outputfield value="{!c.Name}"/>
+ <apex:outputfield value="{!c.Industry}"/>
+ </apex:pageBlockSection>
+ </apex:pageBlock>
+ </apex:form>
+</apex:page>

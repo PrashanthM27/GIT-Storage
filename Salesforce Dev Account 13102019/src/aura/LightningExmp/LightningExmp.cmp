@@ -1,0 +1,21 @@
+<aura:component controller="LightningExmpClass" implements="flexipage:availableForRecordHome,force:hasRecordId,force:hasSObjectName" access="global">
+                <aura:attribute name="accountList" type="Account[]"/>
+    <aura:handler name="init" value="{!this}" action="{!c.myAction}"/>
+           <lightning:button onclick="{!c.getRecordId}" label="Click for Id"/>
+    <aura:attribute name="accRecord" type="Account"/>
+    <aura:attribute name="recordId" type="String" default="World"/>
+    Record Id:{!v.recordId}
+    AccountName:{!v.accRecord.Name}
+    Account Phone:{!v.accRecord.Phone}
+    <aura:iteration items="{!v.accountList}" var="a">
+        <div class="slds-card">
+            <div class="slds-media__figure">
+                <lightning:icon iconName="action:approval" size="small"/>
+            </div>
+        <!--div class="slds-card__header slds-grid">{!a.Id} &nbsp;&nbsp;&nbsp;</div-->
+        <div class="hello">{!a.Name}&nbsp;&nbsp;&nbsp;&nbsp;</div>
+        <div class="love">{!a.Industry}&nbsp;&nbsp;</div>
+    <div class="hello">{!a.Type}</div>  
+            </div>
+    </aura:iteration>
+</aura:component>

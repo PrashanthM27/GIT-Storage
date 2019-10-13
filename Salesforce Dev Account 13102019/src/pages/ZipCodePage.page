@@ -1,0 +1,36 @@
+<apex:page controller="zipcodeGeonames">  
+  <apex:form > 
+  <apex:pageBlock >
+  <apex:actionRegion id="lookupRegion" >
+     <apex:outputLabel value="Enter zip code " for="inputzip" />
+     <apex:inputText value="{!zipValue}" id="inputzip" />&nbsp;&nbsp;&nbsp;
+     <!--apex:outputLabel value="Enter Country " for="inputCountry" /-->
+     <!--apex:inputText value="{!inputCountry}" id="inputCountry" /--><br/><br/>
+     <!-- The rerender attribute causes addressList to be re-rendered when the button is clicked -->
+     <apex:commandButton action="{!lookupList}" value="Search" rerender="addressList" />
+  </apex:actionRegion>
+<apex:pageBlockSection >
+    <apex:pageBlockTable id="addressList" var="z" value="{!zipList}" >
+        <apex:column >
+            <apex:facet name="header">Zip Code</apex:facet>            
+                <input type="Checkbox" name="Postal Lookup" value="{!z.zipCount}" onclick="javascript:sendZipSelection(this.value);" />
+            {!z.zipZip} 
+        </apex:column>
+        <apex:column >
+            <apex:facet name="header">Country</apex:facet>
+            {!z.zipCountry}
+        </apex:column>
+        <apex:column >
+            <apex:facet name="header">City</apex:facet>
+            {!z.zipCity}
+        </apex:column>
+        <apex:column >
+            <apex:facet name="header">State</apex:facet>            
+            {!z.zipState}            
+        </apex:column>
+
+    </apex:pageBlockTable>
+    </apex:pageBlockSection>
+    </apex:pageBlock>
+    </apex:form>
+</apex:page>

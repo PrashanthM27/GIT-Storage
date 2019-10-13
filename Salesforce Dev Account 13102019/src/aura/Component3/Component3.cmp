@@ -1,0 +1,6 @@
+<aura:component >
+    <aura:attribute name="label" type="String"/>
+    <lightning:textarea aura:id="textarea"
+                      name="myTextarea"
+                      label="{!v.label}"/>
+</aura:component>

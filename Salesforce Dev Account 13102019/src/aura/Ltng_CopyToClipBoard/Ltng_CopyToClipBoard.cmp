@@ -1,0 +1,21 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global" >
+    <div>
+        <p aura:id="pId">quick brown fox jumps over the lazy dog</p>
+        <lightning:button iconName="utility:copy_to_clipboard"
+                          onclick="{!c.copyHardcoreText}"
+                          label="Copy Text to clipboard"
+                          aura:id="btn1"/>
+    </div>
+    
+    <div>
+        <lightning:textarea value="hello i am textarea value" aura:id="inputF"/>
+        <lightning:button iconName="utility:copy_to_clipboard"
+                          onclick="{!c.copyInputFieldValue}"
+                          label="Copy Text to clipboard"
+                          aura:id="btn2"/>
+    </div>
+    
+    <div>
+        <lightning:textarea value="" label="Paste Here (for testing)"/>
+    </div>
+</aura:component>

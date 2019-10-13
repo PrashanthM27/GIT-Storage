@@ -1,0 +1,14 @@
+<apex:page controller="PassingParamters">
+<apex:form >
+<script>
+  function callApex(){
+  jfunction(document.getElementById("text1").value,
+  document.getElementById("text2").value);
+  }
+  </script>
+  Name:<input type="text" id="text1" value="{!name}"/>
+  Phone:<input type="text" id="text2" value="{!phone}"/>
+  <apex:actionFunction name="jfunction" action="{!values}" rerender="view" />
+ <button onclick="callApex()">Click me</button>
+ </apex:form>
+</apex:page>

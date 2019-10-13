@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>FCST Configuration Setting</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>FCST Configuration Settings</value>
+    </caseValues>
+    <fields>
+        <label><!-- Backlog Date --></label>
+        <name>Backlog_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Category --></label>
+        <name>Category__c</name>
+    </fields>
+    <fields>
+        <label><!-- OpenStages Unused Field --></label>
+        <name>OpenStages__c</name>
+    </fields>
+    <fields>
+        <help><!-- This is Help text --></help>
+        <label><!-- Stage --></label>
+        <name>Stage__c</name>
+    </fields>
+    <fields>
+        <help><!-- The Territory Model is used as the basis for displaying Opportunities in the Organizational Hierarchy for Revenue Planning --></help>
+        <label><!-- TerritoryModel --></label>
+        <name>TerritoryModel__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

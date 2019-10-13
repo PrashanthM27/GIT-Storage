@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>USERS.NAME</field>
+    </columns>
+    <columns>
+        <field>ACCOUNT.NAME</field>
+    </columns>
+    <columns>
+        <field>Account.FCST_CPM_Region__c</field>
+    </columns>
+    <columns>
+        <field>Account.FCST_Program_Manager__c</field>
+    </columns>
+    <columns>
+        <field>Account.FCST_Program_Executive__c</field>
+    </columns>
+    <columns>
+        <field>Account.FCST_GeoCodes__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Account.FCST_Program_Manager__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Shiva Kumar</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Accreport</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>AccountList</reportType>
+    <scope>user</scope>
+    <showDetails>true</showDetails>
+    <timeFrameFilter>
+        <dateColumn>CREATED_DATE</dateColumn>
+        <interval>INTERVAL_TODAY</interval>
+    </timeFrameFilter>
+</Report>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Fcst Rev Rec Revenue Type</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Fcst Rev Rec Revenue Type</value>
+    </caseValues>
+    <fields>
+        <label><!-- Fcst 12 Month Duration --></label>
+        <name>Fcst_12_Month_Duration__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

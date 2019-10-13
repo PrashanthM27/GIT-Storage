@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>FCST Actual Model</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>FCST Actual Models</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account --></label>
+        <name>Account__c</name>
+        <relationshipLabel><!-- FCST Actual Models --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Actual Amount --></label>
+        <name>Actual_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Actual Type --></label>
+        <name>Actual_Type__c</name>
+        <picklistValues>
+            <masterLabel>Baseline</masterLabel>
+            <translation><!-- Baseline --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Closed Won</masterLabel>
+            <translation><!-- Closed Won --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- BSLA --></label>
+        <name>BSLA__c</name>
+    </fields>
+    <fields>
+        <label><!-- CC Description --></label>
+        <name>CC_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- CC_unused --></label>
+        <name>CC__c</name>
+    </fields>
+    <fields>
+        <label><!-- CDR Description --></label>
+        <name>CDR_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- CDR --></label>
+        <name>CDR__c</name>
+    </fields>
+    <fields>
+        <label><!-- Comments --></label>
+        <name>Comments__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contract LineItem --></label>
+        <name>Contract_LineItem__c</name>
+        <relationshipLabel><!-- FCST Actual Models --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- COwnerUnused Field --></label>
+        <name>Contract_OwnerId__c</name>
+    </fields>
+    <fields>
+        <label><!-- FCST CC --></label>
+        <name>FCST_CC__c</name>
+    </fields>
+    <fields>
+        <label><!-- FCST Contract --></label>
+        <name>FCST_Contract__c</name>
+        <relationshipLabel><!-- FCST Actual Models --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- FCST GEO --></label>
+        <name>FCST_GEO__c</name>
+    </fields>
+    <fields>
+        <label><!-- FCST Planning Version --></label>
+        <name>FCST_Planning_Version__c</name>
+        <relationshipLabel><!-- FCST Actual Models --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Fiscal Period --></label>
+        <name>Fiscal_Period__c</name>
+        <relationshipLabel><!-- FCST Actual Models --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Fiscal Year --></label>
+        <name>Fiscal_Year__c</name>
+        <relationshipLabel><!-- FCST Actual Models --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- GEO Description --></label>
+        <name>GEO_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- GEO_unused --></label>
+        <name>GEO__c</name>
+    </fields>
+    <fields>
+        <label><!-- Model Name --></label>
+        <name>Model_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Opportunity --></label>
+        <name>Opportunity__c</name>
+        <relationshipLabel><!-- FCST Actual Models --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Offering Name --></label>
+        <name>Product__c</name>
+        <relationshipLabel><!-- FCST Actual Models --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Revenue Stream --></label>
+        <name>Revenue_Stream__c</name>
+    </fields>
+    <fields>
+        <label><!-- Revenue Type --></label>
+        <name>Revenue_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- SalesKey Unused Field --></label>
+        <name>SalesKey__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,10 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <span class="crayon-i"> </span><span class="crayon-c"><!-- init handler event call "doInit" function on component load and fetch current user information --></span> 
+    <aura:attribute name="userInfo" type="user"/>
+    <aura:handler name="init" value="this" action="{!c.userInfo}"/> 
+    <b>Current User Information</b>
+    <p>Name:{!v.userInfo.Name}</p>
+     <p>Email:{!v.userInfo.Email}</p>
+    <p>Phone:{!v.userInfo.Phone}</p>
+    <p>TimeZone:{!v.userInfo.TimeZonesidkey}</p>
+</aura:component>

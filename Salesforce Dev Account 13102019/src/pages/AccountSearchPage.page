@@ -1,0 +1,26 @@
+<apex:page controller="AccountSearch">
+ <apex:form >
+ <apex:pageBlock title="Details">
+ <apex:pageBlockSection title="Section" Columns="1">
+ <apex:pageBlockSectionItem >
+ <apex:outputLabel value="Name"></apex:outputLabel>
+ <apex:inputText value="{!aName}" required="true"/>
+ </apex:pageBlockSectionItem><br/>
+ <apex:pageBlockSectionItem >
+ <apex:outputLabel Value="Industry"></apex:outputLabel>
+ <apex:inputText value="{!aIndustry}"/>
+ </apex:pageBlockSectionItem><br/>
+ <apex:pageBlockSectionItem >
+ <apex:outputLabel value="Phone"></apex:outputLabel>
+ <apex:inputText value="{!aPhone}"/>
+ </apex:pageBlockSectionItem>
+  <apex:pageBlockTable value="{!ac}" var="s">
+ <apex:column value="{!s.Name}"/>
+ <apex:column value="{!s.Industry}"/>
+ <apex:column value="{!s.Phone}"/>
+  </apex:pageBlockTable>
+ </apex:pageBlockSection>
+ <apex:commandButton action="{!Search}" value="Kiss here"/>
+ </apex:pageBlock>
+ </apex:form>
+</apex:page>

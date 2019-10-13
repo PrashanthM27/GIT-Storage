@@ -1,0 +1,16 @@
+<apex:page standardController="Account">
+<!-- Use $Action global varialble to access the New action reference -->
+<apex:outputLink value="{!URLFOR($Action.Account.New)}">New</apex:outputLink>
+<br/>
+<!-- View action requires the id parameter, a standard controller can be used to obtain the id -->
+<apex:outputLink value="{!URLFOR($Action.Account.View, account.id)}">View</apex:outputLink> 
+<br/>
+<!-- Edit action requires the id parameter, id is taken from standard controller in this example -->
+<apex:outputLink value="{!URLFOR($Action.Account.Edit, account.id)}">Edit</apex:outputLink>  
+<br/>
+<!-- Delete action requires the id parameter, also a confirm message is added to prevent deleting the record when clicked by mistake -->
+<apex:outputLink value="{!URLFOR($Action.Account.Delete, account.id)}" onclick="return window.confirm('Are you sure?');">Delete</apex:outputLink> 
+<br/>
+<!-- From all custom buttons, links, s-controls and visualforce pages you can use the following to get the link of the object's homepage -->
+<apex:outputLink value="{!URLFOR($Action.Account.Tab, $ObjectType.Account)}">Home</apex:outputLink> 
+</apex:page>

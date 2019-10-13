@@ -1,0 +1,13 @@
+<aura:component >
+<lightning:accordion activeSectionName="C">
+    <lightning:accordionSection label="Section A" name="A">This is for A
+    <aura:set attribute="actions">
+        <lightning:buttonMenu aura:id="menu" alternativeText="Show Menu">
+        <lightning:menuItem value="New" label="Menu Item one"/>
+        </lightning:buttonMenu>
+                </aura:set>
+    </lightning:accordionSection>
+    <lightning:accordionSection label="Section B" name="B">This area is for B</lightning:accordionSection>
+    <lightning:accordionSection label="Section C" name="C">This area is for C</lightning:accordionSection>    
+    </lightning:accordion>
+</aura:component>

@@ -1,0 +1,33 @@
+<apex:page standardController="Account" recordSetVar="accountList"
+           extensions="DynamicCustomizableListHandler">
+    <br/>
+    <apex:form >
+
+    <!-- View selection widget, uses StandardController methods -->
+    <apex:pageBlock >
+        <apex:outputLabel value="Select Accounts View: " for="viewsList"/>
+        <apex:selectList id="viewsList" size="1" value="{!filterId}">
+            <apex:actionSupport event="onchange" rerender="theTable"/>
+            <apex:selectOptions value="{!listViewOptions}"/>
+        </apex:selectList>
+    </apex:pageblock>
+
+    <!-- This list of accounts has customizable columns -->
+    <apex:pageBlock title="Accounts" mode="edit">
+        <apex:pageMessages />
+        <apex:panelGroup id="theTable">
+            <apex:pageBlockTable value="{!accountList}" var="acct">
+                <apex:column value="{!acct.Name}"/>
+                <!-- This is the dynamic reference part -->
+                <apex:repeat value="{!displayFields}" var="f">
+                    <apex:column value="{!acct[f]}"/>
+                </apex:repeat>
+            </apex:pageBlockTable>
+        </apex:panelGroup>
+    </apex:pageBlock>
+
+    <br/>
+    <apex:commandButton value="Customize List" action="{!customize}"/>
+
+    </apex:form>
+</apex:page>

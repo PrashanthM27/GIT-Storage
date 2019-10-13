@@ -1,0 +1,106 @@
+<apex:page standardController="Opportunity" extensions="CustomProjectDataController" sidebar="false">
+    <apex:slds />
+    <style>
+    .pbSubheader.brandTertiaryBgr.first.tertiaryPalette
+    {
+        background-color: #003E7E !important;
+    }
+    .pbSubheader.brandTertiaryBgr.tertiaryPalette
+     {
+        background-color: #003E7E !important;
+     }
+      input.btn.slds-button.slds-button_neutral.for_custom
+      {
+        background: #0070d2;
+        color: white;
+        border-color: #0070d2;
+        font-size: 14px;
+        width: 220px;
+      }
+        .for_input_custom
+        {
+            width:75% !important; 
+        }
+  </style>
+    
+    <script>
+    function getProjectName() {
+        var prjtName = document.getElementsByClassName("projectName")[0].value;
+        passProjectName(prjtName);
+    }
+    </script>
+    <apex:form >
+        <apex:actionFunction name="passProjectName" action="{!getProjectDetails}" reRender="pgt">
+            <apex:param value="" name="projectName" />
+        </apex:actionFunction>
+        <apex:outputPanel id="output">
+            <apex:pageMessages id="msgs" />
+            <apex:pageBlock title="Opportunity Information">
+                <apex:pageBlockButtons location="top">
+                    <apex:commandButton action="/{!Opportunity.Id}" value="Back to Opportunity" style="padding:6px 14px;height:30px"/>
+                </apex:pageBlockButtons>     
+                <apex:pageBlockSection title="Opportunity Details With Project Id to Select" columns="2" collapsible="false">
+                    <apex:outputField value="{!Opportunity.Name}" styleClass="slds-input"/>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Product Name"/>
+                        <apex:selectList value="{!strSelectedValue}" size="1">
+                            <apex:selectOptions value="{!productOptions}" />
+                            <apex:actionSupport event="onchange" action="{!updateDate}" reRender="pDate" />
+                        </apex:selectList>
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Date"/>
+                        <apex:outputText value="{0,date,dd/MM/yy}" id="pDate" styleClass="slds-input">
+                            <apex:param value="{!dPrdtDate}" />
+                        </apex:outputText>
+                    </apex:pageBlockSectionItem>
+                    <apex:inputField value="{!objClin.Project__c}" styleClass="projectName" >
+                        <apex:actionSupport event="onchange" oncomplete="getProjectName();" reRender="pgt" />
+                    </apex:inputField>
+                </apex:pageBlockSection>
+                <apex:pageBlockSection title="Project Details" collapsible="false" columns="2" id="pgt" >
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Project Name"/>
+                        <apex:outputText value="{!objPrjt.Name}" styleClass="slds-input"/>
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Project Level"/>
+                        <apex:outputText value="{!objPrjt.Project_Level__c}" styleClass="slds-input"/>
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Account Id"/>
+                        <apex:outputText value="{!objPrjt.Account_Id__c}" styleClass="slds-input"/>
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Project Amount"/>
+                        <apex:outputText value="{!objPrjt.Amount__c}" styleClass="slds-input"/>
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Project Start Date"/>
+                        <apex:outputText value="{0,date,dd/MM/yy}" styleClass="slds-input">
+                            <apex:param value="{!objPrjt.Project_Start_Date__c}" />
+                        </apex:outputText>
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Project End Date"/>
+                        <apex:outputText value="{0,date,dd/MM/yy}" styleClass="slds-input">
+                            <apex:param value="{!objPrjt.Project_End_Date__c}" />
+                        </apex:outputText>
+                    </apex:pageBlockSectionItem>                
+                </apex:pageBlockSection>
+                <apex:pageBlockButtons location="bottom">
+                    <apex:commandButton action="{!saveCLIN}" value="Save CLIN" style="padding:6px 14px;height:30px"/>
+                </apex:pageBlockButtons> 
+                <apex:pageBlockSection columns="1" title="Saved CLIN Details" collapsible="false" rendered="{!IF(lstShowData.size > 0, true, false)}">
+                    <apex:pageBlockTable value="{!lstShowData}" var="opData">
+                        <apex:column headerValue="Project Name"  value="{!opData.objWrapperCLIN.Project__c}"/>
+                        <apex:column headerValue="Account Name" value="{!opData.objWrapperCLIN.Account__c}" />
+                        <apex:column headerValue="Opportunity Name" value="{!opData.objWrapperCLIN.Opportunity__c}" />
+                        <apex:column headerValue="Product Name" value="{!opData.objWrapperCLIN.Product__c}"/>
+                        <apex:column headerValue="Date" value="{!opData.objWrapperCLIN.Date__c}" />
+                    </apex:pageBlockTable>
+                </apex:pageBlockSection>
+            </apex:pageBlock>
+        </apex:outputPanel>
+    </apex:form>
+</apex:page>

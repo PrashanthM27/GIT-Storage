@@ -1,0 +1,25 @@
+<apex:page controller="AddRowsDeleteRows">
+<script>
+function call(){
+addingRow();
+}
+function validate(){
+deleteRow();
+}
+</script>
+<apex:form id="fm">
+<apex:commandLink action="{!addRow}" value="Add Row"/>
+  <apex:image id="image" height="40" width="40" value="{!$Resource.PlusSymbol}" onclick="addRow()"/>
+  <apex:image id="image2" height="50" width="50" value="{!$Resource.Recycle}" onclick="deleteRow()"/>
+  <apex:commandButton value="Save" action="{!Save}"/>
+  <apex:actionFunction name="addingRow" reRender="fm" action="{!addRow}"/>
+  <apex:actionFunction name="deleteRow" reRender="fm" action="{!deleteRow}"/>
+  <apex:pageBlock >
+  <apex:repeat value="{!ac}" var="a">
+  <apex:inputField value="{!a.Name}"/>
+  <apex:inputField value="{!a.Industry}"/>
+  </apex:repeat>
+  <apex:commandLink action="{!deleteRow}" value="Remove Row"/>
+  </apex:pageBlock>
+  </apex:form>
+</apex:page>

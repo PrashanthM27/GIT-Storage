@@ -1,0 +1,24 @@
+<apex:page standardController="Opportunity" recordSetVar="acc">
+    <script>
+    function PopUpWindow(id){
+        var win=window.open('{!$Page.popup}?id=' +id,'Popup',
+                            'height=322,width=573,left=300,top=100,resizable=no,scrollbars=yes,toolbar=yes,status=yes');
+        if(window.focus){
+            win.focus();
+        }
+        return false;
+    }
+    </script>
+    <apex:pageBlock >
+        <apex:pageBlockSection >
+            <apex:pageBlockTable value="{!acc}" var="a">
+                <apex:column headerValue="Action">
+                    <apex:outputLink title="Header" onclick="return PopUpWindow('{!a.Id}')">Details</apex:outputLink>
+                </apex:column>
+                <apex:column value="{!a.Name}"/>
+                <apex:column value="{!a.CloseDate}"/>
+                <apex:column value="{!a.StageName}"/>
+            </apex:pageBlockTable>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:page>

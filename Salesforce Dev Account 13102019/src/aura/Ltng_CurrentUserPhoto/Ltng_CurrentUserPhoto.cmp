@@ -1,0 +1,15 @@
+<aura:component controller="Ltng_CurrentUserPhoto"
+                implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction"
+                access="global" >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="oUser" type="user" default="{'sobjectType' : 'User'}" />
+  
+    <div style="padding:100px">
+        <img src="{!v.oUser.FullPhotoUrl}" alt="{!v.oUser.Name}"/> 
+           <br/><br/>
+        <img src="{!v.oUser.SmallPhotoUrl}"  alt="{!v.oUser.Name}"/>
+           <br/><br/>
+        <lightning:avatar src="{!v.oUser.SmallPhotoUrl}" />
+    </div>  
+    
+</aura:component>

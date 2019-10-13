@@ -1,0 +1,22 @@
+<apex:page controller="accountcls">
+<apex:sectionHeader title="Accounts" subtitle="HOME"/>
+<apex:form >
+<apex:outputtext style="height:5000px;font-weight:bold" value="View:"/>&nbsp;
+<apex:selectlist value="{!selectedAccount}" size="1">
+<apex:selectOptions value="{!items}"/>
+<apex:actionSupport event="onchange" action="{!getContacts}" status="stat" rerender="out"/>
+</apex:selectlist> <br/> <br/>
+
+<apex:outputPanel id="out">
+<apex:pageBlock >
+<apex:pageBlockTable value="{!lstcon}" var="lst">
+<apex:column value="{!lst.name}"/>
+<apex:column value="{!lst.phone}"/>
+<apex:column value="{!lst.type}"/>
+</apex:pageBlockTable>
+</apex:pageBlock>
+</apex:outputPanel>
+
+
+</apex:form>
+</apex:page>

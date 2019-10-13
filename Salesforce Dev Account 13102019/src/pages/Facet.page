@@ -1,0 +1,5 @@
+<apex:page standardController="Account">
+   <apex:pageBlock title="Contacts">
+   <apex:iframe title="frame" height="300" src="www.google.com"/>
+   </apex:pageBlock>
+</apex:page>

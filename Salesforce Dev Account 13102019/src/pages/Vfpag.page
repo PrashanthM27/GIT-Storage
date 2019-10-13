@@ -1,0 +1,80 @@
+<apex:page controller="AccountDeleteWrapperCLs">
+
+ <!-- This i am using for action status message display with processing records information -->
+
+ <style>
+    /* This is for the full screen DIV */
+    .popupBackground {
+        /* Background color */
+        background-color:black;
+        opacity: 0.20;
+        filter: alpha(opacity = 20);
+    
+        /* Dimensions */
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 998;
+        position: absolute;
+        
+        /* Mouse */
+        cursor:wait;
+    }
+
+    /* This is for the message DIV */
+    .PopupPanel {
+        /* Background color */
+        border: solid 2px blue;
+        background-color: white;
+
+        /* Dimensions */
+        left: 50%;
+        width: 300px;
+        margin-left: -100px;
+        top: 50%;
+        height: 50px;
+        margin-top: -25px;
+        z-index: 999;
+        position: fixed;
+        
+        /* Mouse */
+        cursor:pointer;
+    }
+</style>
+<apex:actionStatus id="deleteStatus" stopText="">
+    <apex:facet name="start">
+        <div>
+            <div class="popupBackground" />
+            <div class="PopupPanel">
+                <table border="0" width="100%" height="100%">
+                    <tr>
+                        <td align="center"><b>Please Wait</b></td>
+                    </tr>
+                    
+                </table>
+            </div>
+        </div>
+    </apex:facet>
+</apex:actionStatus>
+
+ <!-- end of Action Status --> 
+<apex:pagemessages id="Msg"> </apex:pagemessages>
+<apex:pagemessage summary="Your are doing Mass Delete On Account Object" Severity="Info" Strength="2"></apex:pagemessage>
+
+
+ <apex:form id="theForm">
+  <apex:commandButton value="Delete Account" action="{!DeleteAccount}" reRender="thePb,Msg" status="deleteStatus"/>
+  <apex:pageblock id="thePb">
+   <apex:pageblockTable value="{!accWrapperRecordList}" var="record">
+   <apex:column headerValue="Select">
+     <apex:inputCheckbox value="{!record.isSelected}"/>
+    </apex:column> 
+    <apex:column value="{!record.accObj.Name}"/>
+     <apex:column value="{!record.accObj.Phone}"/>
+      <apex:column value="{!record.accObj.AccountNumber}"/>
+   </apex:pageblockTable>  
+  </apex:pageblock> 
+ </apex:form>
+
+</apex:page>

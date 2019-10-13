@@ -1,0 +1,6 @@
+<apex:component controller="EnhancedList">
+    <apex:attribute name="listviewname" type="String" required="true" 
+                    description="The name of the listview" assignTo="{!listName}"/>
+    <apex:enhancedList height="400" rowsPerPage="25" Id="ContactList" listId="{!listId}" rendered="{!listId!=null}"/>
+    <apex:outputText rendered="{!listId==null}" value="Could not found requed ListView:'{!listName}'.Please contact admin"/>
+</apex:component>

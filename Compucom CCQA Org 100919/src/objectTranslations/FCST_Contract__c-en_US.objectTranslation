@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>FCST Contract</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>FCST Contracts</value>
+    </caseValues>
+    <fields>
+        <label><!-- Contract Description --></label>
+        <name>Contract_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contract Owner(UNUSED) --></label>
+        <name>Contract_Owner__c</name>
+        <relationshipLabel><!-- FCST Contracts --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Contract# --></label>
+        <name>Contract__c</name>
+    </fields>
+    <fields>
+        <label><!-- FCST Baseline Created Year Integer --></label>
+        <name>FCST_Baseline_Created_Year_Integer__c</name>
+    </fields>
+    <fields>
+        <label><!-- FCST Baseline Created Year --></label>
+        <name>FCST_Contract_Created_Year__c</name>
+    </fields>
+    <fields>
+        <label><!-- FCST Q# --></label>
+        <name>FCST_Q__c</name>
+    </fields>
+    <fields>
+        <label><!-- Account --></label>
+        <name>Fcst_Account__c</name>
+        <relationshipLabel><!-- FCST Contracts --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Fcst Geo Name --></label>
+        <name>Fcst_Geo_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fcst Geo Number(UNUSED) --></label>
+        <name>Fcst_Geo_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fcst Geo Number --></label>
+        <name>Fcst_Geo_Numbers__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fcst Service End date --></label>
+        <name>Fcst_Service_End_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fcst Service start date --></label>
+        <name>Fcst_Service_start_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Opportunity --></label>
+        <name>Opportunity__c</name>
+        <relationshipLabel><!-- FCST Contracts --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Revenue Source --></label>
+        <name>Revenue_Source__c</name>
+    </fields>
+    <layouts>
+        <layout>FCST Contract Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <quickActions>
+        <label><!-- Add/Update Baseline LineItem --></label>
+        <name>Add_Update_Baseline_LineItem</name>
+    </quickActions>
+    <startsWith>Consonant</startsWith>
+    <webLinks>
+        <label><!-- Add_Update_Baseline_LineItem --></label>
+        <name>Add_Update_Baseline_LineItem</name>
+    </webLinks>
+</CustomObjectTranslation>

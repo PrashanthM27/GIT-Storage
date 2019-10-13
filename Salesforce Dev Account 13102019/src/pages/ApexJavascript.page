@@ -1,0 +1,17 @@
+<apex:page standardcontroller="Opportunity" showHeader="false">
+<apex:form >
+<apex:pageBlock title="Header">
+<apex:pageBlockButtons >
+<apex:commandButton action="{!Save}" value="Click"/>
+</apex:pageBlockButtons>
+<apex:pageBlockSection title="Section 1">
+<apex:inputField value="{!opportunity.Name}"/>
+<apex:inputField value="{!opportunity.Amount}"/>
+</apex:pageBlockSection>
+<apex:pageBlockSection title="Section 2">
+<apex:inputField value="{!opportunity.StageName}"/>
+<apex:inputField value="{!opportunity.Closedate}"/>
+</apex:pageBlockSection>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

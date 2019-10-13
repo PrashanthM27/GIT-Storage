@@ -1,0 +1,22 @@
+<aura:component >
+    <aura:attribute name="Countries" type="List"/>
+    <aura:attribute name="DependantList" type="Object"/>
+    <aura:attribute name="DependantOptions" type="List"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInIt}"/>
+    <div class="slds-container--center slds-container--small">
+    
+    <lightning:select name="Countries" label="Select Country" aura:id="Countries" onchange="{!c.pickChange}">
+    <option value="">-None-</option>
+    <aura:iteration items="{!v.Countries}" var="a">
+    <option value="{!a.value}">{!a.text}</option>
+    </aura:iteration>
+    </lightning:select>
+        
+        <lightning:select name="Cities" label="Select Cities" >
+        <option value="">-None-</option>
+            <aura:iteration items="{!v.DependantList}" var="b">
+            <option value="{!b.value}">{!b.text}</option>
+            </aura:iteration>
+        </lightning:select>
+        </div>
+</aura:component>

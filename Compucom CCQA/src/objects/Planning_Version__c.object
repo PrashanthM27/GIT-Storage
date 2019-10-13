@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>true</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Additional_Planning_Version__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Additional Planning Version</label>
+        <referenceTo>Additional_Planning_Versions__c</referenceTo>
+        <relationshipName>Planning_Versions</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Backlog_ClosedWon_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Backlog CWon Date Unused Field</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>CopyNumber__c</fullName>
+        <externalId>false</externalId>
+        <formula>Value(Fiscal_Period__r.Fiscal_Planning_Year__r.Name  +
+ Fiscal_Period__r.Copy_Month__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>CopyNumber</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Data_Entry_Closed_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Data Entry Closed Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Data_Entry_Start_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Data Entry Start Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Fiscal_Period__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Fiscal Period</label>
+        <referenceTo>Fiscal_Year_Model__c</referenceTo>
+        <relationshipLabel>FCST Planning Versions</relationshipLabel>
+        <relationshipName>FCST_Planning_Versions</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Fiscal_Year_Planning__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Fiscal Year Planning</label>
+        <referenceTo>Fiscal_Year_Planning__c</referenceTo>
+        <relationshipName>Planning_Versions</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Gap_Planning_Version__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Gap Planning Version</label>
+        <referenceTo>Gap_Planning_Version__c</referenceTo>
+        <relationshipLabel>FCST Planning Versions</relationshipLabel>
+        <relationshipName>FCST_Planning_Versions</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>IsAutoConvert__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>IsAutoConvert</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Is_this_a_Budget_Planning_Version__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Is this a Budget Planning Version?</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Is_this_a_Gap_Planning_Version__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Is this a Gap Planning Version?</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Long_Label__c</fullName>
+        <externalId>false</externalId>
+        <label>Long_Label</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MonthName__c</fullName>
+        <externalId>false</externalId>
+        <label>MonthName</label>
+        <length>30</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Month_Number__c</fullName>
+        <externalId>false</externalId>
+        <label># Month</label>
+        <precision>5</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>OpenByInProgressVersion__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>OpenByInProgressVersion</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Period_Number__c</fullName>
+        <externalId>false</externalId>
+        <label>Period Number</label>
+        <precision>5</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Planning_Version_Current_Period__c</fullName>
+        <externalId>false</externalId>
+        <label>Planning Version Current Period</label>
+        <length>30</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Planning_Version_Description__c</fullName>
+        <externalId>false</externalId>
+        <label>Planning Version Description</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Planning_Version_Fiscal_Year__c</fullName>
+        <externalId>false</externalId>
+        <label>Planning Version Fiscal Year</label>
+        <length>30</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Previous_Version__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Previous Version</label>
+        <referenceTo>Planning_Version__c</referenceTo>
+        <relationshipLabel>FCST Planning Versions</relationshipLabel>
+        <relationshipName>FCST_Planning_Versions</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Quarter__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(SequenceNo__c &gt; 3,IF(SequenceNo__c &gt; 6,IF(SequenceNo__c &gt; 9,IF(SequenceNo__c &gt; 12,&apos;Q5&apos;,&apos;Q4&apos;),&apos;Q3&apos;),&apos;Q2&apos;),&apos;Q1&apos;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Quarter Unused Field</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Record_Source__c</fullName>
+        <externalId>false</externalId>
+        <label>Record Source</label>
+        <length>30</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SequenceNo__c</fullName>
+        <externalId>false</externalId>
+        <label>Sequence Number</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Short_Label__c</fullName>
+        <externalId>false</externalId>
+        <label>Short Label Unused Field</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Status_Closed_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Status Closed Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Version_Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Version Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Not Open</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Open (Admin)</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Open (User)</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>In Progress</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Closed</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <label>FCST Planning Version</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Version_Status__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>Planning Version Name</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>FCST Planning Versions</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>Data_Entry_Closed_Date__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Data_Entry_Start_Date__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>SequenceNo__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Planning_Version_Current_Period__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Planning_Version_Fiscal_Year__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Version_Status__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>MonthName__c</customTabListAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>Prevent_update_after_closed</fullName>
+        <active>false</active>
+        <description>If planning version is closed  then if somebody trying to change data entries start date and end date manually.</description>
+        <errorConditionFormula>AND(
+    ISPICKVAL(Version_Status__c , &apos;Closed&apos;),
+    OR(
+       ISCHANGED( Data_Entry_Start_Date__c ),
+       ISCHANGED( Data_Entry_Closed_Date__c )
+    )
+)</errorConditionFormula>
+        <errorMessage>you can not change version date with closed version status</errorMessage>
+    </validationRules>
+</CustomObject>

@@ -1,0 +1,58 @@
+<apex:page controller="ContactsDataCSVImportController_v2">
+    <apex:form >
+        <apex:sectionHeader subtitle="Contracts, Contract lineItems, InitialForecasts" title="Contract"/>
+        <apex:pagemessages />
+        <apex:pageBlock >
+            <apex:pageBlockSection columns="4"> 
+                  <apex:inputFile value="{!csvFileBody}"  filename="{!fileName}"/>                  
+                  <apex:actionstatus id="statusupload">
+                    <apex:facet name="start">Uploading....</apex:facet>
+                    <apex:facet name="stop"><apex:commandButton value="Upload CSV"  status="statusupload" action="{!uploadCSV}"/></apex:facet>
+                  </apex:actionstatus>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        
+        
+        <apex:pageBlock rendered="{!TotalRecord > 0}"  id="blk">
+            <apex:outputpanel >
+                <table>
+                    <tr>
+                        <td>Total Record Processed: </td><td>{!TotalRecord}</td>
+                    </tr>
+                    <tr>
+                        <td>Total Success Records: </td><td>{!SuccessRecord}</td>
+                    </tr>
+                    <tr>
+                        <td>Total Failed Records: </td><td>{!FailRecord}</td>
+                    </tr>
+                </table>
+            </apex:outputpanel>
+            <br/>
+            <apex:outputpanel rendered="{!IF(FailRecord != null && FailRecord > 0,true,false)}">
+            <b>Unsuccessfull Records</b>
+            <div style="max-height:200px;overflow:auto">
+            <apex:pageblocktable title="Unsuccessfull Records" value="{!ErrorFile}" var="p" >
+                <apex:column value="{!p.Fcst_Contract__c}" />
+                <apex:column value="{!p.Fcst_Account__c}" />
+                <apex:column value="{!p.Fcst_Amount__c}" />
+                <apex:column value="{!p.Fcst_Baseline_year__c}" />                
+                <apex:column value="{!p.Fcst_Contract_Description__c}" /> 
+                <apex:column value="{!p.Fcst_Cost_Center__c}" />
+                <apex:column value="{!p.Fcst_Fiscal_Year__c}" />
+                <apex:column value="{!p.Fcst_LineItem__c}" />
+                <apex:column value="{!p.Fcst_Line_Description__c}" />                 
+                <apex:column value="{!p.Fcst_Year__c}" />
+                <apex:column value="{!p.Fcst_Month__c}" />
+                <apex:column value="{!p.Fcst_planning_version__c}" />
+                <apex:column value="{!p.ErrorMsg__c}" />
+                
+                                
+
+                    
+            </apex:pageblocktable>
+            <apex:outputPanel rendered="{!showmore}"><a href="/a0I/o" target="_blank">view more records</a></apex:outputPanel>
+            </div>
+            </apex:outputpanel>
+        </apex:pageBlock>
+   </apex:form>
+</apex:page>

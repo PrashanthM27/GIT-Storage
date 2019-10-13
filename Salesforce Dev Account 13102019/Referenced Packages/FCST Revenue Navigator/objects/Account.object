@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>FCST_Account_Region_Vertical__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>FCST Account Region / Vertical</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Admin Account</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Alliances</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Canada</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Financial Services Vertical</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>GE</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Partner Account (Spans Multiple Regions)</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Partner Account - No Direct Sales</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Protected Account – TechZone</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Retail Vertical</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>TBD / Needs Review</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Unassigned / Not a Target</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>US</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>VAR Partner &quot;Protected&quot; Account – Clearpath</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Wholesale</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Supplier Account</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>FCST_Account_Sub_Region__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>FCST Account Sub Region</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Alliances</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Canada East</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Canada West</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>International</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Unknown</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>US - Central East</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>US - DC Region</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>US - North Central</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>US - North East</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>US - South Central</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>US - South East</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>US - Strategic Accounts</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>US - Western Region</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>FCST_CPM_Region__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>FCST CPM_Region</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>US-DC Area</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>US-Mid-Atlantic</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>US-Midwest</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>US-Ohio Valley</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>US-South Central</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>US-Southeast</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>US-West</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>US-Target</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>US-US Bank</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>CAN-Canada</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>CAN-BMO</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>CAN-Gov&apos;t of Ontario</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>FCST_GeoCodes__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>FCST GeoCodes</label>
+        <length>10000</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>FCST_Program_Executive__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>FCST_Program Executive</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Accounts2</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>FCST_Program_Manager__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>FCST Program Manager</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Accounts</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Lookup</type>
+    </fields>
+</CustomObject>

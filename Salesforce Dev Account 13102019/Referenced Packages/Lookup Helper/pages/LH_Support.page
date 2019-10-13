@@ -1,0 +1,144 @@
+<apex:page controller="LH.LH_All_Settings_Controller" standardStylesheets="false" sidebar="false" applyBodyTag="false" docType="html-5.0" showHeader="true">  
+<html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+
+	<apex:stylesheet value="{! URLFOR($Resource.HS_Jquery, 'jquery-ui.min.css')}" />
+    <apex:includeScript value="{! URLFOR($Resource.HS_Jquery, 'jquery-1.12.1.min.js')}" />
+    <apex:includeScript value="{! URLFOR($Resource.HS_Jquery, 'jquery-ui.min.js')}" />   
+</head>
+
+	<style type="text/css">
+		
+		.panel-primary > .panel-heading {
+			background-color: #16325c !important;
+		}
+		
+	</style>
+	
+<div class="slds-scope" role="main" style="width:95%; margin-left:auto; margin-right:auto;">
+	<c:LH_Nav_Bar />
+    <apex:slds />
+	<apex:form >
+        <div class="slds-card">
+            <div class="slds-card__header slds-grid">
+                <header class="slds-media slds-media_center slds-has-flexi-truncate" style="border-radius:4px !important;">
+                    <h3 class="slds-text-heading_small">Support Resources</h3>
+                </header>
+            </div>
+					<div class="slds-card__body slds-card__body_inner" >
+                        <ul>
+                            <li> <apex:outputLink id="trainingSiteLink" target="_blank" value="http://www.passagetechnology.com/lookup-helper-training">Lookup Helper Training Site</apex:outputLink> </li>
+                            <li> <apex:outputLink value="mailto:support@passagetech.com">Email Support</apex:outputLink> </li>
+                            <li> <apex:commandLink onclick="document.getElementById('faqModal').style.display = 'block';" rerender="none">FAQ</apex:commandLink> </li>
+                        </ul>
+ 
+					</div>
+				</div>
+
+		<div id="faqModal" style="display:none">
+		  <div aria-hidden="false" role="dialog" class="slds-modal slds-modal_large slds-fade-in-open">
+            <div class="slds-modal__container" style="max-width:800px;">
+              <div class="slds-modal__header">
+                <h2 class="slds-text-heading_medium">Lookup Helper FAQ</h2>
+                <button type="button" class="slds-button slds-button_icon-inverse slds-modal__close" onClick="document.getElementById('faqModal').style.display = 'none';">
+                    <img width="60%" height="60%" src="{! URLFOR($Resource.SFStyleSheets, 'SFStyleSheets/assets/icons/utility/close_60.png')}"></img>
+                  <span class="slds-assistive-text">Close</span>
+                </button>
+              </div>
+              <div class="slds-modal__content">
+              		<script>
+			            var lh = lh || {};
+			    		lh.j$ = jQuery.noConflict();
+			            lh.j$(function() {
+			                lh.j$( "#faq" ).accordion({ collapsible: true, active: false, heightStyle: "content"});
+			            });   
+		        	</script>
+		        	
+		        	<div id="faq">
+                        
+                        <h3>How do I enable realtime for my lookups?</h3>
+                        <div class="slds-text-longform">
+                            In most cases, you can use the <a href="{!URLFOR($Page.LH_All_Realtime_Triggers)}">Realtime Enablement</a> page. <br/><br/>
+                            <strong>If you are unable to enable realtime on a Custom object</strong> due to lack of access to the Metadata API, please contact <a href="mailto:support@passagetech.com">Passage Technology support</a> for assistance in implementing a workaround Visualforce page "trigger", or view our <a href="https://docs.google.com/document/d/1LBZx5MKO2duHz1PwgpwQtoqQ0ztKZluIVXdtDftQXgI/edit#heading=h.km36w3b2jste" target="_blank">developer guide</a> for instructions on how to implement one yourself.
+                            
+                        </div>
+                        
+                  	  <h3>I created a Lookup Field in Lookup Helper, but the field doesn't show up on the detail page. Why?</h3>
+                      <div class="slds-text-longform">
+                        When creating a lookup field through Lookup Helper it is not added to any existing page layouts. Please update the page layouts, and user permissions if you would like this new lookup field to be displayed.
+                      </div>
+
+		              <h3>How do I know if my Setting is processing?</h3>
+    		              <div class="slds-text-longform">
+    		               	To see if a Lookup Helper setting is running you may look for running batch jobs that belong to the 'LH_Batch_Update' class on the <a href="/apexpages/setup/listAsyncApexJobs.apexp" target="_blank">apex jobs page</a>.
+    		              </div>
+		               
+		              <h3>Is there any way to schedule the settings to run?</h3>
+    		              <div>
+    		               	The schedule option is located on the <a href="{!$Page.LH_All_Settings}" target="_blank">All Lookup Settings</a> page. Please click on the dropdown action button to the far right of the desired setting, then select "Schedule".
+    		              </div>
+		               
+		              <h3>Does Lookup Helper respect Lookup Field Filters?</h3>
+    		              <div class="slds-text-longform">
+    		               	If the lookup filter is required the filter is enforced. If the lookup filter is optional the filter is not enforced.
+    		              </div>
+		               
+		              <h3>Which record will Lookup Helper select if there are multiple matches?</h3>
+    		              <div class="slds-text-longform">
+    		              	If two or more parent records exist with the same name or matching field values, Lookup Helper will relate child records to the most recently created parent record.
+    		              </div>
+		               
+		              <h3>What are the differences between the two Lookup Helper setting types?</h3>
+    		              <div>
+	    		              <ul>
+	    		              <li><b>Field matches Name/Id</b>: Lookup Helper will attempt to match the specified field on the child object to a parent record with the same name as the value in the child records field. If the value in the child field is a valid ID for a parent record it will match with the ID field instead of the name field on the parent record.</li>
+	    		              <li><b>Field matches field</b>: Lookup Helper will look for matching values in the fields selected for the child and parent records. If a match is found, Lookup Helper will relate the child record to the parent with the matching value.</li>
+							  </ul>
+    		              </div>
+		               
+		              <h3>What is a category record?</h3>
+    		              <div>
+    		              	A category record is simply a parent record.
+    		              </div>
+		               
+		              <h3>What objects do I need to create triggers on to run in real-time?</h3>
+    		              <div>
+    		              	By default realtime triggers are created for Account, Case, Contact, Event, and Task objects. All other object will require realtime triggers to be created.
+    		              </div>
+    		               
+    		          <h3>How do I get rid of old Lookup Helper error records?</h3>
+    		              <div>
+    		              	Lookup Helper Error records are used to help our support team troubleshoot issues encountered. Because of this we do not recommend deleting them. However if you absolutely need them removed, you may reach out to <a href="mailto:support@passagetech.com" style="color:blue;">support@passagetech.com</a> so we may delete them for you.
+    		              </div>
+    		               
+    		          <h3>How do I recover a setting I accidentally deleted?</h3>
+    		              <div class="slds-text-longform">
+    		              	You may recover deleted Lookup Helper settings from the <a href="/search/UndeletePage" target="_blank">recycling bin</a>.
+    		              </div> 
+    		               
+    		          <h3>Is it better to have a Lookup Helper setting sourced off of a formula field or a workflow field update?</h3>
+    		              <div class="slds-text-longform">
+    		              	Lookup Helper will trigger updates on both formula field changes, and workflow field updates. It should not matter what field type is used. 
+    		              </div>    		               
+		          </div>
+		          <br/>
+              <center>
+              | <a href="mailto:support@passagetech.com">Contact Support</a> | <a href="https://appexchange.salesforce.com/listingDetail?listingId=a0N30000009wj3REAQ&tab=r" target="_blank">Review Our AppExchange Listing</a> | <a href="https://www.passagetechnology.com" target="_blank">Visit Our Website</a> |
+              </center>
+              </div>
+              <div class="slds-modal__footer">
+                <div class="slds-x-small-buttons_horizontal">
+                  <button type="button" class="slds-button slds-button_neutral" onClick="document.getElementById('faqModal').style.display = 'none';">Exit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+	</apex:form>
+</div>
+
+</html>
+</apex:page>

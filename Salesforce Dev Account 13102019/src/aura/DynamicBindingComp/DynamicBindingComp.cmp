@@ -1,0 +1,4 @@
+<aura:component controller="DynamicBindingDemoController">
+    <aura:attribute name="objectsList" type="List" default="world"/>
+    <lightning:select name="selectitem" label="select item" />
+</aura:component>

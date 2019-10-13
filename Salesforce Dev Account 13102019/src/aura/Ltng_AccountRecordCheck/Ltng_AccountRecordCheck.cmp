@@ -1,0 +1,3 @@
+<aura:component controller="Ltng_AccountRecordCheck">
+    <aura:attribute name="AccList" type="List"/>
+</aura:component>

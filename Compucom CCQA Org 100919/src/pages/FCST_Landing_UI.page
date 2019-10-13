@@ -1,0 +1,478 @@
+<apex:page controller="FCST_Landing_UI_Controller" sidebar="false" docType="html-5.0"> 
+	<html xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">    
+        <head> 
+            <apex:slds />
+            <apex:includeScript value="{!URLFOR($Resource.jquery_3_1_1_min)}"/>
+            <apex:includeScript value="{!URLFOR($Resource.ILOC_Resources, 'ILOC_Resources/Js/jquery-1.11.1.min.js')}"/>                
+            <apex:includeScript value="{!URLFOR($Resource.ILOC_Resources, 'ILOC_Resources/Js/jquery.dataTables.min.js')}"/>
+            <apex:stylesheet value="{!URLFOR($Resource.ILOC_Resources, 'ILOC_Resources/Css/jquery.dataTables.css')}" />
+            <apex:includeScript value="{!URLFOR($Resource.ILOC_Resources, 'ILOC_Resources/Js/jquery-ui.js')}"/>
+	        <script>
+	               function show(divId)
+	               {                        
+	                   var element = document.getElementById(divId);
+	                   var classname = element.getAttribute('class');
+	                   if(classname.indexOf('slds-is-selected') > -1){
+	                       element.setAttribute('class', 'slds-button slds-button--icon-border ' + 'slds-not-selected');
+	                       element.setAttribute('title', 'Show filter');
+	                       document.getElementById('expand').style.display = 'none';
+	                   }
+	                   else{
+	                       element.setAttribute('class', 'slds-button slds-button--icon-border ' + 'slds-is-selected');
+	                       element.setAttribute('title', 'Hide filter'); 
+	                       document.getElementById('expand').style.display = 'block';
+	                   }
+	               } 
+	          
+	           </script>
+	           <script>
+               
+               var table;
+                    var listofIds = [];
+                    function tableload(){
+                        listofIds = [];
+                        table = $('#pageTable').DataTable({
+                             responsive: true,
+                             searching: true,
+                             order:false,
+                        'columnDefs': [
+                            { "targets": 0,"orderable": false},
+                            { "targets": 1,"orderable": false},
+                            { "targets": 2,"orderable": false},
+                            { "targets": 3,"orderable": false},
+                            { "targets": 4,"orderable": false},
+                            { "targets": 5,"orderable": false},
+                            { "targets": 6,"orderable": false},
+                            { "targets": 7,"orderable": false},
+                            { "targets": 8,"orderable": false},
+                            { "targets": 9,"orderable": false}
+                          
+                        ]
+                        });
+                        
+                       
+                        
+                    }
+            function submitfrcast(){
+            alert('Are you sure to Submit ?');
+                // SubmitFun();
+            }
+            	
+               
+              </script>
+	           
+	           <Style>
+	           .removeHovercls{
+				    pointer-events: none;
+				}
+				#oppdetaildiv{
+					display:none;
+				}
+				#myapp{
+				    overflow:scroll;
+				
+				}
+	           </style>
+         </head>
+         <body onload="tableload()">
+            <apex:form id="formid">
+                <apex:pageMessages id="messagebx" />
+                 
+                
+                <apex:actionfunction name="refreshOppTable" reRender="Opplistpanel" />
+              <!--  <apex:actionfunction name="SubmitFun" action="{!SubmitForecast}"/> -->
+                
+                <apex:actionstatus id="counterStatus">
+                    <apex:facet name="start">
+                        <div class="waitingSearchDiv" id="el_loading" style="background-color: #FFFFFF; height:100%;opacity:0.55;width:100%;">
+                            <div class="waitingHolder" style="top: 275px; width: 150px;height:50px;background-color:white;border:2px solid #99BBE8;border-radius:5px;padding:10px">
+                            <img class="waitingImage" src="/img/loading.gif" title="Please Wait..." />
+                            <span style="color:black">Loading...</span>
+                            </div>
+                        </div>
+                    </apex:facet>
+                </apex:actionstatus>
+                <apex:actionFunction action="{!gotohomepage}" name="gotohome" /> 
+                
+                <!--Action functions ends-->
+                 
+                <div class="slds" id="pageBody"  > 
+                    <div class="slds-page-header" role="banner" style="background-color:white !important">
+                        <div class="slds-grid slds-wrap slds-grid--pull-padded">
+                            <div class="slds-col--padded" style="width: 70%;">
+                                <div class="slds-media">
+	                                    	<apex:image url="{!URLFOR($Resource.FcstEraSldsIcons, 'CompuComlogo.png')}" width="15%" height="55%" alt="Report"  />
+                                        <h1 style="width: 100%;" class="slds-text-heading--medium"  title="Forecast Summary"><b style="    margin-top: 0.5%;    margin-left: 2%;font-size: 24px;">Forecast Summary</b></h1>                                 
+                                </div>
+                            </div>
+                            
+                            <apex:outputPanel id="buttonid">
+                            <div class="slds-col">
+                                <apex:commandButton styleclass="slds-button slds-button_brand" value="Submit Forecast" action="{!SubmitForecast}" onclick="submitfrcast()" style="{!if(forecastbuttoncolor = true ,'background-color:green' ,'background-color:red')}" />
+                            </div>
+                                <apex:outputText value="{!lastSubimitted}"/>
+                             </apex:outputPanel>
+                
+                            <div class="slds-col slds-no-flex slds-align-middle">
+	                          <!-- <a href="{!URLFOR($Action.Document.Download, {!documentId})}"  target="_Blank">test</a>  -->
+							 <button id="ticketlink" class="slds-button slds-float--right slds-button--icon-border slds-not-selected" Style="background-color:#2F2B9C;height: 34px;" title="Ticketing Tool Link" name="data" type="button"   >
+                                   <a href="https://desk.zoho.in/portal/forecastera/home" target="_Blank">   <apex:image url="{!URLFOR($Resource.FcstSldsIcons, 'link_60.png')}" width="60" height="60" alt="Ticketing Tool Link"  />
+                                      	</a>
+                              </button>
+                             <!-- <apex:outputLink value="{!URLFOR($Action.Document.Download,documentId)}" target="_blank">Test</apex:outputLink>
+                             -->  <button id="downloadHelp" class="slds-button slds-float--right slds-button--icon-border slds-not-selected" Style="background-color:#2F2B9C;height: 34px;" title="Revenue Navigator User Guide " name="data" type="button"  >
+                          	  
+                          	 <a href="{!URLFOR($Action.Document.Download,documentId)}" target="_Blank"><apex:image url="{!URLFOR($Resource.FcstSldsIcons, 'download_60.png')}" width="60" height="60" alt="Report"  /></a>
+                              </button>
+                              
+                                <button id="QuarterButton" class="slds-button slds-float--right slds-button--icon-border slds-not-selected" Style="background-color:#2F2B9C;height: 34px;" title="Go to home" name="data" type="button"   onclick="gotohome()" >
+                                      <apex:image url="{!URLFOR($Resource.FcstSldsIcons, 'home_60.png')}" width="60" height="60" alt="Report"  />
+                              </button>
+                                <div class="slds-button" >
+                                    <button id="FilterIconDiv" style="background-color: #2F2B9C;" class="slds-button slds-button--icon-border slds-is-selected" name="data" title="Hide filter" type="button" onClick="show('FilterIconDiv')">
+                                    <apex:image url="{!URLFOR($Resource.FcstSldsIcons, 'filter_60.png')}" width="40" height="40" alt="Report" style="width: 16px;"  />
+                                    <span class="slds-assistive-text">Filter List</span>
+                                    </button>  
+                                </div>  
+                                
+                             
+                            </div>
+                        </div> 
+                        <br/>
+              
+                        <!-- Filter-->
+                     
+                                        
+                        <div id="expand" style="display:block;border-top:1px solid #D8DDE6">
+
+                            <div class="slds-grid slds-wrap slds-grid--pull-padded slds-page-header__detail-row">                            
+
+                            <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-4 slds-large-size--1-of-4">
+                                <div class="slds-form-element">
+                                    <label class="slds-text-body--regular" for="SelectListFromYear" title="Planning Year"><b>Planning Year</b></label>
+                                    <div class="slds-form-element__control">
+
+                                    <apex:selectList id="SelectListFromYear" Styleclass="slds-select" value="{!s_FilterPlanningYear}" multiselect="false" size="1" >
+                                        <apex:selectOptions value="{!FilterPlanningYear}" />
+                                        <apex:actionSupport event="onchange" action="{!onChangeYear}" reRender="messagebx,versionsec,quartersec"/>
+                                    </apex:selectList>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-4 slds-large-size--1-of-4">
+                                <div class="slds-form-element">
+                                    <label class="slds-text-body--regular" for="SelectListFromYear" title="Planning Version"><b>Planning Version</b></label>
+                                    <div class="slds-form-element__control">
+                                        <apex:outputpanel id="versionsec">              
+                                            <apex:selectList id="SelectListFrom" Styleclass="slds-select" value="{!s_FilterPlanningVersion}" multiselect="false" size="1">
+                                            <apex:selectOptions value="{!FilterPlanningVersion}" />
+                                            </apex:selectList> 
+                                        </apex:outputpanel>
+                                    </div>
+                                </div>
+                            </div>
+                                
+                                <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-4 slds-large-size--1-of-4">
+                                <div class="slds-form-element">
+                                    <label class="slds-text-body--regular" for="selectSample1" title="Quarter - Multi-Select"><b>Quarter - Multi-Select</b></label>
+                                    <div class="slds-form-element__control">
+                                        <apex:outputpanel id="quartersec">
+                                            <apex:selectList id="SelOppCatg" Styleclass="slds-select" value="{!S_FilterQuarter}" multiselect="true" size="2">
+                                            <apex:selectOptions value="{!FilterQuarter}" />
+                                            </apex:selectList>
+                                        </apex:outputpanel>
+                                    </div>
+                                </div>                            
+                            </div>
+                                     
+ 
+                         
+                            
+                         <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-4 slds-large-size--1-of-4">
+                                    <div class="slds-form-element">
+                                   <label class="slds-text-body--regular" for="selectSample1" title="CPM Region"><b>{!cpmRegionName}</b></label>
+                                    <div class="slds-form-element__control">
+                                        <apex:outputpanel id="dsds3"> 
+                                            <apex:selectList id="cpmRegionId" Styleclass="slds-select" value="{!cpmRegion_String}" multiselect="false" size="1">
+                                            <apex:selectOptions value="{!CPMRegionType}" />
+                                            </apex:selectList>
+                                        </apex:outputpanel>
+                                    </div>
+                                                        
+                            </div>                            
+                                </div>   
+                        
+                         
+                                
+
+                            
+                          
+
+
+                            </div>
+
+                             <div class="slds-grid slds-wrap slds-grid--pull-padded slds-page-header__detail-row"> 
+                  
+                          	  <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-4 slds-large-size--1-of-4">
+                                <div class="slds-form-element">
+                                   <label class="slds-text-body--regular" for="selectSample1" title="Revenue Type"><b>{!RevenueName}</b></label>
+                                    <div class="slds-form-element__control">
+                                        <apex:outputpanel id="dsds">
+                                            <apex:selectList id="Selqwqwqwmeasure" Styleclass="slds-select" value="{!revenue_String}" multiselect="false" size="1">
+                                            <apex:selectOptions value="{!RevenueType}" />
+                                            </apex:selectList>
+                                        </apex:outputpanel>
+                                    </div>
+                                                        
+                            </div>
+                                </div> 
+                            
+                            <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-4 slds-large-size--1-of-4">
+	                                 <div class="slds-form-element">
+	                                
+	                                   <label class="slds-text-body--regular" for="selectSample1" title="User Role"><b>User Role</b></label>
+	                                    <div class="slds-form-element__control">
+	                                        <apex:outputpanel id="dsds6">
+	                                            <apex:selectList id="SelRoleId" Styleclass="slds-select" value="{!role_String}" multiselect="false" size="1">
+	                                            <apex:selectOptions value="{!UserRole}" />
+	                                             <apex:actionSupport event="onchange" action="{!onChangeRole}" status="userRoleStatus" reRender="userOutputPanelId"/>
+	                                            </apex:selectList>
+	                                        </apex:outputpanel>
+	                                    </div>
+	                                                        
+	                            </div>
+                             </div> 
+                             
+                             
+                             <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-4 slds-large-size--1-of-4">
+	                                 <div class="slds-form-element">
+	                                 
+	                                   <label class="slds-text-body--regular" for="selectSample1" title="User Name"><b> <apex:actionStatus startText="User Name Loading...." stopText="User Name" id="userRoleStatus"/></b></label>
+	                                    <div class="slds-form-element__control">
+	                                        <apex:outputpanel id="userOutputPanelId">
+	                                            <apex:selectList id="userPicklistId" Styleclass="slds-select" value="{!User_String}" multiselect="false" size="1">
+	                                            <apex:selectOptions value="{!FilterUser}" />
+	                                            </apex:selectList>
+	                                        </apex:outputpanel>
+	                                    </div>
+	                                                        
+	                            </div>
+                             </div> 
+                                
+                                
+
+                                <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-4 slds-large-size--1-of-4" >
+                                    <div class="slds-form-element" style="padding-top:17px"> 
+                    
+                                        <apex:actionStatus id="stsfd">
+                                            <apex:facet name="start">
+                                                <apex:commandButton style="width:100%" styleClass="slds-button slds-button--neutral"   value="Report Loading......"  >
+                                                </apex:commandButton> 
+               
+                                            </apex:facet>
+                                            <apex:facet name="stop">
+                                               <apex:commandButton style="width:100%" styleClass="slds-button slds-button--neutral slds-button--brand"   value="Load Report"  title="Load Report" reRender="chartmonth,messagebx" status="stsfd"  action="{!onReportLoad}" >
+                                                </apex:commandButton>                     
+                                            </apex:facet>
+                                        </apex:actionStatus>
+                                    </div> 
+                                    
+                                                            
+                                </div>
+                                
+                                
+                                
+
+                            </div> 
+                        </div>
+                        <!--Filter End-->
+                    </div>  
+                    <br/>
+                    
+                    
+                    <div class="myapp">
+                        <apex:outputPanel id="chartmonth">                        
+                          
+                            <table id="pageTable" style="border-collapse: collapse;" class="slds-table slds-table--bordered slds-table--cell-buffer" >
+                                            <thead> 
+                                                <tr class="slds-text-title--caps" style="font-weight:bold;">
+                                                    <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;"><div class="slds-truncate" style="font-weight:bold;" title="Account/Revenue Type">Account/Revenue <br/>Type</div></th>
+                                                   <!-- <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;" ><div class="slds-truncate" style="font-weight:bold;" title="Actual">Actual Amount(A)</div></th> -->
+                                                    <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;" ><div class="slds-truncate" style="font-weight:bold;" title="Revenue from Backlog">Unadjusted Revenue <br/> from Baseline(B)</div></th>
+                                                    <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;    text-align: center;" ><div class="slds-truncate" style="font-weight:bold;" title="Revenue from Open Opp">Risk Adjusted <br/> Revenue from <br/>Baseline(C)</div></th>
+                                                    <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;" ><div class="slds-truncate" style="font-weight:bold;" title="Revenue FCST from">Unadjusted Revenue<br/> from Closed <br/>WON(D) </div></th>
+                                                    <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;" ><div class="slds-truncate" style="font-weight:bold;" title="Revenue FCST from">Risk Adjusted <br/> Revenue from <br/>Closed WON(E) </div></th>
+                                                     <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;" ><div class="slds-truncate" style="font-weight:bold;" title="Revenue FCST from">Unadjusted Revenue <br/> From Open <br/> Opportunities(F)</div></th>
+                                                     <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;" ><div class="slds-truncate" style="font-weight:bold;" title="Revenue FCST from"> Adjusted Revenue <br/> From Open <br/> Opportunities(G)</div></th>
+                                                   <!-- <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;" ><div class="slds-truncate" style="font-weight:bold;" title="Unadjusted Bestcase Forecast">Unadjusted Bestcase <br/>Forecast (A+B+D+F)</div></th>  -->
+                                                    <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;" ><div class="slds-truncate" style="font-weight:bold;" title="Unadjusted Bestcase Forecast">Unadjusted Bestcase <br/>Forecast (B+D+F)</div></th> <!-- Added on 19 8 19 by Satyaprasad -->
+                                                    <!--<th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;" ><div class="slds-truncate" style="font-weight:bold;" title="Riskadjusted Bestcase Forecast">Riskadjusted Bestcase <br/>Forecast  (A+C+E+G)</div></th>  -->
+                                                    <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;" ><div class="slds-truncate" style="font-weight:bold;" title="Riskadjusted Bestcase Forecast">Riskadjusted Bestcase <br/>Forecast  (C+E+G)</div></th> <!-- Added on 19 8 19 by Satyaprasad -->
+                                                  
+                                                 
+                                                </tr>
+                                            </thead> 
+                                            <tbody>
+                                                 <apex:repeat value="{!wrapperSUList}" var="a">                                      
+                                                    <tr style="background-color:#5B9BD5" class="removeHovercls">
+                                                        <td  style="color:white;border-right: 1px solid black;font-size: 13px;font-weight: 600;" data-label="Account/Revenue Type" >
+                                                         
+                                                          {!a.revenueType} 
+                                                        </td>
+                                                     <!--   <td ></td> -->
+                                                     	<td ></td>
+                                                     	<td ></td>
+                                                     	<td ></td>
+                                                     	<td ></td>
+                                                     	<td ></td>
+                                                      	<td ></td>
+                                                      	<td ></td>
+                                                      	<td style="border-right: 1px solid black;"></td>
+                                                    </tr>
+                                                            
+                                                     <apex:repeat value="{!a.wrapperListAccDetail}" var="obj">
+                                                     
+                                                        <tr>
+                                                           
+                                                            <td style="border-right: 1px solid black;"  title="{!obj.acc.Name}" > 
+                                                            <apex:outputpanel rendered="{!obj.linkVisible== true}">
+                                                            	<a href="#" onClick="window.open('/apex/FCST_CompucomSummaryWorkBench?pv={!s_FilterPlanningVersion}&su={!User_String}&AccId={!obj.acc.Id}','_blank');"> {!obj.accName} </a>
+                                                            </apex:outputpanel> 
+                                                            <apex:outputpanel rendered="{!obj.linkVisible!=true}"> 
+                                                           	{!obj.accName} 
+                                                        	</apex:outputpanel>
+                                                            </td> 
+                                                           
+                                                                   
+                                                           <!--  <td style="border-right: 1px solid black;text-align: right;"  title="{!obj.actualAmount}">
+                                                             <apex:outputpanel rendered="{!obj.actualAmount >= 0}">
+	                                                             <apex:outputText value="${0, number, ###,###,###}" >
+	                                                             	<apex:param value="{!obj.actualAmount}"/>
+                                                           		</apex:outputText>
+                                                           	 </apex:outputpanel>
+                                                           	 <apex:outputpanel rendered="{!obj.actualAmount <0}">
+	                                                           (  <apex:outputText value="${0, number, ###,###,###}" >
+	                                                             	<apex:param value="{!obj.actualAmount*(-1)}"/>
+                                                           		</apex:outputText>)
+                                                           	 </apex:outputpanel>
+                                                          </td> -->
+                                                            <td style="border-right: 1px solid black;text-align: right;" >
+                                                            	<apex:outputpanel rendered="{!obj.uRFBAmount>= 0}">
+		                                                            <apex:outputText value="${0, number, ###,###,###}" >
+		                                                             	<apex:param value="{!obj.uRFBAmount}"/>
+		                                                           	</apex:outputText>
+                                                             	</apex:outputpanel>
+                                                             	<apex:outputpanel rendered="{!obj.uRFBAmount< 0}">
+		                                                            (<apex:outputText value="${0, number, ###,###,###}" >
+		                                                             	<apex:param value="{!obj.uRFBAmount*(-1)}"/>
+		                                                           	</apex:outputText>)
+                                                             	</apex:outputpanel>
+                                                            </td>
+                                                            <td  style="text-align:right;border-right: 1px solid black;text-align: right;">
+                                                               <apex:outputpanel rendered="{!obj.rARFBAmount>= 0}">
+                                                            	<apex:outputText value="${0, number, ###,###,###}" >
+                                                             		<apex:param value="{!obj.rARFBAmount}"/>
+                                                           		</apex:outputText>
+                                                               </apex:outputpanel> 
+                                                               <apex:outputpanel rendered="{!obj.rARFBAmount< 0}">
+                                                            	(<apex:outputText value="${0, number, ###,###,###}" >
+                                                             		<apex:param value="{!obj.rARFBAmount*(-1)}"/>
+                                                           		</apex:outputText>)
+                                                               </apex:outputpanel>
+                                                            </td>
+                                                            <td data-label="actual" style="text-align:right;border-right: 1px solid black;text-align: right;">
+                                                            	<apex:outputpanel rendered="{!obj.uRFCAmount>= 0}">
+	                                                            	<apex:outputText value="${0, number, ###,###,###}" >
+	                                                            	  <apex:param value="{!obj.uRFCAmount}"/>
+	                                                           		</apex:outputText>
+                                                                </apex:outputpanel>
+                                                                <apex:outputpanel rendered="{!obj.uRFCAmount< 0}">
+	                                                            	(<apex:outputText value="${0, number, ###,###,###}" >
+	                                                            	  <apex:param value="{!obj.uRFCAmount*(-1)}"/>
+	                                                           		</apex:outputText>)
+                                                                </apex:outputpanel>
+                                                            </td>
+                                                            <td data-label="back"  colspan="1" style="border-right: 1px solid black;text-align: right;">
+                                                            <apex:outputpanel rendered="{!obj.rARFCWAmount>= 0}">
+                                                            	<apex:outputText value="${0, number, ###,###,###}" >
+                                                             		<apex:param value="{!obj.rARFCWAmount}"/>
+                                                           		</apex:outputText>
+                                                           	 </apex:outputpanel>
+                                                           	 <apex:outputpanel rendered="{!obj.rARFCWAmount<0}">
+                                                            	(<apex:outputText value="${0, number, ###,###,###}" >
+                                                             		<apex:param value="{!obj.rARFCWAmount*(-1)}"/>
+                                                           		</apex:outputText>)
+                                                           	 </apex:outputpanel>
+                                                            </td>
+                                                           <td data-label="back"  colspan="1" style="border-right: 1px solid black;text-align: right;">
+                                                           <apex:outputpanel rendered="{!obj.rFFOOAmount>=0}">
+		                                                           <apex:outputText value="${0, number, ###,###,###}" >
+		                                                             <apex:param value="{!obj.rFFOOAmount}"/>
+	                                                           		</apex:outputText>
+	                                                        </apex:outputpanel>
+	                                                         <apex:outputpanel rendered="{!obj.rFFOOAmount<0}">
+		                                                         (  <apex:outputText value="${0, number, ###,###,###}" >
+		                                                             <apex:param value="{!obj.rFFOOAmount*(-1)}"/>
+	                                                           		</apex:outputText>)
+	                                                        </apex:outputpanel>
+                                                           </td>
+                                                           <td data-label="back"  colspan="1" style="border-right: 1px solid black;text-align: right;">
+                                                           <apex:outputpanel rendered="{!obj.rFFUNOOAmount>=0}">
+		                                                           <apex:outputText value="${0, number, ###,###,###}" >
+		                                                             <apex:param value="{!obj.rFFUNOOAmount}"/>
+	                                                           		</apex:outputText>
+	                                                        </apex:outputpanel>
+	                                                         <apex:outputpanel rendered="{!obj.rFFUNOOAmount<0}">
+		                                                         (  <apex:outputText value="${0, number, ###,###,###}" >
+		                                                             <apex:param value="{!obj.rFFUNOOAmount*(-1)}"/>
+	                                                           		</apex:outputText>)
+	                                                        </apex:outputpanel>
+                                                           </td>
+                                                            <td data-label="back"  colspan="1" style="border-right: 1px solid black;text-align: right;">
+                                                            <apex:outputpanel rendered="{!obj.uFAmount>=0}">
+                                                            	<apex:outputText value="${0, number, ###,###,###}" >
+                                                             		<apex:param value="{!obj.uFAmount}"/>
+                                                           		</apex:outputText>
+                                                           	</apex:outputpanel>
+                                                           	<apex:outputpanel rendered="{!obj.uFAmount<0}">
+                                                            	(<apex:outputText value="${0, number, ###,###,###}" >
+                                                             		<apex:param value="{!obj.uFAmount*(-1)}"/>
+                                                           		</apex:outputText>)
+                                                           	</apex:outputpanel>
+                                                           		</td>
+                                                            <td data-label="back"  colspan="1" style="border-right: 1px solid black;text-align: right;">
+                                                            <apex:outputpanel rendered="{!obj.rAFAmount>=0}">
+                                                            	<apex:outputText value="${0, number, ###,###,###}" >
+                                                             		<apex:param value="{!obj.rAFAmount}"/>
+                                                           		</apex:outputText>
+                                                           	</apex:outputpanel>
+                                                           	 <apex:outputpanel rendered="{!obj.rAFAmount<0}">
+                                                            	(<apex:outputText value="${0, number, ###,###,###}" >
+                                                             		<apex:param value="{!obj.rAFAmount*(-1)}"/>
+                                                           		</apex:outputText>)
+                                                           	</apex:outputpanel>
+                                                            </td>
+
+                                                                                                                
+                                                         </tr>
+                                                    </apex:repeat> 
+                                                </apex:repeat>
+                                            </tbody> 
+                                            
+                                        </table> 
+                                       
+                            
+                            <script>
+                                   tableload();
+                            </script> 
+                            
+                        </apex:outputPanel>
+                    </div>
+                </div>
+               
+            </apex:form>
+         </body>
+    </html>
+</apex:page>

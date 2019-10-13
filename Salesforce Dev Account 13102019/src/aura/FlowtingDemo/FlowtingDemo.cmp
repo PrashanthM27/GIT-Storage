@@ -1,0 +1,13 @@
+<aura:component >
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="intervalId" type="Integer" default="0"/>
+    
+    <div id="parentDIV" style="overflow:scroll">
+        <p style="position:relative;" id="tofloat">
+            <b><span style="color:red">Important Note : </span>
+            I am Floating (Left to Right) Imformation...</b>
+        </p>
+    </div>
+    
+</aura:component>

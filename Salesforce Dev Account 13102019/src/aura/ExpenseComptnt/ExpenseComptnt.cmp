@@ -1,0 +1,8 @@
+<aura:component >
+    <aura:attribute name="message" type="String" default="Work until you die"/>
+    Message of the day: {!v.message}
+    
+    <lightning:card >
+    
+    </lightning:card>
+</aura:component>

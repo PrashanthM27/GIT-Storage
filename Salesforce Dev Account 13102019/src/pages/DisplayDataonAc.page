@@ -1,0 +1,33 @@
+<apex:page controller="DisplayContactonAccountClick">
+    <apex:form >
+<apex:pageBlock title="Hello {!$User.FirstName}">
+    <apex:pageBlockSection >
+        <apex:pageBlockTable value="{!accList}" var="acc">
+        <apex:column headerValue="Account Name">
+            <apex:commandLink value="{!acc.Name}" action="{!getContacts}" reRender="cont">
+                <apex:param value="{!acc.Id}" name="cid" assignTo="{!sid}"/>
+            </apex:commandLink>
+            </apex:column>
+            <apex:column headerValue="Edit">
+                <apex:outputLink value="/{!acc.Id}/e">Edit</apex:outputLink>
+            </apex:column>
+            <apex:column headerValue="Delete">
+                <apex:commandLink action="{!deleteRec}" onclick="if(!confirm('Are you sure?')) return false;">Delete
+                    <apex:param value="{!acc.Id}" assignTo="{!sid}" name="cis"/>
+                </apex:commandLink>
+            </apex:column>
+            <apex:column value="{!acc.Id}"/>
+        </apex:pageBlockTable>
+    </apex:pageBlockSection>
+    </apex:pageBlock>
+    </apex:form>
+        <apex:pageBlock title="Contacts">
+        <apex:pageBlockSection >
+            <apex:pageBlockTable value="{!contList}" var="con" id="cont">
+              <apex:column value="{!con.Id}"/>
+                <apex:column value="{!con.FirstName}"/>
+                <apex:column value="{!con.LastName}"/>
+            </apex:pageBlockTable>            
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+</apex:page>

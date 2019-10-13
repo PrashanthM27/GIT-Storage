@@ -1,0 +1,14 @@
+<apex:page controller="LastModifiedRecords">
+<apex:form >
+  <apex:pageBlock >
+  <apex:pageBlockSection >
+  <apex:commandButton action="{!Search}" value="Search"/>
+  <apex:pageBlockTable value="{!cont}" var="ac">
+  <apex:column value="{!ac.FirstName}"/>
+  <apex:column value="{!ac.LastName}"/>
+  <apex:column value="{!ac.Email}"/>
+  </apex:pageBlockTable>
+  </apex:pageBlockSection>
+  </apex:pageBlock>
+  </apex:form>
+</apex:page>

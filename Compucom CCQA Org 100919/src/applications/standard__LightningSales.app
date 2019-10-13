@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <formFactors>Small</formFactors>
+    <formFactors>Medium</formFactors>
+    <formFactors>Large</formFactors>
+    <navType>Standard</navType>
+    <tab>standard-home</tab>
+    <tab>standard-Opportunity</tab>
+    <tab>standard-Lead</tab>
+    <tab>standard-Task</tab>
+    <tab>standard-File</tab>
+    <tab>standard-Account</tab>
+    <tab>standard-Contact</tab>
+    <tab>standard-Campaign</tab>
+    <tab>standard-Dashboard</tab>
+    <tab>standard-report</tab>
+    <tab>standard-Feed</tab>
+    <tab>standard-CollaborationGroup</tab>
+    <tab>standard-Event</tab>
+    <tab>standard-OtherUserProfile</tab>
+    <tab>standard-Case</tab>
+    <tab>standard-Forecasting3</tab>
+    <tab>FCSTRevRecognitionRules</tab>
+    <tab>FCST_Contract__c</tab>
+    <tab>FCST_Initial_Forecast__c</tab>
+    <tab>FCST_Opportunity_Initial_Forecast__c</tab>
+    <tab>FCST_Mapping</tab>
+    <tab>Fcst_Cost_Center__c</tab>
+    <tab>Upload_File__c</tab>
+    <tab>Fcst_BaseLine_Error_Log__c</tab>
+    <tab>Fcst_Geo_Codes__c</tab>
+    <tab>FCST_Contract_Data</tab>
+    <tab>Actual_Data_Extract_Report</tab>
+    <uiType>Lightning</uiType>
+</CustomApplication>

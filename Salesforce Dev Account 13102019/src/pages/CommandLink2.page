@@ -1,0 +1,21 @@
+<apex:page controller="CommandLinkcls">
+<apex:form >
+<apex:pageBlock tabStyle="Account" title="User Details">
+<apex:pageBlockSection title="User Section">
+<apex:commandLink action="{!getreturn}" value="Go Fuck it">
+<apex:param name="Name" value="Prathyusha"/>
+<apex:param name="Industry" value="Education"/>
+<apex:param name="Phone" value="8096388152"/>
+<apex:param name="RollNo" value="1164"/>
+</apex:commandLink>
+<br/>
+<apex:pageBlockSection Title="User Results">
+My Name is:{!Name}<br/><br/>
+My Industry is:{!Industry}<br/><br/>
+My Phone is:{!Phone}<br/><br/>
+My RollNo is:{!RollNo}
+</apex:pageBlockSection>
+</apex:pageBlockSection>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

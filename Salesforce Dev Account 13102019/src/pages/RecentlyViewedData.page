@@ -1,0 +1,9 @@
+<apex:page controller="RecentlyViewedData">
+  <apex:pageBlock title="Recently Viewed Items">
+  <apex:pageBlockSection >
+  <apex:pageBlockTable value="{!rv}" var="dt">
+  <apex:column value="{!dt.Name}"/>
+  </apex:pageBlockTable>
+  </apex:pageBlockSection>
+  </apex:pageBlock>
+</apex:page>

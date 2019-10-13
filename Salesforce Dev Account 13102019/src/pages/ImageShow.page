@@ -1,0 +1,11 @@
+<apex:page showheader="false" title="Display Image" sidebar="false">
+<apex:form >
+<table>
+<tr>
+<td width="1000px" height="900px;" align="center">
+<apex:image url="https://developer.salesforce.com/files/salesforce-developer-network-logo.png" />
+</td>
+</tr>
+</table>
+</apex:form>
+</apex:page>

@@ -1,0 +1,19 @@
+<apex:page standardController="Contact" extensions="RadioButtonCaseDetails">
+    <apex:form >
+    <apex:pageBlock >
+    <apex:pageBlockSection >
+        <apex:inputField value="{!Contact.FirstName}">
+            <apex:actionSupport action="{!Save}" event="onchange" rerender="sec"/>
+        </apex:inputField>
+            <br/><br/>
+        <apex:inputField value="{!Contact.LastName}"/>        
+        </apex:pageBlockSection>
+        <apex:pageBlockSection id="sec">
+            <apex:pageBlockTable value="{!ct}" var="c">
+        <apex:outputField value="{!c.Phone}"/>
+        <apex:outputField value="{!c.Email}"/>
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+    </apex:pageBlock>
+        </apex:form>
+</apex:page>

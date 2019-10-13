@@ -1,0 +1,13 @@
+<apex:page controller="ZippopotusInt">
+ <apex:form >
+ <apex:pageBlock >
+ <apex:pageBlockSection >
+ <apex:pageBlockSectionItem >
+ <apex:outputLabel value="Enter Zip Code"/>
+ <apex:inputText />
+ </apex:pageBlockSectionItem><br/>
+ <apex:commandButton value="Search" />
+ </apex:pageBlockSection>
+ </apex:pageBlock>
+ </apex:form>
+</apex:page>

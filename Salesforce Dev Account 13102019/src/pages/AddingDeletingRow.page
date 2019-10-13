@@ -1,0 +1,24 @@
+<apex:page controller="AddingDeletingRows">
+<script>
+function add(){
+addThis();
+}
+function delete(){
+deleteThis();
+}
+</script>
+  <apex:form id="fm">
+  <apex:actionFunction action="{!addRow}" name="addThis" reRender="fm"/>
+  <apex:actionFunction action="{!deleteRow}" name="deleteThis" reRender="fm"/>
+  <apex:commandLink action="{!addRow}" value="addRow"/><br/>
+  <apex:commandButton action="{!Save}" value="Save"/>
+  <apex:pageBlock >
+  <apex:repeat value="{!con}" var="c">
+  <apex:inputField value="{!c.FirstName}"/>
+  <apex:inputField value="{!c.LastName}"/>
+  <apex:inputField value="{!c.Phone}"/>
+  </apex:repeat>
+  </apex:pageBlock>
+    <apex:commandLink action="{!deleteRow}" value="deleteRow"/>
+  </apex:form>
+</apex:page>

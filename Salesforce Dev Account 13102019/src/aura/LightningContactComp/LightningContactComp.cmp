@@ -1,0 +1,7 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	{!$Browser.isTablet}
+    {!$Browser.isPhone}
+    {!$Browser.formFactor}
+    <lightning:button iconName="utility:download" label="Click" onclick="{!c.checkBrowser}"></lightning:button>
+    <lightning:button iconName="Standard:account" label="Press" onclick="{!c.clickHere}"></lightning:button>
+</aura:component>

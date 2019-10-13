@@ -1,0 +1,26 @@
+<apex:page controller="MyCustomController" tabStyle="Account">
+<apex:form >
+<apex:pageBlock title="Account Detail">
+<apex:pageblockSection title="Account Information" >
+<apex:inputField value="{!account.Name}"/>
+<apex:inputField value="{!account.Phone}"/>
+<apex:inputField value="{!account.Industry}"/>
+<apex:inputField value="{!account.Rating}"/>
+<apex:inputField value="{!account.Website}"/>
+<apex:inputField value="{!account.Active__c}"/>
+</apex:pageblockSection>
+<apex:pageblockSection title="Account Detail" >
+<apex:inputField value="{!account.BillingCity}"/>
+<apex:inputField value="{!account.BillingCountry}"/>
+<apex:inputField value="{!account.Description}"/>
+<apex:inputField value="{!account.Fax}"/>
+<apex:inputField value="{!account.ShippingCity}"/>
+<apex:inputField value="{!account.ShippingCountry}"/>
+<apex:inputField value="{!account.AnnualRevenue}"/>
+</apex:pageblockSection>
+<apex:pageBlockButtons >
+<apex:commandButton action="{!saveMethod}" value="Save the Page"/>
+</apex:pageBlockButtons>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

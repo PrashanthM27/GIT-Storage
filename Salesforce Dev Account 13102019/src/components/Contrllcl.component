@@ -1,0 +1,5 @@
+<apex:component controller="contrlcls" access="global">
+<apex:outputLink id="urlstring" value="{!url}/{!$User.Id}" >{!url}/{!$User.Id}</apex:outputLink> <br />   
+    <apex:outputLabel value="{!UserName}" id="un"/>
+    <apex:outputLabel value="{!UserPhone}" id="ph"/>
+</apex:component>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomTab xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Actual Hyperion Report</label>
+    <mobileReady>false</mobileReady>
+    <motif>Custom55: Books</motif>
+    <page>FCST_Actual_HyperionUpload_Page</page>
+</CustomTab>

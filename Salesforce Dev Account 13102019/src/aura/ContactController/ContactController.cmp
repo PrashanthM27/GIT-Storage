@@ -1,0 +1,5 @@
+<aura:component controller="ContactsController">
+    <aura:attribute name="statusOptions" type="List"/>
+    <aura:attribute name="Contacts" type="Contact"/>
+    
+</aura:component>

@@ -1,0 +1,78 @@
+<aura:component controller="Ltng_AccountRecordSearch">
+    <aura:attribute name="searchResult" type="List" description="store return records to display"/>
+    <aura:attribute name="searchKeyword" type="String" description="store string keywords to search"/>
+    <aura:attribute name="Message" type="Boolean" description="Message to show if there are no records"/>
+    <aura:attribute name="numberofRecords" type="integer" description="To display no of records returned"/>
+    <lightning:spinner variant="brand" size="large" aura:id="Id_spinner" class="slds-hide"/>
+    <div class="slds-m-around_medium">
+        <lightning:layout>
+            <lightning:layoutItem size="3" padding="around-small">
+                <lightning:input value="{!v.searchKeyword}"
+                                 required="true"
+                                 placeholder="search Accounts.."
+                                 aura:id="searchField"
+                                 label="Account Name"/>
+            </lightning:layoutItem>
+            <lightning:layoutItem size="2" padding="around-small">
+                <lightning:button onclick="{!c.searchController}"
+                                  variant="brand"
+                                  label="Search"
+                                  iconName="utility:search"/> 
+            </lightning:layoutItem>
+        </lightning:layout>
+        <div class="slds-m-around_x-small">
+            <lightning:badge label="{!v.numberofRecords}"/>
+        </div>
+        <aura:if isTrue="{!v.Message}">
+            <div class="slds-notify_container slds-is_relative">
+                <div class="slds-notify slds-notify_toast slds-theme_error" role="alert">
+                    <div class="slds-notify_content">
+                        <h2 class="slds-text-heading_small">No Records Found</h2>
+                    </div>
+                </div>
+            </div>
+        </aura:if>
+        <table class="slds-table slds-table_boardered slds-table_cell-buffer">
+            <thead>
+                <tr class="slds-text-title_caps">
+                    <th scope="col">
+                        <div class="slds-truncate" title="S.No">S.No</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Account Name">Account Name</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Account Industry">Account Industry</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Account Phone">Account Phone</div>
+                    </th>
+                    <th scope="col">
+                        <div class="slds-truncate" title="Account Fax">Account Fax</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <aura:iteration items="{!v.searchResult}" var="src" indexVar="count">
+                    <tr>
+                        <td>
+                            <div class="slds-truncate">{!count+1}</div>
+                        </td>
+                        <td>
+                            <div class="slds-truncate">{!src.Name}</div>
+                        </td>
+                        <td>
+                            <div class="slds-truncate">{!src.Industry}</div>
+                        </td>
+                        <td>
+                            <div class="slds-truncate">{!src.Phone}</div>
+                        </td>
+                        <td>
+                            <div class="slds-truncate">{!src.Fax}</div>
+                        </td>
+                    </tr>
+                </aura:iteration>
+            </tbody>
+        </table>
+    </div>
+</aura:component>

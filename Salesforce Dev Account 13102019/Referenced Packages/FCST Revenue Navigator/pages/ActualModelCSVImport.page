@@ -1,0 +1,53 @@
+<apex:page controller="FcstCCRev.ActualModelCSVImportController">
+    <apex:form >
+        <apex:pagemessages />
+        <apex:pageBlock >
+            <apex:pageBlockSection columns="4"> 
+                  <apex:inputFile value="{!csvFileBody}"  filename="{!fileName}"/>                  
+                  <apex:actionstatus id="statusupload">
+                    <apex:facet name="start">Uploading....</apex:facet>
+                    <apex:facet name="stop"><apex:commandButton value="Upload CSV"  status="statusupload" action="{!uploadCSV}"/></apex:facet>
+                  </apex:actionstatus>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        
+        
+        <apex:pageBlock rendered="{!TotalRecord > 0}"  id="blk">
+            <apex:outputpanel >
+                <table>
+                    <tr>
+                        <td>Total Record Processed: </td><td>{!TotalRecord}</td>
+                    </tr>
+                    <tr>
+                        <td>Total Success Records: </td><td>{!SuccessRecord}</td>
+                    </tr>
+                    <tr>
+                        <td>Total Failed Records: </td><td>{!FailRecord}</td>
+                    </tr>
+                </table>
+            </apex:outputpanel>
+            <br/>
+            <apex:outputpanel rendered="{!IF(ErrorFile != null && ErrorFile.size > 0,true,false)}">
+            <b>Unsuccessfull Records</b>
+            <div style="max-height:200px;overflow:auto">
+            <apex:pageblocktable title="Unsuccessfull Records" value="{!ErrorFile}" var="p" >
+                <apex:column value="{!p.FcstCCRev__Revenue_Stream__c}" />
+                <apex:column value="{!p.FcstCCRev__Contract_Id__c}" />
+                <apex:column value="{!p.FcstCCRev__CDR__c}" />
+                <apex:column value="{!p.FcstCCRev__CDR_Description__c}" />
+                <apex:column value="{!p.FcstCCRev__CC__c}" /> 
+                <apex:column value="{!p.FcstCCRev__CC_Description__c}" />
+                <apex:column value="{!p.FcstCCRev__Geo__c}" />
+                <apex:column value="{!p.FcstCCRev__Geo_Description__c}" /> 
+                <apex:column value="{!p.FcstCCRev__Current_Month_Expected_Revenue__c}" />
+                <apex:column value="{!p.FcstCCRev__Period__c}" />
+                <apex:column value="{!p.FcstCCRev__ErrorMsg__c}" /> 
+
+                    
+            </apex:pageblocktable>
+            <apex:outputPanel rendered="{!showmore}"><a href="/a0I/o" target="_blank">view more records</a></apex:outputPanel>
+            </div>
+            </apex:outputpanel>
+        </apex:pageBlock>
+   </apex:form>
+</apex:page>

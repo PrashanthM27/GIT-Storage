@@ -1,0 +1,21 @@
+<aura:component >
+    <aura:attribute name="search" type="Aura.Component[]"/>
+    <aura:attribute name="sideBarFooter" type="Aura.Component[]"/>
+    <div class="slds-grid slds-grid--align-center">
+    <div class="slds-col">
+        <div class="logoContainer"></div>
+        <div class="slds-col">
+           {!v.search}
+            <div class="slds-col">
+             <c:verticalNavigation ></c:verticalNavigation>
+                <div class="slds-col">
+                {!v.sideBarFooter}
+                    <div class="slds-col content">
+                    {!v.body}
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</aura:component>

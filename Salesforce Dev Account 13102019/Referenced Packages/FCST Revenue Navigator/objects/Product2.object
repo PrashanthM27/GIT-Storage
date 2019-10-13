@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>Account_Id__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Account Id</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Cost_Center__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Cost Center</label>
+        <length>10</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FCST_Cost_Center__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>FCST Cost Center</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FCST_Revenue_Type__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>FCST Revenue Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Annuity</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Project</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Prod - Commodity</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Prod - Enterprise</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>eXcell</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Software</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>R_Type_Test__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>R_Type_Test</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Annuity</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Project</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Prod - Commodity</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Prod - Enterprise</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>eXcell</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Revenue_Type__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Revenue Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Annuity</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Project</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Prod - Commodity</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Prod - Enterprise</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>eXcell</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+</CustomObject>

@@ -1,0 +1,290 @@
+<apex:page controller="FcstCCRev.FCST_Field_Mapping_AC_CLONED" showHeader="false" sidebar="false" docType="html-5.0" >
+     <html>
+         <head>
+            <apex:stylesheet value="{!URLFOR($Resource.FcstCCRev__FcstEraSLDS090, 'assets/styles/salesforce-lightning-design-system-vf.css')}" />
+        </head>
+       <apex:form >
+           <apex:pageMessages />
+          <div class="slds" id="pageBody">
+               <div class="slds-grid">
+                      <div class="slds-col">
+                           <div class="slds-box slds-box--small slds-theme--shade " style="height: 80px;">
+                                <span class="slds-icon_container  slds-icon-standard-opportunity" title="FCST Mapping" style="background-color:#F4F6F9;">
+                                    <apex:image url="{!URLFOR($Resource.FcstCCRev__FcstEraSldsIcons, 'opportunity_60.png')}" width="40" height="40" alt="Report" style="background-color: #2F2B9C;" />
+                                    <div class="slds-text-heading--medium" style="margin-left: 50px; margin-top: -30px;"><strong>FCST Mapping</strong></div>
+                                    <button id="QuarterButton" class="slds-button slds-float--right slds-button--icon-border slds-not-selected" Style="background-color: #2F2B9C; margin-top: -2.6%;    margin-right: 4%;" title="Go to home" name="data" type="button"   onclick="gotohome()" >
+                                         <apex:image url="{!URLFOR($Resource.FcstCCRev__FcstEraSldsIcons, 'home_60.png')}" width="40" height="40" alt="Report"  />
+                                    </button>
+                                     <apex:actionFunction action="{!gotohomepage}" name="gotohome" />
+                               </span>
+                          </div>
+                   </div>
+              </div><br/> 
+              
+                
+                        <h3 class="slds-section-title--divider" style="Color:white;background-color:#305496;margin-left: 1px;line-height: 1.5;font-size:25px;left: 80px;text-align: center;">Account Mapping Fields</h3>
+                         <div class="slds-form--stacked slds-p-around--medium slds-m-bottom--x-small">
+                         <div class="slds-form-element">
+                          <div  class="slds-grid slds-wrap slds-grid--pull-padded slds-page-header__detail-row">
+                           <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2">
+                              <div style="margin-left: 32%;">
+                               <label class="slds-text-body--regular" ><div><b>Sales Region</b></div></label>
+                                 <apex:selectList style="width:258px" Styleclass="slds-select" value="{!SalesRegionStr}" multiselect="false" size="1" >
+                                     <apex:selectOptions value="{!AccPicklist}"/>
+                                 </apex:selectList>
+                               </div>
+                            </div>
+                            
+                            <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2">
+                              <div style="margin-left: 31%;">
+                                <label class="slds-text-body--regular" ><div><b>CPM Region</b></div></label>
+                                 <apex:selectList style="width:258px"  Styleclass="slds-select" value="{!CPMRegionStr}" multiselect="false" size="1"  >
+                                     <apex:selectOptions value="{!AccPicklist}"/>
+                             </apex:selectList>
+                                </div>
+                            </div>
+                          </div>
+      
+                             <div  class="slds-grid slds-wrap slds-grid--pull-padded slds-page-header__detail-row">
+                           <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2">
+                               <div style="margin-left: 32%;">
+                               <label class="slds-text-body--regular" ><div><b>Sub - Region</b></div></label>
+                               <apex:selectList style="width:258px"  Styleclass="slds-select" value="{!SubRegionStr}" multiselect="false" size="1"  >
+                                     <apex:selectOptions value="{!AccPicklist}"/>
+                             </apex:selectList>
+                               </div>  
+                               </div>
+                               
+
+                                 
+                                  <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2">
+                               <div style="margin-left: 31%;">
+                               <label class="slds-text-body--regular" ><div><b>Program Manager</b></div></label>
+                               <apex:selectList style="width:258px"  Styleclass="slds-select" value="{!prgManager}" multiselect="false" size="1"  >
+                                     <apex:selectOptions value="{!AccLookupFlds}"/>
+                             </apex:selectList>
+                               </div>  
+                               </div>
+                                  </div> 
+                             
+                             <div  class="slds-grid slds-wrap slds-grid--pull-padded slds-page-header__detail-row">  
+                             <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2">
+                               <div style="margin-left: 32%;">
+                               <label class="slds-text-body--regular" ><div><b>Program Executive</b></div></label>
+                               <apex:selectList style="width:258px"  Styleclass="slds-select" value="{!prgEngineer}" multiselect="false" size="1"  >
+                                     <apex:selectOptions value="{!ProgramEngineers}"/>
+                             </apex:selectList>
+                               </div>  
+                               </div>
+                             
+                             <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2">
+                               <div style="margin-left: 31%;">
+                               <label class="slds-text-body--regular" ><div><b>Geo Codes</b></div></label>
+                               <apex:selectList style="width:258px"  Styleclass="slds-select" value="{!accGeoCodes}" multiselect="false" size="1"  >
+                                     <apex:selectOptions value="{!AccountGeoCodes}"/>
+                             </apex:selectList>
+                               </div>  
+                               </div>
+                             </div>
+  
+                               
+                               
+                               
+                            
+                           <!--div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2">
+                             <div style="margin-left: 20%;">
+                               <label class="slds-text-body--regular" ><div><b>CPM Region</b></div></label>
+                               <apex:selectList style="width:258px" Styleclass="slds-select" value="{!CPMRegionStr}" multiselect="false" size="1"  >
+                                     <apex:selectOptions value="{!AccPicklist}"/>
+                             </apex:selectList>
+                               </div> 
+                            </div-->
+                             <br/><br/>
+              
+                        <h3 class="slds-section-title--divider" style="Color:white;background-color:#305496;margin-left: -15px;margin-right: -15px;line-height: 1.5;font-size:25px;left: 80px;text-align: center;">Opportunity Mapping Fields</h3>
+                         <div class="slds-form--stacked slds-p-around--medium slds-m-bottom--x-small">
+                         <div class="slds-form-element">
+                      
+                          <div  class="slds-grid slds-wrap slds-grid--pull-padded slds-page-header__detail-row">
+                           
+                             <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2">
+                                <div style="margin-left: 31%;">
+                               <label class="slds-text-body--regular" ><div><b>Geo Code</b></div></label>
+                                 <apex:selectList style="width:258px" Styleclass="slds-select" value="{!GeoNum}" multiselect="false" size="1" >
+                                     <apex:selectOptions value="{!OpptStrFlds}"/>
+                                     
+                             </apex:selectList>
+                               </div>
+                                 </div>
+                              
+                              
+                             <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2">
+                              
+                             <div style="margin-left: 32%;">
+                               <label class="slds-text-body--regular" ><div><b>Q#</b></div></label>
+                                 <apex:selectList style="width:258px" Styleclass="slds-select" value="{!QData}" multiselect="false" size="1" >
+                                     <apex:selectOptions value="{!OppNum}"/>
+                             </apex:selectList>
+                               </div>
+                            </div> 
+                              
+                              <!--div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2">
+                              <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2">
+                              <div style="margin-left: 15%;">
+                                <label class="slds-text-body--regular" ><div><b>Geo Code</b></div></label>
+                                 <apex:selectList style="width:258px"  Styleclass="slds-select" value="{!GeoNum}" multiselect="false" size="1"  >
+                                     <apex:selectOptions value="{!OpptStrFlds}"/>
+                             </apex:selectList>
+                                </div>
+                             </div>                            
+                            </div-->
+                              
+                          </div>
+                             <div  class="slds-grid slds-wrap slds-grid--pull-padded slds-page-header__detail-row">                   
+                            <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2">
+                               <div style="margin-left: 31%;">
+                                <label class="slds-text-body--regular" ><div><b>Project Start Date</b></div></label>
+                                 <apex:selectList style="width:258px" Styleclass="slds-select" value="{!ProjectStartDate}" multiselect="false" size="1" >
+                                     <apex:selectOptions value="{!OppDatePicklist}"/>
+                             </apex:selectList>
+                                </div>
+                            </div>
+                           <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2">
+                             <div style="margin-left: 32%;">
+                               <label class="slds-text-body--regular" ><div><b>Project End Date</b></div></label>
+                                 <apex:selectList style="width:258px" Styleclass="slds-select" value="{!ProjectEndDate}" multiselect="false" size="1" >
+                                     <apex:selectOptions value="{!OppDatePicklist}"/>
+                                     
+                             </apex:selectList>
+                               </div>
+                            </div>
+                           </div>
+                           
+                         
+                             <div  class="slds-grid slds-wrap slds-grid--pull-padded slds-page-header__detail-row">
+                              <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2">
+                              <div style="margin-left: 31%;">
+                                <label class="slds-text-body--regular" ><div><b>Term Month</b></div></label>
+                                 <apex:selectList style="width:258px"  Styleclass="slds-select" value="{!termsInMonth}" multiselect="false" size="1"  >
+                                     <apex:selectOptions value="{!TermsMonth}"/>
+                             </apex:selectList>
+                                </div>
+                             </div>
+                            
+                             <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2">
+                              <div style="margin-left: 32%;">
+                                <label class="slds-text-body--regular" ><div><b>Transition Date</b></div></label>
+                                 <apex:selectList style="width:258px"  Styleclass="slds-select" value="{!transitionDate}" multiselect="false" size="1"  >
+                                     <apex:selectOptions value="{!TransDatePicklist}"/>
+                             </apex:selectList>
+                                </div>
+                             </div>
+                            
+                            </div>
+                            
+                             
+                            <div  class="slds-grid slds-wrap slds-grid--pull-padded slds-page-header__detail-row">
+                              <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2">
+                              <div style="margin-left: 31%;">
+                                <label class="slds-text-body--regular" ><div><b>TCV Amount</b></div></label>
+                                 <apex:selectList style="width:258px"  Styleclass="slds-select" value="{!tcv}" multiselect="false" size="1"  >
+                                     <apex:selectOptions value="{!OppTCVPicklist}"/>
+                             </apex:selectList>
+                                </div>
+                             </div>
+                            
+                             <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2">
+                              <div style="margin-left: 32%;">
+                                <label class="slds-text-body--regular" ><div><b>SVC Yr1 Amount</b></div></label>
+                                 <apex:selectList style="width:258px"  Styleclass="slds-select" value="{!svcYR1Amount}" multiselect="false" size="1"  >
+                                     <apex:selectOptions value="{!SVCDecimalPicklist}"/>
+                             </apex:selectList>
+                                </div>
+                             </div>
+                            
+                            </div>
+                             
+                             <div  class="slds-grid slds-wrap slds-grid--pull-padded slds-page-header__detail-row">
+                             <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2">
+                              <div style="margin-left: 15%;">
+                                <label class="slds-text-body--regular" ><div><b>FCST BSLA</b></div></label>
+                                 <apex:selectList style="width:258px"  Styleclass="slds-select" value="{!OpptBSLA}" multiselect="false" size="1"  >
+                                     <apex:selectOptions value="{!OpptBSLAPicklist}"/>
+                             </apex:selectList>
+                                </div>
+                             </div>
+                             </div>
+                            
+                            
+                        </div>
+                             </div>
+                       
+                           
+                                
+                             </div>
+                          </div>
+                          <br/>
+                 
+                  
+                 
+                 
+                 
+               <h3 class="slds-section-title--divider" style="Color:white;background-color:#305496;margin-left: 1px;line-height: 1.5;font-size:25px;left: 80px;text-align: center;">Product Mapping Fields</h3>
+                         <div class="slds-form--stacked slds-p-around--medium slds-m-bottom--x-small">
+                         <div class="slds-form-element">
+                      
+                          <div  class="slds-grid slds-wrap slds-grid--pull-padded slds-page-header__detail-row">
+                           <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2">
+                              <div style="margin-left: 32%;">
+                               <label class="slds-text-body--regular" ><div><b>Cost Center</b></div></label>
+                                 <apex:selectList style="width:258px" Styleclass="slds-select" value="{!cstCenter}" multiselect="false" size="1" >
+                                     <apex:selectOptions value="{!ProductStrFlds}"/>
+                                     
+                                 </apex:selectList>
+                               </div>
+                            </div>  
+                         
+              
+              <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2">
+                             <div style="margin-left: 32%;">
+                               <label class="slds-text-body--regular" ><div><b>Revenue Type</b></div></label>
+                                 <apex:selectList style="width:258px"  Styleclass="slds-select" value="{!RevenueTypeStr}" multiselect="false" size="1" >
+                                     <apex:selectOptions value="{!OppPicklist}"/>
+                                     
+                             </apex:selectList>
+                               </div>
+                            </div>
+                               </div>
+                               
+                               <!-- test -->
+								<div  class="slds-grid slds-wrap slds-grid--pull-padded slds-page-header__detail-row">
+		                           <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2">
+		                              <div style="margin-left: 32%;">
+		                               <label class="slds-text-body--regular" ><div><b>Business Unit </b></div></label>
+		                                 <apex:selectList style="width:258px" Styleclass="slds-select" value="{!businessUnit}" multiselect="false" size="1" >
+		                                     <apex:selectOptions value="{!businessUnitPicklist}"/>
+		                                     
+		                                 </apex:selectList>
+		                               </div>
+                            </div>  
+                         
+              
+			              		<div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-2">
+	                            
+	                            </div>
+                               </div>
+                               
+                               
+                           <!-- test end  -->                               
+                             </div>
+                        </div>
+              
+          
+            
+               <div class="slds-col--padded slds-size--1-of-1  slds-medium-size--1-of-1 slds-large-size--1-of-1"  Style="margin-left:45%;">
+              <apex:commandButton styleClass="slds-button slds-button--neutral slds-button--brand" style="line-height:1.5px;font-size:25px;height: 50px;width:10%;" value="Save" action="{!save}" />
+              </div>
+          </div>
+    </apex:form>
+   </html>
+</apex:page>

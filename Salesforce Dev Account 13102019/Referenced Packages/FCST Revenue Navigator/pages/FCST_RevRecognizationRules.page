@@ -1,0 +1,152 @@
+<apex:page controller="FcstCCRev.FCST_RevRecognizationRules" standardStylesheets="false" sidebar="false" lightningStyleSheets="true">
+    <!--html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en"-->
+    <apex:includeLightning />
+    <apex:slds />
+    <html>
+        <head>
+            <apex:stylesheet value="{!URLFOR($Resource.FcstCCRev__FcstEraSLDS090, 'assets/styles/salesforce-lightning-design-system-vf.css')}" />
+            <style>
+                .submitBtnActive {
+                font-family: HelveticaNeue-Light, "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif !important;
+                width: 175px;
+                
+                height: 40px;
+                font-size: 16px !important;
+                border: 0px;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: 2;
+                text-align: center;
+                disabled: false;
+                background-color: #5d82f4;
+                color: #ffffff !important;
+                float:right;
+                }
+            </style>
+            
+        </head>
+        <body>
+            <apex:form >
+                <div class="slds" id="pageBody" >
+                    <div class="slds-grid">
+                        <div class="slds-col">
+                            <apex:pageMessages id="pgmsg"/>
+                            <apex:actionStatus id="getDataStatus">
+                                <apex:facet name="start">
+                                    <div style="background:#f8f8f8;width: 150px;z-index:1000;position:fixed;border:2px solid #ccc;left:50%;top:50%;padding:25px">
+                                        <img src="/img/loading24.gif" style="vertical-align:middle;"/>
+                                        Wait....
+                                    </div>
+                                </apex:facet>
+                            </apex:actionStatus>
+                            <apex:actionfunction action="{!customSave}" name="saveRevenue" status="getDataStatus"  rerender="pgmsg,tot"/>
+                            
+                            <div class="slds-box slds-box--small slds-theme--shade " style="height: 80px;">
+                                <span class="slds-icon_container  slds-icon-standard-opportunity" title="Revenue Recognition Rules" style="background-color:#F4F6F9;">
+                                    <apex:image url="{!URLFOR($Resource.FcstCCRev__FcstEraSldsIcons, 'opportunity_60.png')}" width="40" height="40" alt="Report" style="background-color: #2F2B9C;" />
+                                    <div class="slds-text-heading--medium" style="margin-left: 50px; margin-top: -30px;"><b>Revenue Recognition Rules</b></div>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--<apex:panelGrid columns="5" cellpadding="" style="width:757px;">-->
+                      <div class="slds-grid slds-wrap slds-grid--pull-padded slds-page-header__detail-row" style="position: static;margin-right: 0.25rem;margin-left: 0.25rem;">
+                         <!--    <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-5" style="margin-left: -31px;">
+                                <label class="slds-text-body--regular" title="Offering Category"><b>Offering Category</b></label>
+                                    <apex:outputPanel id="pdtFamily">
+                                            <apex:selectList style="width:90%" id="productFmailyChange" Styleclass="slds-select" value="{!strProductFamily}" multiselect="false" size="1" >
+                                                   <apex:selectOptions value="{!ProductFamily}"/>
+                                                    <apex:actionSupport event="onchange" action="{!getActiveProducts}"  reRender="pdtNames" Status="getDataStatus"/>
+                                            </apex:selectList>
+                                    </apex:outputPanel> 
+
+                            </div>   -->     
+                       		 <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-5">
+                                <div class="slds-text-body--regular" title="Revenue Type"><b>Revenue Type</b></div>
+                                    <apex:outputPanel id="opptypes">
+                                    <apex:selectList style="width:90%" id="SelectListRevenueType"  Styleclass="slds-select" value="{!oppType}" multiselect="false" size="1" >
+                                        <apex:selectOptions value="{!CategeoryFields}" />
+                                        <apex:actionSupport event="onchange" action="{!getActiveProducts}" rerender="lstpnl,pdtNames,panelTotalId" status="getDataStatus" oncomplete="changeCase()"/>
+                                  </apex:selectList>
+                                 </apex:outputPanel>
+                             </div>
+                            <div class="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-1 slds-large-size--1-of-5">
+                                <div class="slds-text-body--regular" title="Offering Name"><b>Offering Name</b></div>
+                                    <apex:outputPanel id="pdtNames">
+                                    <apex:selectList style="width:90%" id="SelectListOfferingName"  Styleclass="slds-select" value="{!strPrd}" multiselect="false" size="1" >
+                                        <apex:selectOptions value="{!productOptions}" />
+                                        <apex:actionSupport event="onchange" action="{!getTermsMonths}" rerender="pgmsg,lstpnl,panelTotalId,scriptId" status="getDataStatus" oncomplete="changeCase()"/>
+                                  </apex:selectList>
+                                 </apex:outputPanel>
+                             </div>
+                            
+                             </div>
+                             
+                
+                <br/><br/><br/><br/>
+                
+                <apex:outputpanel id="lstpnl">
+                    <!--<apex:pageMessages/>-->
+                         <table class="slds-table slds-table_cell-buffer slds-table_bordered" style="width: 99%;margin-left: -1px;">
+                        <tr style="border: 2px solid black;background-color:#F3F3F3">
+                            <td style="border: 2px solid black;" rowspan="2" ><b>Define % Revenue Recognized</b></td>
+                              <apex:repeat value="{!lstWrapperTermsMonth}" var="b">
+                                       <td style="border: 1px solid black;"><b>{!b.strMonth}</b></td>
+                                </apex:repeat>
+                                <td style="border: 2px solid black;" id="tot"><b>Total</b></td>
+                         </tr>
+                          <tr style="border: 1px solid black;">
+                                         <apex:variable var="count" value="{!1}"   />        <!-- Initialise-->
+
+                            <apex:repeat value="{!lstWrapperTermsMonth}" var="p">
+                                <td style="border: 1px solid black;margin-button:10px">
+                                   <apex:inputText value="{!p.strMonthVal}" styleClass="monthClass_{!count}" html-autocomplete="off" style="border: 0px;width:59px;background-color:white">
+                                         <apex:actionSupport event="onchange" action="{!getTotalVal}" rerender="pgmsg,tot"  oncomplete="changeCase()"/>
+                                </apex:inputText>
+                               </td>    </apex:repeat>
+							
+                            
+                           
+                               <apex:variable value="{!count+1}" var="count"/>  <!--increment-->
+                                <td style="border: 1px solid black;display:none;height: 42Px;" id="tdlastId">
+                                     <apex:outputpanel id="tot">
+                               <div style="text-align: center;margin-top: 8px;">{!intTotalVal}%</div>
+                                         <!--<apex:inputText style="text-align: center;margin-top: 8px;" value="{!intTotalVal}" />-->
+                                  <!--<apex:outputText value="{!intTotalVal}%" />-->
+                                    </apex:outputpanel>
+                                </td>
+                           </tr>
+                        
+                    </table>
+                    <br/>
+                    <br/>
+                    <div style="margin-right: 8px;"><input type="button" value="Save Changes" class="submitBtnActive" onclick="saveRevenue()"/></div>
+                </apex:outputpanel>
+            </apex:form>
+            <apex:outputPanel id="scriptId">
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+                <script>
+               
+                    function changeCase(){
+                        console.log('Test changeCase'+'{!blnCheck}'+document.getElementById("SelectListRevenueType"));
+                        if('{!blnCheck}' == 'true'){
+                           document.getElementById("tdlastId").style.display = 'block';
+                            document.getElementById("tdlastId").next().focus();
+                           var element = document.getElementById("tdlastId");
+                           //element.innerHTML = '<td style="border: 1px solid black;" id="tdlastId">{!intTotalVal}%</td>';
+                        }else {
+                           console.log('In else');
+                           document.getElementById("tdlastId").style.display = 'none';
+                        }
+                    }
+                // window.onload = changeCase;   
+                   
+              </script>
+            </apex:outputPanel>
+        </body>
+    </html>
+    
+</apex:page>

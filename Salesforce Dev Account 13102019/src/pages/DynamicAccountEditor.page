@@ -1,0 +1,12 @@
+<apex:page standardController="Account" extensions="DynamicAccountFieldsLister1">
+    <apex:form >
+    <apex:pageBlock >
+        <apex:pageBlockSection >
+        <apex:inputField value="{!Account.Name}"/>
+        <apex:repeat value="{!editableFields}" var="flds">
+            <apex:inputField value="{!Account[flds]}"/>
+            </apex:repeat>
+        </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,25 @@
+<apex:page controller="PassingParameters">
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockSection >
+                <apex:pageBlockSectionItem >
+                <apex:outputLabel value="Name" />
+                <apex:inputText value="{!Name}"/>
+                    </apex:pageBlockSectionItem>
+                <apex:pageBlockTable value="{!acc}" var="a">
+                    <apex:column >
+                    <apex:commandlink value="{!a.Name}">
+                        <apex:param name="x" value="{!a.Id}"/>
+                        <apex:param name="y" value="{!a.Name}"/>
+                    </apex:commandlink>
+                        </apex:column>
+                 <apex:column value="{!a.Industry}"/>
+                    <apex:column value="{!a.Phone}"/>
+                </apex:pageBlockTable>
+                <apex:commandButton action="{!searchButton}" value="Search"/>
+          </apex:pageBlockSection>
+            </apex:pageBlock>
+        {!$CurrentPage.parameters.x}<br/>
+        {!$CurrentPage.parameters.y}
+        </apex:form>
+</apex:page>

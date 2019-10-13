@@ -1,0 +1,28 @@
+<apex:page controller="PicklistOptons" >
+    <apex:form >
+        <apex:pageBlock title="All Option">
+        <apex:pageBlockTable value="{!options}" var="vr">
+        <apex:column >
+        </apex:column>
+        
+        </apex:pageBlockTable>
+            <apex:selectList value="{!Selected}" multiselect="false" size="1" onclick="">
+                Select :  <apex:selectOptions value="{!options}" >                     
+                </apex:selectOptions> 
+                <apex:actionSupport event="onchange"  reRender="pg1"/>
+            </apex:selectList> 
+        </apex:pageBlock>
+        <apex:pageBlock title="Display Results" id="pg1">           
+          <apex:pageBlockSection title="Display Text field" rendered="{!Selected = 'Text'}">
+                <apex:pageBlockSectionItem >
+                    EnterName = <apex:inputText />
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>            
+            <apex:pageBlockSection title="Display Radio button" rendered="{!Selected = 'Radio'}" >
+                <apex:selectRadio >                   
+                        <apex:selectOption itemLabel="Radio1" itemValue="Radio1"></apex:selectOption>                    
+                </apex:selectRadio>                
+            </apex:pageBlockSection>        
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,13 @@
+<apex:page controller="InputDataClass">
+    <apex:form >
+    <apex:pageBlock title="Details">
+    Input Text:<apex:inputText value="{!myInput}"/>
+        <apex:commandButton action="{!MyData}" value="Submit" reRender="out"/>
+        </apex:pageBlock>
+        <apex:pageBlock >
+            <p>
+       <b>Output Text ekkada:</b><apex:outputText label="" value="{!myoutput}" id="out"></apex:outputText>
+                </p>
+        </apex:pageBlock>
+        </apex:form>
+</apex:page>

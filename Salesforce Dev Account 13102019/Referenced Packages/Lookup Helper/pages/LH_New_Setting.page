@@ -1,0 +1,604 @@
+<apex:page controller="LH.LH_New_Setting_Controller" standardStylesheets="false" sidebar="false" applyBodyTag="false" docType="html-5.0" showHeader="true">  
+<html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+ 
+    <style>
+        .slds-table.newsettingBlock {
+        background-color: #f4f6f9; 
+        }
+        
+        .slds-card__footer.newsettingNote {
+        text-align:left;
+        }
+    </style>
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+ 
+    <apex:stylesheet value="{! URLFOR($Resource.PT_Resources_v1, '/font-awesome/css/font-awesome.min.css') }" />  
+    
+	<apex:stylesheet value="{! URLFOR($Resource.HS_Jquery, 'jquery-ui.min.css')}" />
+    <apex:includeScript value="{! URLFOR($Resource.HS_Jquery, 'jquery-1.12.1.min.js')}" />
+    <apex:includeScript value="{! URLFOR($Resource.HS_Jquery, 'jquery-ui.min.js')}" />  
+
+
+    <title>Create New Lookup Helper Setting</title>
+    
+  </head>
+
+ 
+      <div class="slds-scope" role="main" >
+        <apex:slds />
+       <apex:form >
+	  
+      <div style="width:95%; margin-left:auto; margin-right:auto;">        
+          <c:LH_Nav_Bar />
+      	
+      <div class="slds-card" style="border-radius:4px !important; ">
+   
+          
+          <div class="slds-card__header slds-grid">
+              <header class="slds-media slds-media_center slds-has-flexi-truncate" style="border-radius:4px !important;">
+                  <h3 class="slds-text-heading_small">Step 1: Select Child Object</h3>
+              </header>
+          </div>
+          
+            <section class="slds-card__body slds-card__body_inner" id="selectChild">
+                
+                <div class="slds-tile__title">
+                    <span class="slds-text-body--regular">
+                        Please select the child object you would like to create or maintain a relationship on.
+                    </span>
+                </div>
+                <div class="slds-tile__detail">
+                    <apex:actionRegion >
+                        <apex:selectList value="{!selectedChildObject}" styleclass="slds-picklist " style="width: 30%;" multiselect="false" size="1">
+                            <apex:actionSupport event="onchange" action="{!retrieveChildRelationships}" rerender="step2, step3, step4, iFLS" status="working"/>
+                            <apex:selectOptions value="{!childList.0}"/>
+                            <apex:selectOptions value="{!childList.1}"/>
+                            <apex:selectOptions value="{!childList.2}"/>	                    
+                        </apex:selectList>
+                    </apex:actionRegion>
+                </div>
+                
+
+            </section>
+            <apex:outputPanel id="out">
+                <apex:actionstatus id="status" startText="testing...">
+                </apex:actionstatus>
+            </apex:outputPanel>
+     </div>	
+    	<br/>
+       <apex:outputPanel id="step2">
+	          		
+			<apex:outputPanel rendered="{! NOT(ISBLANK(selectedChildObject))}">
+				<div class="slds-card">
+                    
+                    <div class="slds-card__header slds-grid">
+                        <header class="slds-media slds-media_center slds-has-flexi-truncate" style="border-radius:4px !important;">
+                            <h3 class="slds-text-heading_small">Step 2: Select / Create Lookup Field to be Used</h3>
+                        </header>
+                    </div>
+                    
+			        <section class="slds-card__body slds-card__body_inner"> 
+			            	<table class="slds-table newsettingBlock slds-no-row-hover">
+			            	<tr>
+			            	<td colspan="2">
+			            	<apex:outputPanel rendered="{!NOT(ISBLANK(selectedChildObject)) }">
+			            		<apex:actionRegion >
+			            				<apex:selectRadio value="{!createLookup}" layout="pageDirection" rendered="{!AND(NOT(ISBLANK(selectedChildObject)))}">   
+			            					<apex:actionSupport event="onchange" action="{!clearChildRelationship}" rerender="lookup, categorize, filterType, step2, step3, step4,  standardFields, createSelectFooter, iFLS" status="working"/>
+			            					<apex:selectOptions value="{!relationshipOptions}"/>
+			            				</apex:selectRadio>
+			            		</apex:actionRegion>
+			            	</apex:outputPanel>	
+			            	</td>
+			            	</tr>
+			            	<tr>
+			            	<td colspan="2">            	
+			            	<apex:outputPanel rendered="{! AND( NOT(ISBLANK(selectedChildObject)), createLookup == 'maintain')}">
+      							
+		 								<apex:actionRegion >
+		      								<apex:selectList value="{!childRelationship}" styleclass="slds-picklist" style="width: 30%;" multiselect="false" size="1" rendered="{!AND(NOT(ISBLANK(selectedChildObject)), NOT(childRelationshipListIsEmpty))}">
+			     		   						<apex:actionSupport event="onchange" action="{!clearAllCategoryFields}" rerender="categorize, filterType, step2, step3, step4, standardFields, iFLS" status="working"/>
+				  		  	    				<apex:selectOptions value="{!ChildRelationships}"/>
+											</apex:selectList>
+			 							</apex:actionRegion>
+			 							&nbsp;
+			 							<apex:outputPanel rendered="{!childRelationshipFieldIsPolymorphic}">
+		      								<apex:selectList value="{!parentObjectName}" styleclass="slds-picklist slds-max-small-buttons--stretch" multiselect="false" size="1" style="width:30%;">
+			     		   						<apex:actionSupport event="onchange" action="{!refreshCleanParentName}" rerender="step3, step4, categoryCreate, reqCat" status="working"/>
+			     		   						<apex:selectOptions value="{!childRelationshipPolymorphicParentObjects}"/>
+		      								</apex:selectList>
+			 							</apex:outputPanel> 
+	           		               
+	      	   							<apex:selectList multiselect="false" size="1" styleclass="slds-picklist" style="width: 30%;" rendered="{!childRelationshipListIsEmpty}" disabled="true">
+			    							<apex:selectOption itemValue="No relationships available" itemLabel="No available lookup fields."/>
+			   							</apex:selectList>               
+									<br/>
+									<br/>   
+      						</apex:outputPanel>	
+      						
+      						<apex:outputPanel rendered="{! AND( NOT(ISBLANK(selectedChildObject)), createLookup == 'create',  HasRemoteSite)}">
+      									<label class="slds-form-element__label" for="lookup">Parent Object</label>
+                    					<apex:actionRegion >
+	                						<apex:selectList value="{!parentObjectName}" styleclass="slds-picklist slds-max-small-buttons--stretch" multiselect="false" size="1" style="width: 30%;">
+	                    						<apex:actionSupport action="{!clearAllCategoryFields}" event="onchange" rerender="step2, step3, step4, iFLS" status="working" focus="fieldNameInput" />
+	                    						<apex:selectOptions value="{!ParentList.0}"/>
+           										<apex:selectOptions value="{!ParentList.1}"/>
+           										<apex:selectOptions value="{!ParentList.2}"/>		
+	                    					</apex:selectList>
+                   						</apex:actionRegion>
+      						</apex:outputPanel>
+      						</td>  
+      						</tr>
+      						<tr>
+      						<td width="50%">    						
+      						<apex:outputPanel rendered="{! AND( NOT(ISBLANK(selectedChildObject)), createLookup == 'create', NOT(ISBLANK(parentObjectName)))}">
+      							
+      							<div id="FieldName" class="slds-form-element" style="width:50%;">
+      								
+   									<label class="slds-form-element__label " for="lookup">Field Name</label>										
+ 									<apex:inputText id="fieldNameInput" styleclass="slds-input slds-input--small" value="{!newLookupName}" onchange="checkValidLookupName();"/>
+ 									&nbsp;
+ 									<apex:actionFunction action="{!checkValidLookupName}" name="checkValidLookupName" oncomplete="checkValidRelationshipName();"
+ 									  rerender="categorize, filterType, invalidField, step2, RelationshipName, step3, step4, standardFields, FLS, iFLS" status="working"/>
+   						   			      								   
+  						  		</div>
+                                
+			            	</apex:outputPanel>	
+			            	</td>
+                                
+			            	<td width="50%">  
+			            	<apex:outputPanel id="RelationshipName" rendered="{! AND( NOT(ISBLANK(childRelationship)), NOT(ISBLANK(selectedChildObject)), createLookup == 'create', NOT(ISBLANK(parentObjectName)))}">		            	
+			           			
+			           			<div class="slds-form-element" style="width:50%;">	
+			           				<label class="slds-form-element__label" for="lookup">Child Relationship Name</label>										
+ 									<apex:inputText styleclass="slds-input slds-input--small " value="{!newRelationshipName}" onchange="checkValidRelationshipName();"/> 
+ 									 &nbsp;   	
+ 									 <apex:actionFunction action="{!checkValidRelationshipName}" name="checkValidRelationshipName"
+ 									   rerender="categorize, filterType, invalidField, step2, step3, step4, standardFields, FLS, iFLS, FieldName" status="working"/>						
+   						   			
+			           			</div>	
+	 
+			           		</apex:outputPanel>
+			           		</td>
+			           		</tr>
+			           	</table>
+			    	</section> 
+			    	<footer class="slds-card__footer newsettingNote"  > 
+                        	Please Note: If creating a new lookup field, field level security and page layouts will need to be adjusted to make the new lookup field visible.
+                        	
+      						<apex:outputPanel rendered="{!NOT(HasRemoteSite)}">
+      							<br/>
+								<apex:commandLink action="{! goToDeployRemoteSite }" style="color:red !important;">Error: A Remote Site Setting must be created to create a new field. Please click here to create a Remote Site.</apex:commandLink>
+							</apex:outputPanel>		
+                        
+                           <apex:outputPanel styleclass="slds-col slds-align-middle" id="invalidField" rendered="{!invalidFieldName}"> 
+                               <br/>
+                               <font style="color:#F88962 !important;"> Error: The custom field name and / or the child relationship name on object {!selectedChildObject}
+                                   can only contain alphanumeric characters, must begin with a letter, cannot end with an underscore or contain two consecutive underscore
+                                   characters, and must be unique across all {!selectedChildObject} fields. 
+                               </font>
+                           </apex:outputPanel> 
+                    </footer>
+				</div>
+			</apex:outputPanel>      			           
+   		</apex:outputPanel>    
+	   <br/> 	           
+      <apex:outputPanel id="step3">
+		      <apex:outputPanel rendered="{!AND(
+                                        NOT(ISBLANK(childRelationship)), 
+                                        NOT(ISBLANK(selectedChildObject)), 
+                                        IF(invalidFieldName == false, true, false), 
+                                        IF(childRelationshipFieldIsPolymorphic, NOT(ISBLANK(parentObjectName)), true) 
+                                    )}">
+		      	<div class="slds-card">
+        
+                    <div class="slds-card__header slds-grid">
+                        <header class="slds-media slds-media_center slds-has-flexi-truncate" style="border-radius:4px !important;">
+                            <h3 class="slds-text-heading_small">Step 3: Select Lookup Helper Setting Type</h3>
+                        </header>
+                    </div>
+                    
+                        <section class="slds-card__body slds-card__body_inner">
+                           <table class="slds-table newsettingBlock slds-no-row-hover">
+                           	  <tr>     
+                           	    <td>           
+                                  <apex:actionRegion >
+                                  <label class="slds-form-element__label" for="lookup">Lookup Helper Setting Type:</label>                                
+                                  <apex:selectList id="SettingType" style="width:30%;"  styleclass="slds-picklist slds-max-small-buttons--stretch" value="{!settingType}" size="1">
+                                  	<apex:actionSupport event="onchange" action="{!clearMatchingFields}" rerender="standardFields, categoryCreate, requiredFields, matchFields, externalIdMessage, step4, clarifyingText" status="working"/>
+                                      <apex:selectOptions value="{!settingTypes}"/>
+                                  </apex:selectList>									   
+                                  </apex:actionRegion><br/>
+                                  <apex:outputPanel id="clarifyingText">
+                                  	<apex:outputPanel rendered="{!IF(settingType=='category', true, false)}" styleClass="slds-text-body--small">
+                                  		Child records will be related when the value in the selected field matches the id or name of the potential parent.
+                                  	</apex:outputPanel>
+                                  	<apex:outputPanel rendered="{!IF(settingType=='match', true, false)}" styleClass="slds-text-body--small">
+                                  		Child records will be related when the value in the selected field matches the value in the selected parent field.
+                                  	</apex:outputPanel>
+                                  </apex:outputPanel>
+                                </td>   
+                              </tr>
+							  <tr>
+							  	<td>
+                                  <apex:outputPanel id="standardFields">            
+                                  <apex:outputPanel rendered="{!OR(IF(settingType == 'category', true, false), IF(AND(cleanChildObjName == cleanParentObjName, NOT(ISBLANK(settingType))), true, false))}">                                                               
+                                          <apex:actionRegion >
+                                          	  <label class="slds-form-element__label">Select field on {!ChildObjLabel} to match the name/id of {!cleanParentObjLabelPrefix} {!cleanParentObjLabel} record:</label> 
+                                              <br/>
+                                              <apex:selectList value="{!selectedCategoryField}" styleclass="slds-picklist slds-max-small-buttons--stretch" multiselect="false" size="1" style="width:30%;" rendered="{!AND(NOT(ISBLANK(childRelationship)), NOT(ISBLANK(settingType)))}">
+                                                  <apex:actionSupport event="onchange" action="{!clearRelatedObjField}" rerender="step4, categoryCreate, reqCat, relatedObjectFields, requiredFields, relatedObjectList" status="working"/>
+                                                  <apex:selectOptions value="{!sourceFieldList}"/>
+                                              </apex:selectList>
+                                              &nbsp;
+                                              <apex:outputPanel id="relatedObjectList">    
+                                                 
+                                              <apex:outputPanel rendered="{!IF(AND(!ISBLANK(selectedCategoryField),CONTAINS(selectedCategoryField, '.'), relatedObjects.size > 2), true, false)}">
+                                                  <apex:selectList value="{!selectedRelatedObjectFieldParentName}" styleclass="slds-picklist slds-max-small-buttons--stretch" multiselect="false" size="1" style="width:30%;">
+                                                  <apex:actionSupport event="onchange" rerender="step4, categoryCreate, reqCat, relatedObjectFields" status="working"/>
+                                                  <apex:selectOptions value="{!relatedObjects}"/>
+                                                  </apex:selectList>
+                                              </apex:outputPanel>
+                                              </apex:outputPanel>
+                                              &nbsp;
+                                              <apex:outputPanel id="relatedObjectFields">
+                                              <apex:outputPanel rendered="{!IF(AND(CONTAINS(selectedCategoryField, '.'), !ISBLANK(selectedRelatedObjectFieldParentName)), true, false)}">
+                                                  <apex:selectList value="{!selectedRelatedObjectField}" styleclass="slds-picklist slds-max-small-buttons--stretch" multiselect="false" size="1" style="width:30%;">
+                                                  <apex:actionSupport event="onchange" rerender="step4, categoryCreate, reqCat" status="working"/>
+                                                  <apex:selectOptions value="{!RelatedObjectFields}"/>
+                                                  </apex:selectList>
+                                              </apex:outputPanel>
+                                              </apex:outputPanel>
+                                          </apex:actionRegion>
+                                      
+                                  
+                                  
+                                      <apex:outputPanel id="categoryCreate" style="padding-top:5px;">
+                                      <br/>
+ 
+                                      <apex:outputPanel rendered="{!AND(NOT(ISBLANK(selectedCategoryField)), parentObjectName != 'user', parentObjectName != 'group', OR(NOT(Contains(selectedCategoryField, '.')), NOT(ISBLANK(selectedRelatedObjectField))))}">
+                                          <span title="Select this option to create new {!cleanParentObjName} records if a record for the parent object does not exist. Any new records that do not meet validation rules will not be created." >                                          	
+                                          		<i class="fa fa-info-circle" style="color:#16325c;"></i>                                        	 
+                                          </span>
+                                          <label class="slds-form-element__label" for="lookup">Create new Parent Record?</label>
+                                          <apex:actionRegion >
+                                          <apex:inputCheckbox value="{!createNewCategory}">
+                                          <apex:actionSupport event="onchange" rerender="requiredFields" status="working"/>
+                                          </apex:inputCheckbox>
+                                          </apex:actionRegion>
+                                      </apex:outputPanel>
+                                      </apex:outputPanel>
+                                
+                                       
+                                  
+								</apex:outputPanel>
+							</apex:outputPanel>
+								
+					  								
+							<apex:outputPanel id="matchFields">
+							<apex:outputPanel rendered="{!IF(settingType == 'match', true, false)}">
+							
+            						<div class="slds-text-body--regular">
+                						&nbsp;
+                						<span style="width:25px;" title="Lookup Helper will relate the child {!cleanChildObjName} record to the parent {!cleanParentObjName} record with the same name as the value in the specified field.">
+            								<i class="fa fa-info-circle" style="color:#16325c;"></i>   
+            							</span>  Select Fields On {!cleanChildObjName} And {!cleanParentObjName} To Match:
+            						</div>                   
+            					
+							<br/>
+							<label class="slds-form-element__label" for="lookup">Child {!cleanChildObjName} field:</label><br/>
+							<apex:actionRegion >
+							<apex:outputPanel id="reqflag1" style="margin-right: 15px;">
+							                                 	<apex:outputPanel rendered="{!ISBLANK(selectedCategoryField)}">
+							                                     	<font style="color:red; font-size:25;">*</font>
+							                                     </apex:outputPanel>
+							                                 </apex:outputPanel>
+							<apex:selectList value="{!selectedCategoryField}" styleclass="slds-picklist slds-max-small-buttons--stretch" multiselect="false" size="1" rendered="{!NOT(ISBLANK(childRelationship))}" style="width: 30%; text-align: center;">
+							                                 	<apex:actionSupport event="onchange" rerender="parentFieldToMatch, reqflag1, step4" status="working"/>
+							                                     <apex:selectOptions value="{!sourceFieldList}"/>
+							                                 </apex:selectList>
+							                                 </apex:actionRegion>
+						
+							
+							<apex:outputPanel id="parentFieldToMatch">
+								<br/><br/>
+								<label class="slds-form-element__label" for="lookup">Match to Parent {!cleanParentObjName} field:</label>
+								<br/>
+							
+							<apex:actionRegion >
+							<apex:outputPanel id="reqflag2" style="margin-right: 15px;">
+							                                 	<apex:outputPanel rendered="{!ISBLANK(selectedRelatedObjectField)}">
+							                                     	<font style="color:red; font-size:25;">*</font>
+							                                     </apex:outputPanel>
+							                                 </apex:outputPanel>
+							
+								<apex:selectList value="{!selectedRelatedObjectField}" styleclass="slds-picklist slds-max-small-buttons--stretch" multiselect="false" size="1" style="width: 30%; text-align: center;">
+							     	<apex:actionSupport event="onchange" rerender="reqflag2, step4, categoryCreateOnField" status="working"/>
+							     	<apex:selectOptions value="{!RelatedObjectFields}"/>
+								</apex:selectList>
+							</apex:actionRegion>                     
+							</apex:outputPanel>
+							<br />
+							 <apex:outputPanel id="categoryCreateOnField" style="padding-top:5px;">
+ 
+                                      <apex:outputPanel rendered="{!AND(NOT(ISBLANK(selectedCategoryField)), parentObjectName != 'user', parentObjectName != 'group', OR(NOT(Contains(selectedCategoryField, '.')), NOT(ISBLANK(selectedRelatedObjectField))))}">
+                                          <span title="Select this option to create new {!cleanParentObjName} records if a record for the category name does not exist. Any new records that do not meet validation rules will not be created." >                                          	
+                                          		<i class="fa fa-info-circle" style="color:#16325c;"></i>                                        	 
+                                          </span>
+                                          <label class="slds-form-element__label" for="lookup">Create new category records?</label>
+                                          <apex:actionRegion >
+                                          <apex:inputCheckbox value="{!createNewCategory}">
+                                          <apex:actionSupport event="onchange" rerender="requiredFields" status="working"/>
+                                          </apex:inputCheckbox>
+                                          </apex:actionRegion>
+                                      </apex:outputPanel>
+                              </apex:outputPanel>                            
+                                  	
+							</apex:outputPanel>
+							</apex:outputPanel>
+					</td>
+			    </tr>
+			    <tr>
+			    	<td>
+                                  <apex:outputPanel id="requiredFields">
+                                  <apex:outputPanel rendered="{!IF(createNewCategory = true, true, false)}">
+                                  <div class="panel-title">Populate field values for new <b>{!cleanParentObjName}</b> records created by Lookup Helper (optional):
+                                              &nbsp;
+                                              <span style="float:right; text-align:right; width:25px;" title="When creating new records, required field values will need to be populated with a value. Please note: New records created by Lookup Helper will automatically be named using the value in the child records category field (selected above).">
+                                              	<img src="{!URLFOR($Resource.SFStyleSheets, '/SFStyleSheets/assets/icons/utility/info_60.png')}"/>
+                                              </span>
+                                          </div>              
+                                     
+                                 
+                                      <label class="slds-form-element__label" for="lookup">Field to Populate:</label>
+                                 
+                                      <apex:actionRegion >
+                                          <apex:selectList id="customFields" styleclass="slds-picklist slds-max-small-buttons--stretch" value="{!selectedFilterField}" multiselect="false" size="1">
+                                              <apex:actionSupport event="onchange" rerender="arrow1, filterCondition, value, fieldValue, arrow2, addCriteria"/>
+                                              <apex:selectOptions value="{!ParentFieldList}"/>
+                                          </apex:selectList>
+                                      </apex:actionRegion>
+                                      
+                                      <apex:outputPanel id="arrow1">
+                                      <apex:outputPanel rendered="{!selectedFilterField != ''}">
+                                          <span class="glyphicon glyphicon-minus"/>
+                                          <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"/>
+                                      </apex:outputPanel> 
+                                      </apex:outputPanel> 
+                                         
+                                      
+                                      <apex:outputPanel id="filterCondition">
+                                      <apex:outputPanel rendered="{!selectedFilterField != ''}">    
+                                              <apex:actionRegion >
+                                              <apex:selectList styleclass="slds-picklist slds-max-small-buttons--stretch" value="{!selectedFilterCondition}" multiselect="false" size="1">
+                                                  <apex:actionSupport event="onchange" rerender="arrow2, value, addCriteria, fieldValue"/>
+                                                  <apex:selectOptions value="{!FieldLogicOptions}"/>
+                                              </apex:selectList>
+                                              
+                                              </apex:actionRegion>
+                                              <apex:outputPanel id="arrow2">
+                                              <apex:outputPanel rendered="{!selectedFilterField != ''}">
+                                              <span class="glyphicon glyphicon-minus"/>
+                                              <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"/>
+                                              </apex:outputPanel>
+                                              </apex:outputPanel>
+                                              
+                                      </apex:outputPanel>
+                                      </apex:outputPanel> 
+                                      
+                                          <apex:outputPanel id="value">
+                                          <apex:outputpanel rendered="{!AND(selectedFilterField != '', NOT(selectedFilterCondition == '->'))}">  
+                                          <apex:actionRegion >
+                                                  <apex:inputText styleclass="slds-input slds-input--small " value="{!selectedFilterValue}" style="width:25%"/>
+                                          </apex:actionRegion>
+                                          </apex:outputpanel>
+                                          </apex:outputPanel> 
+                                        
+                                      <apex:outputPanel id="fieldValue">
+                                      <apex:outputpanel rendered="{!AND(selectedFilterField != '', selectedFilterCondition == '->')}">
+                                          <apex:actionRegion >
+                                          <apex:selectList styleclass="slds-picklist slds-max-small-buttons--stretch" value="{!selectedFilterValue}" multiselect="false" size="1">
+                                          	<apex:selectOptions value="{!MappingSourceFieldList}"/>
+                                          </apex:selectList>
+                                          </apex:actionRegion>
+                                      </apex:outputpanel>
+                                      </apex:outputPanel>
+                                     
+                                          <apex:outputpanel id="addCriteria"> 
+                                          <apex:commandButton styleClass="slds-button slds-button--neutral slds-button--small" action="{!addCriteria}" value="Add Criteria" rendered="{!selectedFilterField != ''}" rerender="filterTable, filterCondition, value, fieldValue, arrow1, arrow2, customFields" status="working"/>
+                                          </apex:outputpanel> 
+                                  			<br/><br/>
+                                  
+                                  <apex:outputPanel id="requiredFieldError">
+                                  <apex:outputPanel rendered="{!requiredFieldValueError}" style="float:right; padding:15px">
+                                      <font color="red">Please populate all of the required field values below.</font>
+                                  </apex:outputPanel>
+                                  </apex:outputPanel>
+                               
+                                      <apex:outputPanel id="filterTable">
+                                          <apex:pageBlock rendered="{!IF(requiredFields.size == 0, false, true)}">
+                                              <apex:pageBlockTable id="filtercon" styleclass="list table table-responsive table-striped table-bordered" value="{! requiredFields }" var="item">
+                                                  <h6 style="color:red">
+                                                      <apex:actionStatus id="statusMessage3" startText="(refreshing)" stopText="" styleClass="caption col col_1" style="font-Color:red"/>
+                                                  </h6>                                                   
+                                              
+                                                  <apex:column >
+                                                      <apex:facet name="header">Action</apex:facet>
+                                                      
+                                                      <apex:actionRegion >
+                                                          <apex:outputPanel rendered="{!item.required == 'No'}">
+                                                          <apex:commandLink action="{!removeFilter}" reRender="requiredFields, filterTable, filterCon">   
+                                                            <apex:param name="filterId" value="{! item.field }"/>
+                                                            Delete
+                                                            </apex:commandLink>
+                                                            </apex:outputPanel>
+                                                        </apex:actionRegion>                                                         
+                                                      
+                                                  </apex:column>
+                                                  <apex:column >
+                                                      <apex:facet name="header">
+                                                          {!cleanParentObjName} Field
+                                                      </apex:facet>
+                                                      {! item.field }
+                                                  </apex:column>
+                                                  <apex:column >
+                                                      <apex:facet name="header">
+                                                          Value to populate in field
+                                                      </apex:facet>
+                                                      <apex:outputPanel >
+                                                      <apex:outputPanel rendered="{!AND(item.value == '', item.required == 'Yes')}">
+                                                          <font style="color:red;">Value is required.</font>
+                                                      </apex:outputPanel>
+                                                      
+                                                      {! item.value }
+                                                      
+                                                      <apex:actionregion >
+                                                           <apex:commandLink style="float:right" reRender="requiredFields, customFields, filterCondition, value, arrow1, arrow2, addCriteria" action="{!editFilter}" immediate="true">
+                                                              <apex:param name="filterId" value="{! item.field }"/>
+                                                              Edit
+                                                          </apex:commandLink>
+                                                      </apex:actionregion>
+                                                      
+                                                      </apex:outputPanel> 
+                                                  </apex:column>
+                                              </apex:pageBlockTable>
+                                          </apex:pageBlock>
+                                      </apex:outputPanel>
+                                  
+                            
+                                  </apex:outputPanel>
+                                  </apex:outputPanel>                                         
+                                  
+                           </td>
+                        </tr>         
+                                  
+                          
+					</table>
+                  </section>
+                  <footer class="slds-card__footer newsettingNote"> 
+                  	<apex:outputPanel id="externalIdMessage">
+                  	<apex:outputPanel rendered="{! IF(settingType == 'match', true, false)}">Please Note: If you have large sets of data (over 100,000 {!cleanParentObjName} or {!cleanChildObjName} records), <strong>it is best to only select indexed fields to match.</strong>
+							                                 &nbsp;A good way to apply an index to a field is to make the field an external Id.
+					</apex:outputPanel>
+					</apex:outputPanel>		                                 
+		          </footer>
+ 				</div>
+			  </apex:outputPanel>
+      </apex:outputPanel>
+      
+	  <br/>
+      <apex:outputPanel id="step4">
+      <apex:outputPanel rendered="{!OR(
+                        AND( 
+      										OR(settingType == 'category', NOT(ISBLANK(settingType))), 
+      										NOT(ISBLANK(selectedCategoryField)),
+      										IF(CONTAINS(selectedCategoryField, '.'), NOT(ISBLANK(selectedRelatedObjectFieldParentName)), true),
+      										IF(CONTAINS(selectedCategoryField, '.'), NOT(ISBLANK(selectedRelatedObjectField)), true)
+      									   ), 
+      									AND( settingType == 'match', 
+      										 NOT(ISBLANK(selectedRelatedObjectField)), 
+      										 NOT(ISBLANK(selectedCategoryField)) 
+      									   ) 
+      							      )}">
+    	<div class="slds-card slds-card--empty">
+ 
+            <div class="slds-card__header slds-grid">
+                <header class="slds-media slds-media_center slds-has-flexi-truncate" style="border-radius:4px !important;">
+                    <h3 class="slds-text-heading_small">Step 4: Save and Run Setting</h3>
+                </header>
+            </div>
+      		
+      		<script>
+      		
+      		var lh = lh || {};
+         	lh.j$ = jQuery.noConflict();
+      
+            lh.j$(function() 
+            {
+            	lh.j$( "#advSettings" ).accordion({ collapsible: true, active: false, heightStyle: "content"});
+            });
+                
+                
+      		</script>
+      		
+      		<apex:actionRegion > 
+        
+		      		<div class="row">
+		      			<div id="advSettings" > 
+		       				<h3>Advanced Settings</h3>              
+		       					<div>
+		       						<apex:outputpanel >                    
+		           
+		               					<apex:outputpanel id="allowOverwrite">
+		                   					<apex:inputCheckbox value="{!allowOverwrite}" id="allowOverwriteCheckbox" />                   
+		                   					<apex:actionsupport event="onchange" action="{!postVariable}" rerender="allowOverwrite"/>   
+		               					</apex:outputpanel>
+		
+		               					<apex:outputLabel for="allowOverwriteCheckbox" value="Allow Overwrite of Existing Lookup Field Information"/>
+		           					</apex:outputpanel>
+		
+		            				<br/>
+		           
+		           					<apex:outputpanel >
+		           						<apex:outputpanel id="allowBlankOverwrite">
+	                   						<apex:inputCheckbox value="{!allowBlankOverwrite}" id="allowBlankOverwriteCheckbox" />                   
+	                   						<apex:actionsupport event="onchange" action="{!postVariable}"  rerender="allowBlankOverwrite"/>   
+		           						</apex:outputpanel>
+		
+		           						<apex:outputLabel for="allowBlankOverwriteCheckbox" value="Allow Clearing of Existing Lookup Field Information"/>
+		           					</apex:outputpanel>
+		
+		        				</div>
+		        				
+		        				<h3>Setting Name</h3>
+		        					<div>
+		        						<label class="slds-form-element__label" for="lookup">Setting Name (optional)</label><apex:inputText styleclass="slds-input slds-input--small" maxlength="79" value="{!settingName}" style="width:50%;"/>
+		        					</div>
+		    				</div> 
+		   				 </div>
+    
+    				</apex:actionRegion> 
+      		<section class="slds-card__body slds-card__body_inner">				  
+		        
+      		</section>
+      		<footer class="slds-card__footer">
+      			<hr />
+      			<center>
+      			    <apex:outputPanel id="pgMessage">
+        				<apex:pageMessages />
+        			</apex:outputPanel>
+                    
+                    <apex:actionFunction action="{!postSaveProcessing}" name="postSave_JS" status="working" rerender="norerender" />
+                    <apex:actionFunction action="{!postSaveAndNewProcessing}" name="postSaveAndNew_JS" status="working" rerender="norerender" />
+                    <apex:commandButton action="{!saveSetting}"  styleclass="slds-button slds-button--neutral" value="Save Setting" id="save" rerender="pgMessage,requiredFieldError" status="working" oncomplete="postSave_JS();"/>
+                    <apex:commandButton action="{!saveSetting}"  styleclass="slds-button slds-button--neutral" value="Save & New Setting" id="saveandnew" rerender="pgMessage,requiredFieldError" status="working" oncomplete="postSaveAndNew_JS();"/>
+                    <apex:commandButton action="{!saveAndRunSetting}" styleclass="slds-button slds-button--neutral" value="Save and Run Setting" id="saveandrun" rerender="pgMessage, requiredFieldError" status="working" oncomplete="postSave_JS();"/>
+                    <apex:commandButton action="{!doCancel}" styleclass="slds-button slds-button--neutral" value="Cancel"/>
+                    
+		      	</center>
+      		</footer>
+      	</div>
+      </apex:outputPanel>
+      </apex:outputPanel>
+      
+      
+      
+      <apex:actionStatus id="working" stopText="" styleClass="caption col col_1">
+	      <apex:facet name="start">		  	
+		  	<div id="workingDiv">
+			  <div id="innerWorkingDiv">
+ 		  		<h3>Processing..</h3>
+		  	  </div>
+			</div>
+	      </apex:facet>
+      </apex:actionStatus>
+      
+  			</div>
+      	 </apex:form>
+      </div>
+      
+     
+
+</html>
+</apex:page>

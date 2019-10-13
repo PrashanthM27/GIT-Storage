@@ -1,0 +1,185 @@
+<apex:page controller="FCST_HyperLinkUpload_Controller" sidebar="false" docType="html-5.0"> 
+	<html xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">    
+        <head> 
+            <apex:slds />
+            <apex:includeScript value="{!URLFOR($Resource.jquery_3_1_1_min)}"/>
+            <apex:includeScript value="{!URLFOR($Resource.ILOC_Resources, 'ILOC_Resources/Js/jquery-1.11.1.min.js')}"/>                
+            <apex:includeScript value="{!URLFOR($Resource.ILOC_Resources, 'ILOC_Resources/Js/jquery.dataTables.min.js')}"/>
+            <apex:stylesheet value="{!URLFOR($Resource.ILOC_Resources, 'ILOC_Resources/Css/jquery.dataTables.css')}" />
+        </head>
+        <body onload="tableload()">
+        <script>
+               
+               var table;
+               var listofIds = [];
+               function tableload(){
+                   listofIds = [];
+                   table = $('#pageTableId').DataTable({
+                   "pageLength": 25,
+                        responsive: true,
+                        
+                        searching: true,
+                        order:false,
+                   'columnDefs': [
+                       { "targets": 0,"orderable": false},
+                       { "targets": 1,"orderable": false},
+                       { "targets": 2,"orderable": false},
+                       { "targets": 3,"orderable": false},
+                       { "targets": 4,"orderable": false},
+                       { "targets": 5,"orderable": false},
+                       { "targets": 6,"orderable": false},
+                       { "targets": 7,"orderable": false},
+                       { "targets": 8,"orderable": false},
+                       { "targets": 9,"orderable": false},
+                       { "targets": 10,"orderable": false},
+                       { "targets": 11,"orderable": false},
+                       { "targets": 12,"orderable": false},
+                       { "targets": 13,"orderable": false},
+                       { "targets": 14,"orderable": false},
+                       { "targets": 15,"orderable": false},
+                       { "targets": 16,"orderable": false}
+                   ]
+                   });
+                   
+                  
+                   
+               }
+               
+               
+               function downloadFile(){
+               	 var btn = document.getElementById('donloadButtonId');
+        		 btn.disabled = true;
+        		 btn.style="background-color: gray;";
+        		 dowloadContractLine();
+        		 alert("Downloaded file will be send to your mail");
+               }
+               
+               function reEnableBUtton(){
+                 var btn = document.getElementById('donloadButtonId');
+        		 btn.disabled = false;
+        		 btn.style="background-color: #2F2B9C;";
+        		 
+        		 
+               }
+               
+              </script>
+         <apex:form id="formid"> 
+        	<div class="slds" id="pageBody"  style="overflow-x:hidden;">
+        		<apex:actionstatus id="status">
+		            <apex:facet name="start">
+		                <div class="waitingSearchDiv" id="el_loading" style="background-color: #fbfbfb;
+		                       height: 100%;opacity:0.65;width:100%;"> 
+		                    <div class="waitingHolder" style="top: 74.2px; width: 91px;">
+		                        <img class="waitingImage" src="/img/loading.gif" title="Please Wait..." />
+		                        <span class="waitingDescription">Please Wait...</span>
+		                    </div>
+		                </div>
+		            </apex:facet>
+		        </apex:actionstatus>
+		         
+		        <apex:actionFunction action="{!gotohomepage}" name="gotohome" /> 
+        		<apex:actionFunction action="{!callBatchClass}" name="dowloadContractLine" rerender="false"/> 
+        		
+        		<div class="slds-page-header" role="banner" style="background-color:white !important">
+                        <div class="slds-grid slds-wrap slds-grid--pull-padded">
+                            <div class="slds-col--padded">
+                                <div class="slds-media">
+                                    <div class="slds-media__figure">
+	                                    <apex:image url="{!URLFOR($Resource.FcstSldsIcons, 'report_60.png')}" width="60" height="60" alt="Report" style="background-color: #01d6f1;" />
+	                                    </div>
+	                                    <div class="slds-media__body">                  
+	                                        <h1 class="slds-text-heading--medium"  title="Hyperion Report"><b>Hyperion Report</b></h1>                                 
+	                                   		<div class="slds-form-element" style="    margin-left: 18%;margin-right: 62%;margin-top: -1%;">
+			                                    <label class="slds-text-body--regular" for="SelectListFromYear" title="Planning Year"><b>Planning Year</b></label>
+			                                    <div class="slds-form-element__control" style="width: 50%;">
+			                                    <apex:selectList id="SelectListFromYear" Styleclass="slds-select" value="{!s_FilterPlanningYear}" multiselect="false" size="1" >
+			                                        <apex:selectOptions value="{!FilterPlanningYear}" />
+			                                        <apex:actionSupport event="onchange" action="{!onChangeYear}" status="status" reRender="messagebx,contractLineItemListId" oncomplete="reEnableBUtton()"/>
+                                 
+			                                    </apex:selectList>
+		                                    </div>
+	                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-no-flex slds-align-middle">
+                                <button id="homeButtonId" class="slds-button slds-float--right slds-button--icon-border slds-not-selected" Style="background-color:#2F2B9C;height: 34px;margin-right: 5px;" title="Go to home" name="data" type="button"   onclick="gotohome()" >
+                                      <apex:image url="{!URLFOR($Resource.FcstSldsIcons, 'home_60.png')}" width="60" height="60" alt="Home"  />
+                              </button>
+                            </div>
+                             <div class="slds-col slds-no-flex slds-align-middle">
+                                <button id="donloadButtonId" class="slds-button slds-float--right slds-button--icon-border slds-not-selected" Style="background-color:#2F2B9C;height: 34px;" title="Download as CSV" name="data" type="button"   onclick="downloadFile()" >
+                                      <apex:image url="{!URLFOR($Resource.FcstSldsIcons, 'download_60.png')}" width="60" height="60" alt="Download"  />
+                              </button>
+                            </div>
+                        </div> 
+                        <br/>
+                        
+                    </div>
+                    <br/>
+                    <br/>
+                    
+                    <apex:outputPanel id="contractLineItemListId">
+                    	<div style="width:100%;overflow-x:auto">	
+                    		
+                    		<table id="pageTableId" style="border-collapse: collapse;" class="slds-table slds-table--bordered slds-table--cell-buffer" >
+                                 	
+                                 <thead> 
+                                     <tr class="slds-text-title--caps" style="font-weight:bold;">
+                                      <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;"><div class="slds-truncate" style="font-weight:bold;" title="Program Name">Program Name</div></th>
+                                    	
+                                         <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;"><div class="slds-truncate" style="font-weight:bold;" title=""></div></th>
+                                    	 <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;"><div class="slds-truncate" style="font-weight:bold;" ></div></th>
+                                    	 <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;"><div class="slds-truncate" style="font-weight:bold;" ></div></th>
+                                    	 <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;"><div class="slds-truncate" style="font-weight:bold;" ></div></th>
+                                    	 <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;"><div class="slds-truncate" style="font-weight:bold;" ></div></th>
+                                    	 
+                                    	 <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;"><div class="slds-truncate" style="font-weight:bold;" title="January">Forecast<br/>No Customer<br/>Working Version<br/> FY{!selectedYr} <br/> Jan </div></th>
+                                    	 <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;"><div class="slds-truncate" style="font-weight:bold;" title="February">Forecast<br/>No Customer<br/>Working Version<br/> FY{!selectedYr} <br/>Feb</div></th>
+                                    	 <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;"><div class="slds-truncate" style="font-weight:bold;" title="March">Forecast<br/>No Customer<br/>Working Version<br/> FY{!selectedYr} <br/>Mar</div></th>
+                                    	 <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;"><div class="slds-truncate" style="font-weight:bold;" title="April">Forecast<br/>No Customer<br/>Working Version<br/> FY{!selectedYr} <br/>Apr</div></th>
+                                    	 <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;"><div class="slds-truncate" style="font-weight:bold;" title="May">Forecast<br/>No Customer<br/>Working Version<br/> FY{!selectedYr} <br/>May</div></th>
+                                    	 <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;"><div class="slds-truncate" style="font-weight:bold;" title="June">Forecast<br/>No Customer<br/>Working Version<br/> FY{!selectedYr} <br/>Jun</div></th>
+                                    	 <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;"><div class="slds-truncate" style="font-weight:bold;" title="July">Forecast<br/>No Customer<br/>Working Version<br/> FY{!selectedYr} <br/>Jul</div></th>
+                                    	 <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;"><div class="slds-truncate" style="font-weight:bold;" title="August">Forecast<br/>No Customer<br/>Working Version<br/> FY{!selectedYr} <br/>Aug</div></th>
+                                    	 <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;"><div class="slds-truncate" style="font-weight:bold;" title="September">Forecast<br/>No Customer<br/>Working Version<br/> FY{!selectedYr}<br/>Sep </div></th>
+                                    	 <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;"><div class="slds-truncate" style="font-weight:bold;" title="October">Forecast<br/>No Customer<br/>Working Version<br/> FY{!selectedYr}<br/>Oct</div></th>
+                                    	 <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;"><div class="slds-truncate" style="font-weight:bold;" title="November">Forecast<br/>No Customer<br/>Working Version<br/> FY{!selectedYr}<br/>Nov</div></th>
+                                    	 <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;"><div class="slds-truncate" style="font-weight:bold;" title="December">Forecast<br/>No Customer<br/>Working Version<br/> FY{!selectedYr}<br/>Dec</div></th>
+                                     </tr>
+                                 </thead>
+                                 <tbody> 
+                                 	<apex:repeat value="{!wrapperContractLineItemList}" var="contractLineItemObj">
+                                 		<tr>
+                                 		<td style="border-right: 1px solid black;">{!contractLineItemObj.programName}</td>
+                                 		    <td style="border-right: 1px solid black;">USD</td>
+                                 		    <td style="border-right: 1px solid black;">{!contractLineItemObj.BSLANumber} </td>
+                                 			<td style="border-right: 1px solid black;">{!contractLineItemObj.costcenterNumber} </td>
+                                 			
+                                 			<td style="border-right: 1px solid black;">{!contractLineItemObj.geoNumber}</td>
+                                 			<td style="border-right: 1px solid black;">{!contractLineItemObj.revenueString} </td>
+                                 			
+                                 			<apex:repeat value="{!contractLineItemObj.amountList}" var="contractLineAmount">
+                                 				<td style="border-right: 1px solid black;text-align: right;">
+                                 					<apex:outputText value="${0, number, ###,###,###}" >
+                                                		<apex:param value="{!contractLineAmount}"/>
+                                             		</apex:outputText>
+                                 				</td>
+                                 			</apex:repeat>
+                                 			
+                                 		</tr>
+                                 	</apex:repeat>
+                                 </tbody>
+                            </table>
+                    	</div>
+                    	<script>
+		                  tableload();
+		                 </script> 
+                    </apex:outputPanel>
+                    
+      		  	</div>
+        	
+           </apex:form>
+        </body>
+    </html>
+</apex:page>

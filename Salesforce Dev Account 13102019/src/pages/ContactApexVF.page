@@ -1,0 +1,22 @@
+<apex:page controller="ContactApex">
+    <apex:form >
+    <style type="text/css">
+    .OutBorder
+        {
+        border:10px;
+        }
+    </style>
+    <apex:pageBlock >
+     <apex:pageBlockButtons location="top">
+       <apex:commandButton action="{!Offset}" value="OffSet"/>
+        <apex:commandButton action="{!getData2}" value="Data"/>
+         <apex:commandButton action="{!getData3}" value="Data3"/>
+        </apex:pageBlockButtons>
+        <apex:pageBlockTable value="{!con}" var="c">
+        <apex:column value="{!c.FirstName}"/>
+            <apex:column value="{!c.LastName}"/>
+            <apex:column value="{!c.Phone}"/>
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+        </apex:form>
+</apex:page>

@@ -1,0 +1,14 @@
+<apex:page controller="WrapperExCls">
+    <apex:pageBlock >
+    <apex:pageBlockSection >
+        <apex:pageBlockTable value="{!acList}" var="ac">
+        <apex:column headerValue="Account Name">
+            {!ac.Name}
+            </apex:column>
+            <apex:column headerValue="Account Phone">
+            {!ac.Phone}
+            </apex:column>
+        </apex:pageBlockTable>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:page>

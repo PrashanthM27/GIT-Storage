@@ -1,0 +1,9 @@
+<aura:component >
+    <aura:attribute name="Ram" type="Boolean" default="false"/>
+    <aura:if isTrue="{!v.Ram}">
+        <ui:button label="Kiss Me"/>
+    <aura:set attribute="else">
+    <div class="Red">Please Display Me dude</div>
+    </aura:set>
+        </aura:if>
+</aura:component>

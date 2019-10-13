@@ -1,0 +1,22 @@
+<apex:page standardController="Evaluation__c" >
+<script>
+    function openLookupPopup(name, id)
+ {
+  var url="/a0e/e?retURL=/apex/ExamKey=" + name + "&idfield=" + id;;
+  newWin=window.open(url, 'Popup','height=500,width=600,left=100,top=100,resizable=no,scrollbars=yes,toolbar=no,status=no');
+  if (window.focus) 
+  {
+   newWin.focus();
+  }
+    
+     return false;
+    }      
+    </script>
+  <apex:form >
+  <apex:pageBlock >
+  <apex:pageBlockSection >
+   <apex:inputField value="{!Evaluation__c.Opportunity__c}"/> 
+     </apex:pageBlockSection>
+   </apex:pageBlock>
+  </apex:form>
+</apex:page>

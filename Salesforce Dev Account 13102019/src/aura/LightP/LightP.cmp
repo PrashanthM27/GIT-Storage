@@ -1,0 +1,5 @@
+<aura:component controller="LightPclass">
+    <aura:attribute name="Test" type="String"/>
+    {!v.Test}
+    <p onclick="{!c.myAction}">Press me</p>
+    </aura:component>

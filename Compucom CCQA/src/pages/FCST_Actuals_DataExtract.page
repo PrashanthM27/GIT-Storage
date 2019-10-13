@@ -1,0 +1,233 @@
+<apex:page controller="FCST_Actuals_DataExtract" sidebar="false" docType="html-5.0" > 
+	<html xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink">    
+        <head> 
+            <apex:slds />
+            
+              <apex:includeScript value="{!URLFOR($Resource.jquery_3_1_1_min)}"/>
+            <apex:includeScript value="{!URLFOR($Resource.ILOC_Resources, 'ILOC_Resources/Js/jquery-1.11.1.min.js')}"/>                
+            <apex:includeScript value="{!URLFOR($Resource.ILOC_Resources, 'ILOC_Resources/Js/jquery.dataTables.min.js')}"/>
+            <apex:stylesheet value="{!URLFOR($Resource.ILOC_Resources, 'ILOC_Resources/Css/jquery.dataTables.css')}" />
+            <apex:includeScript value="{!URLFOR($Resource.ILOC_Resources, 'ILOC_Resources/Js/jquery-ui.js')}"/>
+             <script>
+                
+             var table;
+        var listofIds = [];
+        function tableload(){
+            listofIds = [];
+            table = $('#pageTable').DataTable({
+                 responsive: true,
+                 searching: true,
+                 order:false,
+            'columnDefs': [
+                { "targets": 0,"orderable": false},
+                { "targets": 1,"orderable": false},
+                { "targets": 2,"orderable": false},
+                { "targets": 3,"orderable": false},
+                { "targets": 4,"orderable": false},
+                { "targets": 5,"orderable": false},
+                { "targets": 6,"orderable": false},
+                { "targets": 7,"orderable": false},
+                { "targets": 8,"orderable": false},
+              	{ "targets": 9,"orderable": false},
+              	{ "targets": 10,"orderable": false},
+              	{ "targets": 11,"orderable": false},
+              	{ "targets": 12,"orderable": false},
+              	{ "targets": 13,"orderable": false},
+              	{ "targets": 14,"orderable": false},
+              	{ "targets": 15,"orderable": false},
+              	{ "targets": 16,"orderable": false},
+              	{ "targets": 17,"orderable": false},
+              	{ "targets": 18,"orderable": false},
+              	{ "targets": 19,"orderable": false}
+              	
+            ]
+            });
+             
+               }
+               
+               
+               function downloadFile(){
+               	 var btn = document.getElementById('donloadButtonId');
+        		 btn.disabled = true;
+        		 btn.style="background-color: gray;";
+        		 dowloadContractLine();
+        		 alert("Downloaded file will be send to your mail");
+               }
+               
+               function reEnableBUtton(){
+                 var btn = document.getElementById('donloadButtonId');
+        		 btn.disabled = false;
+        		 btn.style="background-color: #2F2B9C;";
+        		 
+        		 
+               }
+               
+              </script>
+        </head>
+        <body onload="tableload()">
+       
+         <apex:form id="formid"> 
+        	<div class="slds" id="pageBody"  style="overflow-x:hidden;">
+        		<apex:actionstatus id="status">
+		            <apex:facet name="start">
+		                <div class="waitingSearchDiv" id="el_loading" style="background-color: #fbfbfb;
+		                       height: 100%;opacity:0.65;width:100%;"> 
+		                    <div class="waitingHolder" style="top: 74.2px; width: 91px;">
+		                        <img class="waitingImage" src="/img/loading.gif" title="Please Wait..." />
+		                        <span class="waitingDescription">Please Wait...</span>
+		                    </div>
+		                </div>
+		            </apex:facet>
+		        </apex:actionstatus>
+		         
+		        <apex:actionFunction action="{!gotohomepage}" name="gotohome" /> 
+        		<apex:actionFunction action="{!callBatchClass}" name="dowloadContractLine" rerender="false"/> 
+        		
+        		<div class="slds-page-header" role="banner" style="background-color:white !important">
+                        <div class="slds-grid slds-wrap slds-grid--pull-padded">
+                            <div class="slds-col--padded">
+                                <div class="slds-media">
+                                    <div class="slds-media__figure">
+	                                    <apex:image url="{!URLFOR($Resource.FcstSldsIcons, 'report_60.png')}" width="60" height="60" alt="Report" style="background-color: #01d6f1;" title="Actual Data Extract Report"/>
+	                                    </div>
+	                                    <div class="slds-media__body">                  
+	                                        <h1 class="slds-text-heading--medium"  title="Actual Data Extract Report"><b>Actual Data Extract Report</b></h1>                                 
+	                                   		<div class="slds-form-element" style="    margin-left: 9%;    width: 15%;" >
+			                                    <label class="slds-text-body--regular" for="SelectListFromYear" title="Planning Year"><b>Planning Year</b></label>
+			                                    <div class="slds-form-element__control" style="width: 50%;">
+			                                    <apex:selectList id="SelectListFromYear" Styleclass="slds-select" value="{!s_FilterPlanningYear}" multiselect="false" size="1" >
+			                                        <apex:selectOptions value="{!FilterPlanningYear}" />
+			                                        <apex:actionSupport event="onchange" action="{!onChangeYear}" status="status" reRender="planningVersionId,messagebx" oncomplete="reEnableBUtton()"/>
+                                 
+					                                    </apex:selectList>
+				                                    </div>
+			                                    </div>
+			                                   <apex:outputPanel id="planningVersionId"> 
+			                                    <div class="slds-form-element" style="    margin-left: 19%;width: 16%;margin-top: -50px;">
+			                                    <label class="slds-text-body--regular" for="SelectListFromYear" title="Planning Version"><b>Planning Version</b></label>
+			                                    
+			                                    <div class="slds-form-element__control" style="width: 50%;"> 
+			                                    <apex:selectList Styleclass="slds-select" value="{!openAdminVersion}" multiselect="false" size="1" >
+			                                        <apex:selectOptions value="{!FilterPlanningVersion}" />
+                                 
+					                                    </apex:selectList>
+				                                    </div>
+				                                 
+			                                    </div>
+			                                     </apex:outputPanel>  
+			                                      <div class="slds-form-element" style="    margin-left: 30%;width: 10%;margin-top: -32px;">
+			                                  <apex:commandButton style="width:100%" styleClass="slds-button slds-button--neutral slds-button--brand"   value="Load Report" status="status" title="Load Report" reRender="contractLineItemListId"   action="{!loadLandingUI}" oncomplete="reEnableBUtton()" >
+                                                </apex:commandButton>
+				                                 
+			                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-no-flex slds-align-middle">
+                                <button id="homeButtonId" class="slds-button slds-float--right slds-button--icon-border slds-not-selected" Style="background-color:#2F2B9C;height: 34px;margin-right: 5px;" title="Go to home" name="data" type="button"   onclick="gotohome()" >
+                                      <apex:image url="{!URLFOR($Resource.FcstSldsIcons, 'home_60.png')}" width="60" height="60" alt="Home"  />
+                              </button>
+                            </div>
+                             <div class="slds-col slds-no-flex slds-align-middle">
+                                <button id="donloadButtonId" class="slds-button slds-float--right slds-button--icon-border slds-not-selected" Style="background-color:#2F2B9C;height: 34px;" title="Download as CSV" name="data" type="button"   onclick="downloadFile()" >
+                                      <apex:image url="{!URLFOR($Resource.FcstSldsIcons, 'download_60.png')}" width="60" height="60" alt="Download"  />
+                              </button>
+                            </div>
+                        </div> 
+                        <br/>
+                        
+                    </div>
+                    <br/>
+                    <br/>
+                    
+                    <apex:outputPanel id="contractLineItemListId">
+                    	<div style="width:100%;overflow-x:auto">	
+                    		
+                    		<table id="pageTable" style="border-collapse: collapse;" class="slds-table slds-table--bordered slds-table--cell-buffer" >
+                                 	
+                                 <thead> 
+                                     <tr class="slds-text-title--caps" style="font-weight:bold;">
+                                         <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;"><div class="slds-truncate" style="font-weight:bold;" title="Program Name">Program Name</div></th>                                    	
+                                      	 <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;"><div class="slds-truncate" style="font-weight:bold;" title="Revenue Type">Revenue Type</div></th>
+                                    	 <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;"><div class="slds-truncate" style="font-weight:bold;" title="Cost Center">Cost Center</div></th>
+                                    	 <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;"><div class="slds-truncate" style="font-weight:bold;" title="GEO">GEO</div></th>                                    	 
+                                    	 
+                                         <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;"><div class="slds-truncate" style="font-weight:bold;" title="Contract #">Contract #</div></th>
+                                    	 <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;"><div class="slds-truncate" style="font-weight:bold;" title="Contract Line Item Description">Contract Line Item Description</div></th>
+                                         <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;"><div class="slds-truncate" style="font-weight:bold;" title="Last Modified BY">Last Modified By</div></th>                                   		 
+                                         <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;"><div class="slds-truncate" style="font-weight:bold;" title="Last Modified Date">Last Modified Date</div></th>
+                                         <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;"><div class="slds-truncate" style="font-weight:bold;" title="Planning Version">Planning Version</div></th>  
+                                    	 <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;"><div class="slds-truncate" style="font-weight:bold;" title="Date of Data Extraction">Date of Data Extraction</div></th>
+                              	
+                                    	 <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;"><div class="slds-truncate" style="font-weight:bold;" title="January">Jan {!selectedYr}</div></th>
+                                    	 <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;"><div class="slds-truncate" style="font-weight:bold;" title="February">Feb {!selectedYr}</div></th>
+                                    	 <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;"><div class="slds-truncate" style="font-weight:bold;" title="March">Mar {!selectedYr}</div></th>
+                                    	 <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;"><div class="slds-truncate" style="font-weight:bold;" title="April">Apr {!selectedYr}</div></th>
+                                    	 <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;"><div class="slds-truncate" style="font-weight:bold;" title="May">May {!selectedYr}</div></th>
+                                    	 <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;"><div class="slds-truncate" style="font-weight:bold;" title="June">Jun {!selectedYr}</div></th>
+                                    	 <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;"><div class="slds-truncate" style="font-weight:bold;" title="July">Jul {!selectedYr}</div></th>
+                                    	 <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;"><div class="slds-truncate" style="font-weight:bold;" title="August">Aug {!selectedYr}</div></th>
+                                    	 <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;"><div class="slds-truncate" style="font-weight:bold;" title="September">Sep {!selectedYr}</div></th>
+                                    	 <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;"><div class="slds-truncate" style="font-weight:bold;" title="October">Oct {!selectedYr}</div></th>
+                                    	 <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;"><div class="slds-truncate" style="font-weight:bold;" title="November">Nov {!selectedYr}</div></th>
+                                    	 <th scope="col" style="text-align:center;background-color:#313A8B;color:white;border-right: 1px solid black;"><div class="slds-truncate" style="font-weight:bold;" title="December">Dec {!selectedYr}</div></th>
+                                    	 
+                                   </tr>
+                                 </thead>
+                                 <tbody> 
+                                 	<apex:repeat value="{!wrapperContractLineWiseList}" var="wrapContractLineObj">
+                                 		<tr>                           		    
+                                            <td style="border-right: 1px solid black;" title="{!wrapContractLineObj.AccountName}">{!wrapContractLineObj.AccountName25Digit}</td>
+                                            <td style="border-right: 1px solid black;" title="{!wrapContractLineObj.RevenueType}">{!wrapContractLineObj.RevenueType25Digit}</td>
+                                            <td style="border-right: 1px solid black;" title="{!wrapContractLineObj.CostCentre}">{!wrapContractLineObj.CostCentre}</td>
+                                            <td style="border-right: 1px solid black;" title="{!wrapContractLineObj.Geo}">{!wrapContractLineObj.Geo25Digit}</td>
+                                            <td style="border-right: 1px solid black;" title="{!wrapContractLineObj.Contractnum}">{!wrapContractLineObj.Contractnum25Digit}</td>
+                                            <td style="border-right: 1px solid black;" title="{!wrapContractLineObj.ContractLineDesc}">{!wrapContractLineObj.ContractLineDesc25Digit}</td>
+                                            <td style="border-right: 1px solid black;" title="{!wrapContractLineObj.LastModifiedBy}">{!wrapContractLineObj.LastModifiedBy}</td>
+                                            <td style="border-right: 1px solid black;" title="{!wrapContractLineObj.lastdate}">{!wrapContractLineObj.lastdate}</td>
+                                            <td style="border-right: 1px solid black;" title="{!wrapContractLineObj.planningversion}">{!wrapContractLineObj.planningversion}</td>
+                                            <td style="border-right: 1px solid black;" title="{!wrapContractLineObj.dataextdate}">{!wrapContractLineObj.dataextdate}</td>                                            
+                                       
+	                                 	  <apex:repeat value="{!wrapContractLineObj.doubleAmount}" var="amount">
+	                                 	  	 <td style="border-right: 1px solid black;text-align: right;">
+                                 					<apex:outputText value="${0, number, ###,###,###}" >
+                                                		<apex:param value="{!amount}"/>
+                                             		</apex:outputText>
+                                 				</td>
+	                                 	  </apex:repeat>  
+	                                 		
+                                 		</tr> 
+                                 	</apex:repeat>
+                                 </tbody>
+                            </table>
+                    	</div> 
+                    	<script>
+		                  tableload();
+		                 </script> 
+		                  <!--Pagination start  -->
+			             <!--   <apex:outputPanel id="myButtons">
+			                    <apex:outputPanel rendered="{!IF(totalPages != 0,TRUE,FALSE)}">
+			                    <div style="text-align: center;"  >
+			                        <apex:commandButton styleClass="slds-button slds-button--neutral slds-button--brand" status="status"  action="{!Beginning}" title="First Page" value="<<" disabled="{!disablePrevious}" reRender="contractLineItemListId,myButtons,counterStatus,myPanel"/>
+			                        <apex:commandButton styleClass="slds-button slds-button--neutral slds-button--brand" status="status"  action="{!Previous}" title="Previous" value="<Previous" disabled="{!disablePrevious}" reRender="contractLineItemListId,myButtons,counterStatus,myPanel"/>        
+			                        <apex:commandButton styleClass="slds-button slds-button--neutral slds-button--brand" status="status"  action="{!Next}" title="Next" value="Next>" disabled="{!disableNext}" reRender="contractLineItemListId,myButtons,counterStatus,myPanel"/>
+			                        <apex:commandButton styleClass="slds-button slds-button--neutral slds-button--brand" status="status"  action="{!End}" title="Last Page" value=">>" disabled="{!disableNext}" reRender="contractLineItemListId,myButtons,counterStatus,myPanel"/> 
+			                    </div>
+			                    </apex:outputPanel>
+			                 </apex:outputPanel>
+			                 <apex:outputPanel id="myPanel">
+			                    <apex:outputPanel rendered="{!IF(totalPages != 0,TRUE,FALSE)}">
+			                   <apex:pageMessages id="theMessages" />
+			                    <div id="pagetext" style="text-align: right;"  >
+			                      <apex:outputText >Showing Page # {!pageNumber} of {!totalPages}</apex:outputText>
+			                    </div>
+			                     </apex:outputPanel>
+			                </apex:outputPanel>
+			             <!--Pagination end  -->
+                    </apex:outputPanel>
+      		  	</div>
+        	
+           </apex:form>
+        </body>
+    </html>
+</apex:page>

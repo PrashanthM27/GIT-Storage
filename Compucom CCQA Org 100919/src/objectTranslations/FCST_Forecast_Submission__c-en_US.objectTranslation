@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>FCST Forecast Submission</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>FCST Forecast Submissions</value>
+    </caseValues>
+    <fields>
+        <label><!-- FCST PM Name --></label>
+        <name>FCST_PM_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- FCST PM Role --></label>
+        <name>FCST_PM_Role__c</name>
+    </fields>
+    <fields>
+        <label><!-- FCST Planning Version --></label>
+        <name>FCST_Planning_Version__c</name>
+    </fields>
+    <fields>
+        <label><!-- FCST Status --></label>
+        <name>FCST_Status__c</name>
+    </fields>
+    <fields>
+        <label><!-- FCST Submission Date --></label>
+        <name>FCST_Submission_Date__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

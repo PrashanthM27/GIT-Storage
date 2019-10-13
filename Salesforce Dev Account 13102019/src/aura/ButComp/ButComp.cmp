@@ -1,0 +1,5 @@
+<aura:component >
+<lightning:avatar src="/bad/image/url.jpg" 
+      fallbackIconName="standard:account" alternativeText="Salesforce" size="x-small" title="This is Icon" variant="circle"/>
+    <lightning:badge label="label"/>
+</aura:component>

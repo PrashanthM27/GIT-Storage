@@ -1,0 +1,25 @@
+<apex:page controller="SelectOptcls">
+    <apex:form >
+    <apex:pageBlock >
+    <apex:pageBlockSection >
+        <apex:pageBlockSectionItem >
+            <apex:outputLabel value="State:"/>
+        </apex:pageBlockSectionItem>
+       <apex:pageBlockSectionItem >
+        <apex:selectList size="1" value="{!state}">
+            <apex:selectOptions value="{!states}"/>
+            <apex:actionSupport event="onchange" reRender="out"/>
+        </apex:selectList>
+           </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem >
+            <apex:outputLabel value="City"/>
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem >
+        <apex:selectList size="1" value="{!City}" id="out">
+            <apex:selectOptions value="{!Cities}"/>
+            </apex:selectList>
+        </apex:pageBlockSectionItem>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+        </apex:form>
+</apex:page>

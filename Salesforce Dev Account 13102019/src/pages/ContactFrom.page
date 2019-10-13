@@ -1,0 +1,8 @@
+<apex:page standardController="Contact" extensions="custom_extension">
+<apex:form id="theForm">
+    <apex:inputField id="newContactName" value="{!newContact.Name}"/>
+    <!--apex:inputField id="newContactAddress" value="{!newContact.Address}"/-->
+    <button type="button" class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+    <apex:commandButton value="Save" action="{!saveContact}" rerender="theForm" />
+</apex:form>
+</apex:page>
